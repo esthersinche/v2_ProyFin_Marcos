@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paquetes</title>
+    
+    <link rel="stylesheet" href="../static/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/scss/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+
+</head>
+
+<body class="bg-white">
+    <!--Header-->
+    <header>
+        <nav class="navbar navbar-expand-lg bg-header">
+            <div class="container-fluid">
+                <i class="bi bi-tsunami" style="color: aliceblue;"></i>
+                <a class="navbar-brand text-white ms-2" href="main.html">TuCrucerito.com</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" aria-current="page" href="rutas.html">Destinos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="paquetes.html">Paquetes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="barcos.html">Barcos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="comprar.html">Comprar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--body-->
+    <main class="py-4">
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                    aria-label="Slide1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80"
+                        class="d-block w-100" alt="Crucero al atardecer">
+                    <div class="container">
+                        <div class="carousel-caption bg-dark bg-opacity-75">
+                            <h1>Tu aventura comienza aquí.</h1>
+                            <p>Surca los mares con estilo y comodidad en nuestros exclusivos cruceros por el Caribe.</p>
+                            <p><a class="btn btn-lg btn-ocean" href="#">Explora destinos</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1560264280-88b68371db39?auto=format&fit=crop&w=1950&q=80"
+                        class="d-block w-100" alt="Entretenimiento a bordo">
+                    <div class="container">
+                        <div class="carousel-caption bg-dark bg-opacity-75">
+                            <h1>Lujo Flotante.</h1>
+                            <p>Disfruta de experiencias únicas: gastronomía gourmet, piscinas infinitas y espectáculos
+                                de
+                                primer nivel gracias a nuestra perfectos inteninerarios.</p>
+                            <p><a class="btn btn-lg btn-ocean" href="#">Vive la Experiencia</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="https://st3.depositphotos.com/2643437/19300/i/450/depositphotos_193006672-stock-photo-family-beach-sunset.jpg"
+                        class="d-block w-100" alt="Entretenimiento a bordo">
+                    <div class="container">
+                        <div class="carousel-caption bg-dark bg-opacity-75">
+                            <h1>Destinos de Ensueño</h1>
+                            <p>De las costas de Grecia a los glaciares de Alaska, el mundo te espera a bordo de
+                                TuCrucerito.</p>
+                            <p><a class="btn btn-lg btn-ocean" href="#">Reserva ahora</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+        <br>
+
+        <!--Div para el contenido de paquetes-->
+        <!---->
+        <div class="container paquetes">
+            <div class="p-5 mb-4 rounded-3 bg-aquamarine">
+                <div class="container-fluid py-5">
+                    <h2 class="display-5 fw-bold">Filtros Avanzados</h2>
+                    <div class="row justify-content-center g-5">
+                        <div class="col-md-4">
+                            <label for="destino" class="form-label">Destino</label>
+                            <select class="form-select" id="destino" required>
+                                <option value="">Elige..</option>
+                                <option>United States</option>
+                            </select>
+                            <div class="invalid-Feedback">Seleccione un destino válido.</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cantperso" class="form-label">Cant. de Personas</label>
+                            <select class="form-select" id="cantperso" required>
+                                <option value="">Elige..</option>
+                                <option>California</option>
+                            </select>
+                            <div class="invalid-Feedback">Seleccione una cantidad válida.</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="barcos" class="form-label">Barcos</label>
+                            <select class="form-select" id="barcos" required>
+                                <option value="">Elige..</option>
+                                <option>tipobarco</option>
+                            </select>
+                            <div class="invalid-Feedback">Seleccione una barco disponible.</div>
+                        </div>
+
+                        <div>
+                            <label for="customRange" class="form-label">Rango Dinero</label><br><br>
+                            <div class="slider-container">
+                                <div class="d-flex justify-content-between px-1 mb-2">
+                                    <span id="min-price" class="slider-value">0$</span>
+                                    <span id="max-price" class="slider-value">40,000$</span>
+                                </div>
+                                <input type="range" class="form-range" min="0" max="40000" step="5000" id="customRange"
+                                    data-mdb-range-init data-mdb-range-value-label="true">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container px-4 py-3 rounded-2" id="paquetescards">
+                <h2 class="pb-2 border-bottom">Paquetes</h2>
+                <div class="row row-cols-1 row-cols-lg-3 align-items-stretch
+                g-4 py-5">
+
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                            style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/RMS_Queen_Elizabeth_2_in_Trondheim_2008.jpg/1200px-RMS_Queen_Elizabeth_2_in_Trondheim_2008.jpg); background-size: cover; cursor: pointer;"
+                            data-bs-toggle="modal" data-bs-target="#Cmodalpaq1">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Caribe, Mediterráneo</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <!--
+                                        <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" 
+                                        class="rounded-circle border border-white"> -->
+                                        <i class="bi bi-person"></i>
+                                        <small>4</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <!--
+                                        <svg class="bi me-2" width="1em" height="1em" role="img" 
+                                            aria-label="Location">
+                                            <use xlink:href="bootstrap-icons.svg#geo-fill"></use>
+                                        </svg>-->
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Bahamas</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <!--
+                                        <svg class="bi me-2" width="1em" height="1em" role="img" 
+                                        aria-label="Duration">
+                                        <use xlink:href="#calendar3"></use>
+                                        </svg>-->
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>14d</small>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="Cmodalpaq1" tabindex="-1" aria-labelledby="example1label"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content rounded-5 ">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="example1label">Paquete del Caribe al Mediterráneo.
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <h2>¡Del Caribe al Mediterráneo! - 4 personas máximo</h2>
+                                    <p>Disfruta de una experiencia inolvidable en las paradisíacas islas desde el Caribe
+                                        hasta el Mediterráneo con nuestro paquete diseñado especialmente para grupos de
+                                        4 personas. Perfecto para familias o amigos que buscan relajarse y explorar.</p>
+                                    <div class="container px-4 py-5" id="cartasmodaladdons">
+                                        <h2 class="pb-2 border-bottom">El paquete incluye: </h2>
+                                        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4 py-5">
+
+                                            <div class="col d-flex align-items-start">
+                                                <i class="bi bi-egg-fried flex-shrink-0 me-3"></i>
+                                                <div>
+                                                    <h4 class="fw-bold mb-0">Restaurantes Exclusivos</h4>
+                                                    <p>stand, stand, stand, stand, stand, stand, stand, stand, stand,
+                                                        stand, stand, stand, stand, stand, stand, stand, stand, stand,
+                                                        stand, stand, stand, stand, stand, stand.</p>
+                                                    <img src="https://i.pinimg.com/originals/d8/9f/a3/d89fa383107571201d3b2673e4e9a51b.gif"
+                                                        class="img-fluid">
+                                                </div>
+                                            </div>
+
+                                            <div class="col d-flex align-items-start">
+                                                <i class="bi bi-egg-fried me-3"></i>
+                                                <div>
+                                                    <h4 class="fw-bold me-2">Parques para Niños</h4>
+                                                    <p>stand, stand, stand, stand, stand, stand, stand, stand, stand,
+                                                        stand, stand, stand, stand, stand, stand, stand, stand, stand,
+                                                        stand, stand, stand, stand, stand, stand..</p>
+                                                    <img src="https://i.pinimg.com/originals/03/c8/70/03c8708a6f6dd67a60083333827ecce8.gif"
+                                                        class="img-fluid">
+                                                </div>
+                                            </div>
+
+                                            <div class="col d-flex align-items-start">
+                                                <i class="bi bi-egg-fried me-3"></i>
+                                                <div>
+                                                    <h4 class="fw-bold me-2">Entretenimiento para Adultos</h4>
+                                                    <p>stand, stand, stand, stand, stand, stand, stand, stand, stand,
+                                                        stand, stand, stand, stand, stand, stand, stand, stand, stand,
+                                                        stand, stand, stand, stand, stand, stand.</p>
+                                                    <img src="https://img1.picmix.com/output/stamp/normal/3/1/1/7/2257113_5e838.gif"
+                                                        class="img-fluid">
+                                                </div>
+                                            </div>
+
+                                            <div class="col d-flex align-items-start">
+                                                <i class="bi bi-egg-fried me-3"></i>
+                                                <div>
+                                                    <h4 class="fw-bold me-2">Entretenimiento para toda la Familia</h4>
+                                                    <p>stand, stand, stand, stand, stand, stand, stand, stand, stand,
+                                                        stand, stand, stand, stand, stand, stand, stand, stand, stand,
+                                                        stand, stand, stand, stand, stand, stand.</p>
+                                                    <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e3155607-c018-46a1-b0ca-2d27f86bee9a/dlwqgs-bbc37535-b17f-4c2f-97e2-87314abfed61.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2UzMTU1NjA3LWMwMTgtNDZhMS1iMGNhLTJkMjdmODZiZWU5YVwvZGx3cWdzLWJiYzM3NTM1LWIxN2YtNGMyZi05N2UyLTg3MzE0YWJmZWQ2MS5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.PGJtyU8BkZvrzYIpGQYIHpxrwYsSFTjdBmkJRDSHArk"
+                                                        class="img-fluid">
+                                                </div>
+                                            </div>
+
+                                            <div class="col d-flex align-items-start">
+                                                <i class="bi bi-egg-fried me-3"></i>
+                                                <div>
+                                                    <h4 class="fw-bold mb-0">Tiendas Comerciales</h4>
+                                                    <p>stand, stand, stand, stand, stand, stand, stand, stand, stand,
+                                                        stand, stand, stand, stand, stand, stand, stand, stand, stand,
+                                                        stand, stand, stand, stand, stand, stand.</p>
+                                                    <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/45127894-95a4-474f-9070-22303e54b490/dr84y5-e860b70b-1d80-4a55-bdc2-e0c2e754a16c.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQ1MTI3ODk0LTk1YTQtNDc0Zi05MDcwLTIyMzAzZTU0YjQ5MFwvZHI4NHk1LWU4NjBiNzBiLTFkODAtNGE1NS1iZGMyLWUwYzJlNzU0YTE2Yy5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.feF7z4ix4Gj7Dbo1FFE5iFObzQADF0OReurw3byvMzs"
+                                                        class="img-fluid">
+                                                </div>
+
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary">Comprar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                            style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR40_EHfGqczcPWFg2Ydwc7EsWij6tyHz3VGQ&s); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Mediterráneo, Alaska</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small>6</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Mediterráneo</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>20d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark "
+                            style="background-image: url(https://expediafranchise.com/wp-content/uploads/2024/04/Blog_Icon-of-the-seas_1-1.jpg); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Alaska, Bahamas</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small>2</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Alaska</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>15d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark "
+                            style="background-image: url(https://www.msccruisesusa.com/-/media/global-contents/ships/fleet/world-europa/main-features/msc-world-europa-intro.jpg?bc=transparent&as=1&mh=600&mw=955&hash=2264A37F0446BFA5AA37268BF2417D87); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Bahamas, Caribe</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small>5</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Bahamas</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>9d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark "
+                            style="background-image: url(https://hips.hearstapps.com/hmg-prod/images/paul-gauguin-veranda-luxury-cruise-lines-654994aa5ab2e.jpg?crop=0.652xw:1.00xh;0.175xw,0&resize=1120:*); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Caribe, Alaska</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small>6</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Caribe</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>24d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark "
+                            style="background-image: url(https://i0.wp.com/sidisney.com/wp-content/uploads/2024/06/Disney-Adventure-Render-Image-1536x864-1.png?fit=1536%2C864&ssl=1); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Estados Unidos, Alaska</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <!--<img  alt="" width="32" height="32" class="rounded-circle ">-->
+                                        <i class="bi bi-person"></i>
+                                        <small>2</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Estados Unidos</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>5d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark "
+                            style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Genting_Dream_in_Malacca%2C_Malaysia%2C_2025_%28cropped%29.jpg/1200px-Genting_Dream_in_Malacca%2C_Malaysia%2C_2025_%28cropped%29.jpg); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Caribe, Estados Unidos</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small>1</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Caribe</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>6d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark "
+                            style="background-image: url(https://www.msccruises.com/int/-/media/uk/best-deals/msc-euribia-from-sou/euribia-tile.jpg?bc=transparent&as=1&mh=360&mw=460&hash=5616D3A2F757650B3DB1EB1D25A249E8); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Estados Unidos, Mediterráneo</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small>4</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Estados Unidos</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>34d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark "
+                            style="background-image: url(https://www.ship-technology.com/wp-content/uploads/sites/8/2024/03/biggest-cruise-ships-in-the-world.jpg); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Mediterráneo, Caribe</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small>4</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Mediterráneo</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>4d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark "
+                            style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Icon_of_the_Seas_%28kahunapulej%29.jpg/330px-Icon_of_the_Seas_%28kahunapulej%29.jpg); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Bahamas, Alaska</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small>8</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Bahamas</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>24d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark "
+                            style="background-image: url(https://www.usatoday.com/gcdn/presto/2023/09/27/USAT/f2614fb6-6ff4-4f3a-b3d2-c45bb37d2a40-IMG-BEACHCLUB-2022-drone-018-UNCROPPED.JPG?crop=3839,2159,x0,y0); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Alaska, Bahamas</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small>3</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Alaska</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>44d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark "
+                            style="background-image: url(https://cruise-with-points.marriott.com/images/web/11/756/shp/ship_sm.jpg); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Mediterráneo, Bahamas</h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small>2</small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small>Mediterráneo</small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small>3d</small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!--Footer-->
+    <footer class="row row-cols-5 py-5 mt-5 p-2 border-top bg-header text-white">
+        <div class="col">
+            <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><!--contenedorgrafico BootstrapIcons-->
+                    <use xlink:href="#bootstrap" /><!--ref icono predeterminado-->
+                </svg>
+            </a>
+            <p class="text-white">&copy;2025 TuCrucerito Corp.</p>
+        </div>
+
+        <div class="col">
+
+        </div>
+
+        <div class="col">
+            <h5>Info</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <a href="#" class="nav-link p-0 text-muted">Terminos y condiciones</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="#" class="nav-link p-0 text-muted">Más sobre nosotros</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="#" class="nav-link p-0 text-muted">Contáctanos</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="#" class="nav-link p-0 text-muted">FAQS</a>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="col">
+            <h5>Redes Sociales</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <a href="https://www.instagram.com" class="nav-link p-0 text-muted">Instagram</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="https://www.facebook.com" class="nav-link p-0 text-muted">Facebook</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a href="x.com" class="nav-link p-0 text-muted">X</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+    <script src="../static/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+
+</body>
+
+</html>

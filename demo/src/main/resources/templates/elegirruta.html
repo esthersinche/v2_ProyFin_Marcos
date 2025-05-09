@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/scss/custom.css">
+  <title>Comprar</title>
+</head>
+
+<body class="bg-white">
+  <!--Header-->
+  <header>
+    <nav class="navbar navbar-expand-lg bg-header">
+      <div class="container-fluid">
+        <a class="navbar-brand text-white" href="main.html">TuCrucerito.com</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+          aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toogle-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
+            <li class="nav-item">
+              <a class="nav-link active text-white" aria-current="page" href="rutas.html">Destinos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-white" aria-current="page" href="paquetes.html">Paquetes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-white" aria-current="page" href="barcos.html">Barcos</a>
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active text-white" aria-current="page" href="comprar.html">Comprar</a>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!--En proceso:v-->
+
+  <div class="position-relative m-4 p-5">
+    <div class="position-relative m-4">
+      <div class="progress" role="progressbar" aria-label="Progress" aria-valuenow="50" aria-valuemin="0"
+        aria-valuemax="100" style="height: 1px;">
+        <div class="progress-bar bg-ocean" style="width: 50%"></div>
+      </div>
+      <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-ocean rounded-pill"
+        style="width: 2rem; height:2rem;">1</button>
+      <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-ocean rounded-pill"
+        style="width: 2rem; height:2rem;">2</button>
+      <button type="button"
+        class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+        style="width: 2rem; height:2rem;">3</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <h1 class="text-center text-dark mb-4">Elige tu ruta</h1>
+
+    <form class="needs-validation" novalidate>
+      <!-- Rutas como cards -->
+      <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://acrobatadelcamino.com/wp-content/uploads/2022/10/mejores-islas-del-caribe.jpg"
+              class="card-img-top" alt="Playa Caribe Occidental">
+            <div class="card-body">
+              <h5 class="card-title">Caribe Occidental</h5>
+              <p class="card-text">
+                Visita Cozumel, Roatán y Costa Maya… playas de arena blanca y aguas cristalinas.
+              </p>
+              <p class="card-text"><small class="text-muted">Salida: 13 de julio</small></p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://www.enroma.com/wp-content/uploads/2020/04/Porto-di-Civitavecchia.jpg" class="card-img-top"
+              alt="Puerto de Civitavecchia, Mediterráneo">
+            <div class="card-body">
+              <h5 class="card-title">Mediterráneo Clásico</h5>
+              <p class="card-text">
+                Descubre Barcelona, Roma y Atenas con recorridos culturales y gastronomía local.
+              </p>
+              <p class="card-text"><small class="text-muted">Salida: 23 de junio</small></p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img
+              src="https://www.viajes.cl/hs-fs/hubfs/Glaciar%20Hubbard%20en%20un%20Viaje%20en%20crucero%20por%20Alaska%20con%20Celebrity%20Cruises.jpg?width=2560&name=Glaciar%20Hubbard%20en%20un%20Viaje%20en%20crucero%20por%20Alaska%20con%20Celebrity%20Cruises.jpg"
+              class="card-img-top" alt="Glaciar Hubbard, Alaska">
+            <div class="card-body">
+              <h5 class="card-title">Alaska Inexplorada</h5>
+              <p class="card-text">
+                Glaciares, fiordos y avistamiento de fauna salvaje. Salida desde Seattle.
+              </p>
+              <p class="card-text"><small class="text-muted">Salida: 7 de junio</small></p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="https://www.ncl.com/sites/default/files/1000x667miamibahamas.jpg" class="card-img-top"
+              alt="Playas Bahamas">
+            <div class="card-body">
+              <h5 class="card-title">Escapada a las Bahamas</h5>
+              <p class="card-text">
+                Playas de ensueño y actividades acuáticas con salida desde Fort Lauderdale.
+              </p>
+              <p class="card-text"><small class="text-muted">Salida: 20 de julio</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Select de ruta -->
+      <div class="mb-4">
+        <label for="rutaSelect" class="form-label">Selecciona la ruta</label>
+        <select id="rutaSelect" class="form-select" required>
+          <option value="" disabled selected>-- Elige una ruta --</option>
+          <option value="1">Caribe Occidental</option>
+          <option value="2">Mediterráneo Clásico</option>
+          <option value="3">Alaska Inexplorada</option>
+          <option value="4">Escapada a las Bahamas</option>
+        </select>
+        <div class="invalid-feedback">Debes seleccionar una ruta.</div>
+      </div>
+
+      <!-- Botón de envío -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-ocean btn-lg">Continuar</button>
+      </div>
+    </form>
+  </main>
+
+  <!--Footer-->
+  <footer class="row row-cols-5 py-5 mt-5  border-top bg-header text-white">
+    <div class="col">
+      <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32">
+          <use xlink:href="#bootstrap" />
+        </svg>
+      </a>
+      <p class="text-white">&copy;2025 TuCrucerito Corp.</p>
+    </div>
+
+    <div class="col">
+
+    </div>
+    <div class="col">
+      <h5>Info</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Terminos y condiciones</a></li>
+        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Más sobre nosotros</a></li>
+        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Contáctanos</a></li>
+        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <h5>Redes sociales</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2"><a href="https://www.instagram.com" class="nav-link p-0 text-muted">Instagram</a></li>
+        <li class="nav-item mb-2"><a href="https://www.facebook.com" class="nav-link p-0 text-muted">Facebook</a></li>
+        <li class="nav-item mb-2"><a href="x.com" class="nav-link p-0 text-muted">X</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script src="../static/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+<script>
+  (function () {
+    'use strict';
+    const form = document.querySelector('.needs-validation');
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        // redirige solo si todo es válido
+        event.preventDefault();
+        window.location.href = 'elegirruta.html';
+      }
+      form.classList.add('was-validated');
+    }, false);
+  })();
+</script>
+
+</html>
