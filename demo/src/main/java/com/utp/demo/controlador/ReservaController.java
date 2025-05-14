@@ -34,6 +34,7 @@ public class ReservaController {
     @GetMapping("/comprar")
     public String mostrarFormularioCliente(Model model) {
         model.addAttribute("cliente", new Cliente());
+        model.addAttribute("reserva", new Reserva()); // <-- Añade esto
         return "comprar";
     }
 

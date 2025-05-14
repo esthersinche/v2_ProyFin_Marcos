@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../static/node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../static/scss/custom.css">
-  <title>Comprar</title>
+  <link rel="stylesheet" th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/scss/custom.css}">
+  <title>Elegir Paquete</title>
 </head>
 
 <body class="bg-white">
@@ -14,140 +14,126 @@
   <header>
     <nav class="navbar navbar-expand-lg bg-header">
       <div class="container-fluid">
-        <a class="navbar-brand text-white" href="main.html">TuCrucerito.com</a>
+        <a class="navbar-brand text-white" href="/main">TuCrucerito.com</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
           aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toogle-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
-          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
-            <li class="nav-item">
-              <a class="nav-link active text-white" aria-current="page" href="rutas.html">Destinos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active text-white" aria-current="page" href="paquetes.html">Paquetes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active text-white" aria-current="page" href="barcos.html">Barcos</a>
-
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active text-white" aria-current="page" href="comprar.html">Comprar</a>
-
-            </li>
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+            <li class="nav-item"><a class="nav-link active text-white" href="/rutas">Destinos</a></li>
+            <li class="nav-item"><a class="nav-link active text-white" href="/paquetes">Paquetes</a></li>
+            <li class="nav-item"><a class="nav-link active text-white" href="/barcos">Barcos</a></li>
+            <li class="nav-item"><a class="nav-link active text-white" href="/comprar">Comprar</a></li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
-  <!--En proceso:v-->
 
+  <!-- Progress Bar -->
   <div class="position-relative m-4 p-5">
     <div class="position-relative m-4">
-      <div class="progress" role="progressbar" aria-label="Progress" aria-valuenow="50" aria-valuemin="0"
-        aria-valuemax="100" style="height: 1px;">
-        <div class="progress-bar bg-ocean" style="width: 50%"></div>
+      <div class="progress" role="progressbar" style="height: 1px;">
+        <div class="progress-bar bg-ocean" style="width: 75%"></div>
       </div>
       <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-ocean rounded-pill"
         style="width: 2rem; height:2rem;">1</button>
       <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-ocean rounded-pill"
         style="width: 2rem; height:2rem;">2</button>
       <button type="button"
-        class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+        class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-ocean rounded-pill"
         style="width: 2rem; height:2rem;">3</button>
     </div>
   </div>
 
   <main class="container">
-    <h1 class="text-center text-dark mb-4">Elige tu Paquete y cabina</h1>
+    <h1 class="text-center text-dark mb-4">Elige tu Paquete y Cabina</h1>
 
-
-
-      <!-- Select de ruta -->
+    <form th:action="@{/guardarPaquete}" th:object="${reserva}" method="post" class="needs-validation" novalidate>
+      <!-- Paquetes (Checkbox) -->
       <div class="mb-4">
-        <label for="rutaSelect" class="form-label">Selecciona tu paquete</label>
-        <select id="rutaSelect" class="form-select" required>
-          <option value="" disabled selected>-- Elige tu paquete --</option>
-          <option value="1">Caribe Occidental</option>
-          <option value="2">Mediterráneo Clásico</option>
-          <option value="3">Alaska Inexplorada</option>
-          <option value="4">Escapada a las Bahamas</option>
-        </select>
-        <div class="invalid-feedback">Debes seleccionar una paquete.</div>
+        <label class="form-label">Selecciona tus paquetes</label>
+        <div class="form-check" th:each="paquete : ${paquetes}">
+          <input class="form-check-input" type="checkbox" th:value="${paquete.id}" th:field="*{paquetesSeleccionados}" id="paquete-${paquete.id}">
+          <label class="form-check-label" th:for="${'paquete-' + paquete.id}" th:text="${paquete.nombre}"></label>
+        </div>
       </div>
 
-            <!-- Select de cabina -->
+      <!-- Cabinas (Combobox) -->
       <div class="mb-4">
-        <label for="rutaSelect" class="form-label">Selecciona tu cabina</label>
-        <select id="rutaSelect" class="form-select" required>
+        <label class="form-label">Selecciona tu cabina</label>
+        <select class="form-select" th:field="*{cabinaId}" required>
           <option value="" disabled selected>-- Elige tu cabina --</option>
-          <option value="1">Caribe Occidental</option>
-          <option value="2">Mediterráneo Clásico</option>
-          <option value="3">Alaska Inexplorada</option>
-          <option value="4">Escapada a las Bahamas</option>
+          <option th:each="cabina : ${cabinas}" th:value="${cabina.id}" th:text="${cabina.tipo}"></option>
         </select>
         <div class="invalid-feedback">Debes seleccionar una cabina.</div>
       </div>
 
-      <!-- Botón de envío -->
+      <!-- Cantidad de cabinas -->
+      <div class="mb-4">
+        <label class="form-label">Cantidad de cabinas</label>
+        <input type="number" min="1" class="form-control" th:field="*{cantidadCabinas}" required>
+        <div class="invalid-feedback">Ingresa una cantidad válida.</div>
+      </div>
+
+      <!-- Adicional de personas/niños -->
+      <div class="mb-4">
+        <label class="form-label">Cantidad de personas adicionales</label>
+        <input type="number" min="0" class="form-control" th:field="*{personasAdicionales}">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Cantidad de niños adicionales</label>
+        <input type="number" min="0" class="form-control" th:field="*{ninosAdicionales}">
+      </div>
+
+      <!-- Botón -->
       <div class="text-center">
-        <button type="submit" class="btn btn-ocean btn-lg">Continuar</button>
+        <button type="submit" class="btn btn-ocean btn-lg">Finalizar</button>
       </div>
     </form>
   </main>
 
   <!--Footer-->
-  <footer class="row row-cols-5 py-5 mt-5  border-top bg-header text-white">
+  <footer class="row row-cols-5 py-5 mt-5 border-top bg-header text-white">
     <div class="col">
-      <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32">
-          <use xlink:href="#bootstrap" />
-        </svg>
-      </a>
       <p class="text-white">&copy;2025 TuCrucerito Corp.</p>
     </div>
-
-    <div class="col">
-
-    </div>
+    <div class="col"></div>
     <div class="col">
       <h5>Info</h5>
       <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Terminos y condiciones</a></li>
+        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Términos y condiciones</a></li>
         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Más sobre nosotros</a></li>
         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Contáctanos</a></li>
         <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
       </ul>
     </div>
-
     <div class="col">
       <h5>Redes sociales</h5>
       <ul class="nav flex-column">
         <li class="nav-item mb-2"><a href="https://www.instagram.com" class="nav-link p-0 text-muted">Instagram</a></li>
         <li class="nav-item mb-2"><a href="https://www.facebook.com" class="nav-link p-0 text-muted">Facebook</a></li>
-        <li class="nav-item mb-2"><a href="x.com" class="nav-link p-0 text-muted">X</a></li>
+        <li class="nav-item mb-2"><a href="https://x.com" class="nav-link p-0 text-muted">X</a></li>
       </ul>
     </div>
   </footer>
-  <script src="../static/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
-<script>
-  (function () {
-    'use strict';
-    const form = document.querySelector('.needs-validation');
-    form.addEventListener('submit', function (event) {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      } else {
-        // redirige solo si todo es válido
-        event.preventDefault();
-        window.location.href = 'elegirruta.html';
-      }
-      form.classList.add('was-validated');
-    }, false);
-  })();
-</script>
+  <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+  <script>
+    (() => {
+      'use strict';
+      const form = document.querySelector('.needs-validation');
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    })();
+  </script>
+</body>
 
 </html>

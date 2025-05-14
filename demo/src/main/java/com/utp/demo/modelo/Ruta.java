@@ -6,6 +6,17 @@ public class Ruta {
     private String dias;
     private double precio_ruta;
     private String salida;
+    private String imagen;
+
+    public Ruta(String nombre_ruta, String descripcion_ruta, String dias, double precio_ruta, String salida,
+            String imagen) {
+        this.nombre_ruta = nombre_ruta;
+        this.descripcion_ruta = descripcion_ruta;
+        this.dias = dias;
+        this.precio_ruta = precio_ruta;
+        this.salida = salida;
+        this.imagen = imagen;
+    }
 
     public String getNombre_ruta() {
         return nombre_ruta;
@@ -47,12 +58,12 @@ public class Ruta {
         this.salida = salida;
     }
 
-    public Ruta(String nombre_ruta, String descripcion_ruta, String dias, double precio_ruta, String salida) {
-        this.nombre_ruta = nombre_ruta;
-        this.descripcion_ruta = descripcion_ruta;
-        this.dias = dias;
-        this.precio_ruta = precio_ruta;
-        this.salida = salida;
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
 }
