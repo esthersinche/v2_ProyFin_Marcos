@@ -2,23 +2,72 @@ package com.utp.demo.model;
 
 public class Barcos {
 
+    public enum Modelobarco{
+        SMODEL("Pequeño", 15, 15, 18, 16, 16),
+        MMODEL("Grande", 20, 26, 30, 24, 20),
+        LMODEL("Largo", 40, 50, 30, 35, 25);
+
+        private final String modelo;
+        private final int cant_cabinas_inf;
+        private final int cant_cabinas_ext;
+        private final int cant_cabinas_cbal;
+        private final int cant_cabinas_suit;
+        private final int cant_cabinas_fam;
+
+        private Modelobarco(String modelo, int cant_cabinas_inf, int cant_cabinas_ext, int cant_cabinas_cbal,
+                int cant_cabinas_suit, int cant_cabinas_fam) {
+            this.modelo = modelo;
+            this.cant_cabinas_inf = cant_cabinas_inf;
+            this.cant_cabinas_ext = cant_cabinas_ext;
+            this.cant_cabinas_cbal = cant_cabinas_cbal;
+            this.cant_cabinas_suit = cant_cabinas_suit;
+            this.cant_cabinas_fam = cant_cabinas_fam;
+        }
+
+        public String getModelo() {
+            return modelo;
+        }
+
+        public int getCant_cabinas_inf() {
+            return cant_cabinas_inf;
+        }
+
+        public int getCant_cabinas_ext() {
+            return cant_cabinas_ext;
+        }
+
+        public int getCant_cabinas_cbal() {
+            return cant_cabinas_cbal;
+        }
+
+        public int getCant_cabinas_suit() {
+            return cant_cabinas_suit;
+        }
+
+        public int getCant_cabinas_fam() {
+            return cant_cabinas_fam;
+        }
+  
+    }
+//si no funciona borran el enum y el constructor y los getters y setters dsps le quitan
+//el comentario a modelo barcvo y lo generan de nuevo con sourceaction
     private String id_barco;
     private String nombre;
     private String capitan;
-    // faltaría lo de suites
+    private Modelobarco modelobarco;
+    //private String modelobarco;
     private int capacidad;
     private String recreacion;
-    private String modelo;
     private String imagen;
 
-    public Barcos(String id_barco, String nombre, String capitan, int capacidad, String recreacion, String modelo,
-            String imagen) {
+    public Barcos(String id_barco, String nombre, String capitan, Modelobarco modelobarco, int capacidad,
+            String recreacion, String imagen) {
         this.id_barco = id_barco;
         this.nombre = nombre;
         this.capitan = capitan;
+        this.modelobarco = modelobarco;
         this.capacidad = capacidad;
         this.recreacion = recreacion;
-        this.modelo = modelo;
         this.imagen = imagen;
     }
 
@@ -46,6 +95,14 @@ public class Barcos {
         this.capitan = capitan;
     }
 
+    public Modelobarco getModelobarco() {
+        return modelobarco;
+    }
+
+    public void setModelobarco(Modelobarco modelobarco) {
+        this.modelobarco = modelobarco;
+    }
+
     public int getCapacidad() {
         return capacidad;
     }
@@ -62,14 +119,6 @@ public class Barcos {
         this.recreacion = recreacion;
     }
 
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
     public String getImagen() {
         return imagen;
     }
@@ -77,5 +126,11 @@ public class Barcos {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+    
+
+    
+
+    
 
 }
