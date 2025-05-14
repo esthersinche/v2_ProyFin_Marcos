@@ -3,14 +3,14 @@ package com.utp.demo.modelo;
 public class Cabina {
     private String nombre_cab;
     private double precio;
-    private int cantidad_personas;
-    private int cantidad_niños;
+    private int maximoAdultos;
+    private int maximoNinos;
 
-    public Cabina(String nombre_cab, double precio, int cantidad_personas, int cantidad_niños) {
+    public Cabina(String nombre_cab, double precio, int maximoAdultos, int maximoNinos) {
         this.nombre_cab = nombre_cab;
         this.precio = precio;
-        this.cantidad_personas = cantidad_personas;
-        this.cantidad_niños = cantidad_niños;
+        this.maximoAdultos = maximoAdultos;
+        this.maximoNinos = maximoNinos;
     }
 
     public String getNombre_cab() {
@@ -29,20 +29,20 @@ public class Cabina {
         this.precio = precio;
     }
 
-    public int getCantidad_personas() {
-        return cantidad_personas;
+    public int getMaximoAdultos() {
+        return maximoAdultos;
     }
 
-    public void setCantidad_personas(int cantidad_personas) {
-        this.cantidad_personas = cantidad_personas;
+    public void setMaximoAdultos(int maximoAdultos) {
+        this.maximoAdultos = maximoAdultos;
     }
 
-    public int getCantidad_niños() {
-        return cantidad_niños;
+    public int getMaximoNinos() {
+        return maximoNinos;
     }
 
-    public void setCantidad_niños(int cantidad_niños) {
-        this.cantidad_niños = cantidad_niños;
+    public void setMaximoNinos(int maximoNinos) {
+        this.maximoNinos = maximoNinos;
     }
 
 }

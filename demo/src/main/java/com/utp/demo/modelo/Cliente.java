@@ -8,6 +8,10 @@ public class Cliente {
     private int celular;
     private String ciudad;
 
+    public Cliente() {
+        // Obligatorio para Spring y formularios
+    }
+
     public Cliente(String nombre, String apellido, String correo, int celular, String ciudad) {
         this.nombre = nombre;
         this.apellido = apellido;

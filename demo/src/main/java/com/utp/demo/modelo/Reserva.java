@@ -3,17 +3,25 @@ package com.utp.demo.modelo;
 import java.util.List;
 
 public class Reserva {
+
     private Cliente cliente;
     private Ruta ruta;
     private List<Paquete> paquetes;
     private Cabina cabina;
 
-    public Reserva(Cliente cliente, Ruta ruta, List<Paquete> paquetes, Cabina cabina) {
-        this.cliente = cliente;
-        this.ruta = ruta;
-        this.paquetes = paquetes;
-        this.cabina = cabina;
+    // Cantidades de pasajeros
+    private int cantidadAdultos;
+    private int cantidadNinos;
+
+    // Total calculado de la reserva
+    private double total;
+
+    public Reserva() {
+        // Constructor vacío Spring necesita poder crear el objeto sin argumentos.
+        // para instanciarlo automaticamente
     }
+
+    // Getters y Setters
 
     public Cliente getCliente() {
         return cliente;
@@ -47,4 +55,27 @@ public class Reserva {
         this.cabina = cabina;
     }
 
+    public int getCantidadAdultos() {
+        return cantidadAdultos;
+    }
+
+    public void setCantidadAdultos(int cantidadAdultos) {
+        this.cantidadAdultos = cantidadAdultos;
+    }
+
+    public int getCantidadNinos() {
+        return cantidadNinos;
+    }
+
+    public void setCantidadNinos(int cantidadNinos) {
+        this.cantidadNinos = cantidadNinos;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }

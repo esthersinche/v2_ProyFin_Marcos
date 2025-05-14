@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class RutaService {
 
-    public List<Ruta> obtenerTodas() {
+    public List<Ruta> obtenerTodoRutas() {
         // modificar datossss
         return List.of(
                 new Ruta("Caribe Occidental", "Crucero por islas tropicales", "7 días", 1500.0, "Puerto Miami"),
@@ -17,8 +17,8 @@ public class RutaService {
                 new Ruta("Escapada a Bahamas", "Relax y playa", "4 días", 950.0, "Miami"));
     }
 
-    public Ruta buscarPorNombre(String nombre) {
-        return obtenerTodas().stream()
+    public Ruta buscarPorNombreRuta(String nombre) {
+        return obtenerTodoRutas().stream()
                 .filter(r -> r.getNombre_ruta().equalsIgnoreCase(nombre))
                 .findFirst()
                 .orElse(null);
