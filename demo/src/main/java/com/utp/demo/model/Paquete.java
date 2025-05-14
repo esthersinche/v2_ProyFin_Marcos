@@ -1,6 +1,7 @@
-package com.utp.demo.modelo;
+package com.utp.demo.model;
 
 public class Paquete {
+
     private String nombre_paq;
     private String descripcion_paq;
     private double precio_paq;

@@ -1,6 +1,7 @@
-package com.utp.demo.modelo;
+package com.utp.demo.model;
 
 public class Cabina {
+
     private String nombre_cab;
     private double precio;
     private int maximoAdultos;

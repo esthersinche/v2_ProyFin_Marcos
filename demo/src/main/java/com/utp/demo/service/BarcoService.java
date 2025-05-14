@@ -1,10 +1,10 @@
-package com.utp.demo.servicio;
+package com.utp.demo.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.utp.demo.modelo.Barcos;
+import com.utp.demo.model.Barcos;
 
 @Service
 public class BarcoService {

@@ -1,9 +1,10 @@
-package com.utp.demo.servicio;
-
-import com.utp.demo.modelo.Cabina;
-import org.springframework.stereotype.Service;
+package com.utp.demo.service;
 
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.utp.demo.model.Cabina;
 
 @Service
 public class CabinaService {

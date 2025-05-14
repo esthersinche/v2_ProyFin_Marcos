@@ -1,7 +1,8 @@
-package com.utp.demo.servicio;
+package com.utp.demo.service;
 
-import com.utp.demo.modelo.Paquete;
 import org.springframework.stereotype.Service;
+
+import com.utp.demo.model.Paquete;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package com.utp.demo.modelo;
+package com.utp.demo.model;
 
 public class Barcos {
 

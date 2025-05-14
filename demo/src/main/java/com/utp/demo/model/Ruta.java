@@ -1,6 +1,7 @@
-package com.utp.demo.modelo;
+package com.utp.demo.model;
 
 public class Ruta {
+
     private String nombre_ruta;
     private String descripcion_ruta;
     private String dias;

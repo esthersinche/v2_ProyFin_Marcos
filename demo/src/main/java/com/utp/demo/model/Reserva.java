@@ -1,4 +1,4 @@
-package com.utp.demo.modelo;
+package com.utp.demo.model;
 
 import java.util.List;
 
@@ -22,7 +22,6 @@ public class Reserva {
     }
 
     // Getters y Setters
-
     public Cliente getCliente() {
         return cliente;
     }

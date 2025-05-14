@@ -1,7 +1,8 @@
-package com.utp.demo.servicio;
+package com.utp.demo.service;
 
-import com.utp.demo.modelo.Ruta;
 import org.springframework.stereotype.Service;
+
+import com.utp.demo.model.Ruta;
 
 import java.util.List;
 
