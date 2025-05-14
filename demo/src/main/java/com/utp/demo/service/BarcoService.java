@@ -19,4 +19,10 @@ public class BarcoService {
                 new Barcos("B006", "Antonia Graza", "Alessandro Bianchi", 1800, "Club nocturno, Zona comercial, Zona de Buffets, Centro de Relajación, Zona Kids", "X-Large", "https://royalcaribbean.com.pe/img/barcos/222_imagen_2625.jpg"));
     }
 
+    public Barcos buscarPorBarco(String id) {
+        return obtenerBarcos().stream()
+                .filter(r -> r.getId_barco().equalsIgnoreCase(id))
+                .findFirst()
+                .orElse(null);
+    }
 }
