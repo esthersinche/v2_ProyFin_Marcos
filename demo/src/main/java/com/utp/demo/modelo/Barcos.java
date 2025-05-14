@@ -5,6 +5,7 @@ public class Barcos {
     private String id_barco;
     private String nombre;
     private String capitan;
+    // faltaría lo de suites
     private int capacidad;
     private String recreacion;
     private String modelo;
