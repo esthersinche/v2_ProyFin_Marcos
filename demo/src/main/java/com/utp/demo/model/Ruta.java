@@ -8,15 +8,23 @@ public class Ruta {
     private double precio_ruta;//por unidad
     private String salida;
     private String imagen;
+// Nuevo:
+    private Barcos.Modelobarco modelobarco;
 
-    public Ruta(String nombre_ruta, String descripcion_ruta, String dias, double precio_ruta, String salida,
-            String imagen) {
+    public Ruta(String nombre_ruta,
+            String descripcion_ruta,
+            String dias,
+            double precio_ruta,
+            String salida,
+            String imagen,
+            Barcos.Modelobarco modelobarco) {
         this.nombre_ruta = nombre_ruta;
         this.descripcion_ruta = descripcion_ruta;
         this.dias = dias;
         this.precio_ruta = precio_ruta;
         this.salida = salida;
         this.imagen = imagen;
+        this.modelobarco = modelobarco;
     }
 
     public String getNombre_ruta() {
@@ -65,6 +73,14 @@ public class Ruta {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public Barcos.Modelobarco getModelobarco() {
+        return modelobarco;
+    }
+
+    public void setModelobarco(Barcos.Modelobarco modelobarco) {
+        this.modelobarco = modelobarco;
     }
 
 }
