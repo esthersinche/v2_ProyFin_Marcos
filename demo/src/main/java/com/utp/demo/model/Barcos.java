@@ -119,14 +119,6 @@ public class Barcos {
         this.imagen = imagen;
     }
 
-    public Modelobarco getModelobarco() {
-        return modelobarco;
-    }
-
-    public void setModelobarco(Modelobarco modelobarco) {
-        this.modelobarco = modelobarco;
-    }
-
     //total de cabinas
     public int getTotalcabinas() {
         return modelobarco.getCant_cabinas_inf() + modelobarco.getCant_cabinas_ext()
