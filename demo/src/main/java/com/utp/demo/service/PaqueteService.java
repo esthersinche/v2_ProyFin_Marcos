@@ -1,12 +1,15 @@
 package com.utp.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.utp.demo.model.Barcos;
 import com.utp.demo.model.Cabina;
 import com.utp.demo.model.Paquete;
+import com.utp.demo.model.Ruta;
 
 @Service
 public class PaqueteService {
@@ -17,32 +20,126 @@ public class PaqueteService {
         this.rutaService = rutaService;
     }
 
-    public List<Paquete> obtenerTodoPaquetes() {
-        return List.of(
-                /* 
-                new Paquete("Todo Incluido", "Todos los beneficios del crucero", 1200),
-                new Paquete("Sin Paquetes", "Solo el crucero base", 0),
-                new Paquete("Paquete de Bebidas", "Incluye bebidas ilimitadas", 300),
-                new Paquete("Paquete de Internet", "Wi-Fi ilimitado en todo el barco", 250),
-                new Paquete("Paquete de Restaurantes", "Acceso a restaurantes gourmet", 350),
-                new Paquete("Paquete de Entretenimiento para Niños", "Actividades para menores", 200),
-                new Paquete("Paquete de Entretenimiento para Adultos", "Shows y actividades nocturnas", 400),
-                new Paquete("Paquete de Piscinas", "Acceso a piscinas premium", 150)*/
-                new Paquete("Todo incluido", Cabina.Cabina_tipo.fam, "Todos los beneficios del crucero", rutaService.buscarPorNombreRuta("Caribe Occidental")),
-                new Paquete("Sin Paquetes", Cabina.Cabina_tipo.inf, "Solo el crucero base", rutaService.buscarPorNombreRuta("Caribe Occidental")),
-                new Paquete("Paquete de Bebidas", Cabina.Cabina_tipo.ext, "Incluye bebidas ilimitadas", rutaService.buscarPorNombreRuta("Caribe Occidental")),
-                new Paquete("Paquete de Internet", Cabina.Cabina_tipo.cbal, "Wi-Fi ilimitado en todo el barco", rutaService.buscarPorNombreRuta("Caribe Occidental")),
-                new Paquete("Paquete de Restaurantes", Cabina.Cabina_tipo.suit, "Acceso a restaurantes gourmet", rutaService.buscarPorNombreRuta("Caribe Occidental")),
-                new Paquete("Paquete de Entretenimiento para Niños", Cabina.Cabina_tipo.fam, "Actividades para menores", rutaService.buscarPorNombreRuta("Caribe Occidental")),
-                new Paquete("Paquete de Entretenimiento para Adultos", Cabina.Cabina_tipo.suit, "Shows y actividades nocturnas", rutaService.buscarPorNombreRuta("Caribe Occidental")),
-                new Paquete("Paquete de Piscinas", Cabina.Cabina_tipo.cbal, "Acceso a piscinas premium", rutaService.buscarPorNombreRuta("Caribe Occidental"))
-        );
+    public List<Paquete> ObtenertodoPaquetes(){
+        List<Paquete> listapaquetes= new ArrayList<>();
+
+        String[] nompaqs= { //nombres paquetes
+            "Todo Incluido",
+            "Paquete Internet, Restaurante, Bebidas, Piscina",
+            "Paquete Internet, Restaurante-Buffet, Bebidas"
+        };
+
+        Cabina.Cabina_tipo[] tiposcabina= Cabina.Cabina_tipo.values();//values devuelve array de los enums
+
+        Barcos.Modelobarco[] tiposmodelo= Barcos.Modelobarco.values();//array de modelos de barco
+
+        List<Ruta> rutas= rutaService.obtenerTodoRutas();
+
+        String[] descs= { //descripciones de paquetes
+            "Todos los beneficios del crucero",
+            "Acceso a Internet Ilimitado, Bebidas ilimitadas, Restaurantes gourmet, Buffet y Piscinas",
+            "Acceso basico a Internet Ilimitado, Bebidas Ilimitadas y Buffet."
+        };
+
+        for(Ruta ruta : rutas){//recorre las rutas
+            switch(ruta.getNombre_ruta()){
+                case "Caribe Occidental":
+                    for(Barcos.Modelobarco tipomodelo : tiposmodelo){
+                        if (tipomodelo.equals(Barcos.Modelobarco.SMODEL) ) {
+                            for(Cabina.Cabina_tipo tipocabina : tiposcabina){
+                                for (int i = 0; i < nompaqs.length; i++) {
+                                    Paquete paquete = new Paquete(nompaqs[i], tipocabina, descs[i], ruta);
+                                    listapaquetes.add(paquete);
+                                    //si ruta en el constructor no funciona usar esto, rutaService.buscarPorNombreRuta("Caribe Occidental")
+                                }
+                            }        
+                        }else if (tipomodelo.equals(Barcos.Modelobarco.LMODEL)) {
+                            for(Cabina.Cabina_tipo tipocabina :tiposcabina){
+                                for (int i = 0; i < nompaqs.length; i++) {
+                                    Paquete paquete = new Paquete(nompaqs[i], tipocabina, descs[i], ruta);
+                                    listapaquetes.add(paquete);
+                                    //si ruta en el constructor no funciona usar esto, rutaService.buscarPorNombreRuta("Caribe Occidental")
+                                }
+                            }                           
+                        }
+                    }
+                    break;
+                case "Escapada a Bahamas":
+                for(Barcos.Modelobarco tipomodelo : tiposmodelo){
+                        if (tipomodelo.equals(Barcos.Modelobarco.MMODEL) ) {
+                            for(Cabina.Cabina_tipo tipocabina : tiposcabina){
+                                for (int i = 0; i < nompaqs.length; i++) {
+                                    Paquete paquete = new Paquete(nompaqs[i], tipocabina, descs[i], ruta);
+                                    listapaquetes.add(paquete);
+                                    //si ruta en el constructor no funciona usar esto, rutaService.buscarPorNombreRuta("Escapada a Bahamas")
+                                }
+                            }        
+                        }
+                    }
+                    break;
+                case "Mediterráneo Clásico":
+                for(Barcos.Modelobarco tipomodelo : tiposmodelo){
+                        if (tipomodelo.equals(Barcos.Modelobarco.SMODEL) ) {
+                            for(Cabina.Cabina_tipo tipocabina : tiposcabina){
+                                for (int i = 0; i < nompaqs.length; i++) {
+                                    Paquete paquete = new Paquete(nompaqs[i], tipocabina, descs[i], ruta);
+                                    listapaquetes.add(paquete);
+                                    //si ruta en el constructor no funciona usar esto, rutaService.buscarPorNombreRuta("Mediterráneo Clásico")
+                                }
+                            }        
+                        }
+                    }
+                    break;
+
+                case "Alaska Inexplorada":
+                for(Barcos.Modelobarco tipomodelo : tiposmodelo){
+                        if (tipomodelo.equals(Barcos.Modelobarco.MMODEL) ) {
+                            for(Cabina.Cabina_tipo tipocabina : tiposcabina){
+                                for (int i = 0; i < nompaqs.length; i++) {
+                                    Paquete paquete = new Paquete(nompaqs[i], tipocabina, descs[i], ruta);
+                                    listapaquetes.add(paquete);
+                                    //si ruta en el constructor no funciona usar esto, rutaService.buscarPorNombreRuta("Alaska Inexplorada")
+                                }
+                            }        
+                        }else if (tipomodelo.equals(Barcos.Modelobarco.LMODEL)) {
+                            for(Cabina.Cabina_tipo tipocabina :tiposcabina){
+                                for (int i = 0; i < nompaqs.length; i++) {
+                                    Paquete paquete = new Paquete(nompaqs[i], tipocabina, descs[i], ruta);
+                                    listapaquetes.add(paquete);
+                                    //si ruta en el constructor no funciona usar esto, rutaService.buscarPorNombreRuta("Alaska Inexplorada")
+                                }
+                            }                           
+                        }
+                    }
+                    break;
+            }
+           
+        }
+
+        return listapaquetes;
+
+            
     }
+       
 
     // 
     public List<Paquete> buscarPorNombrePaquetes(List<String> nombres_paquetes) {
-        return obtenerTodoPaquetes().stream()
+        return ObtenertodoPaquetes().stream()
                 .filter(p -> nombres_paquetes.contains(p.getNombre_paq()))
                 .collect(Collectors.toList());
     }
+
+    public List<Paquete> buscarPorRutaPaquetes(List<String> nom_ruta_paquetes){
+        //lista q saca los nombres de la lista ruta_paquetes
+        //map transforma los elementos del stream en otros, aqui es en string
+        /*List<String> nom_ruta_paquetes= ruta_paquetes.stream()
+                .map(Ruta::getNombre_ruta).collect(Collectors.toList());*/
+
+        return ObtenertodoPaquetes().stream()
+                .filter(p -> nom_ruta_paquetes.contains(p.getRuta_paq().getNombre_ruta()))
+                .collect(Collectors.toList());
+
+    }
+
+
 }
