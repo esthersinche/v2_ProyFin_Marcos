@@ -1,10 +1,10 @@
 package com.utp.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.utp.demo.model.Ruta;
-
-import java.util.List;
 
 @Service
 public class RutaService {
@@ -13,8 +13,7 @@ public class RutaService {
         // modificar datossss
         return List.of(
                 new Ruta("Caribe Occidental",
-                        "Visita Cozumel, Roatán y Costa Maya… playas de arena blanca y aguas cristalinas.", "7 días",
-                        1500.0, "Puerto Miami: 13 de Julio",
+                        "Visita playas de arena blanca y aguas cristalinas.", "7 días", 1500.0, "Puerto Miami: 13 de Julio",
                         "https://acrobatadelcamino.com/wp-content/uploads/2022/10/mejores-islas-del-caribe.jpg"),
                 new Ruta("Mediterráneo Clásico", "Italia, Grecia y España", "10 días", 2200.0, "Barcelona",
                         "https://www.enroma.com/wp-content/uploads/2020/04/Porto-di-Civitavecchia.jpg"),

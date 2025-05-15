@@ -1,200 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barcos</title>
-    <link rel="stylesheet" href="../static/node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/scss/custom.css">
+    <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/scss/custom.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
 <body class="bg-white">
     <!--Header-->
-    <!--Aquí va el header-->
-    <header>
-        <nav class="navbar navbar-expand-lg bg-header">
-            <div class="container-fluid">
-                <i class="bi bi-tsunami" style="color: aliceblue;"></i>
-                <a class="navbar-brand text-white ms-2" href="main.html">TuCrucerito.com</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                        <li class="nav-item">
-                            <a class="nav-link active text-white" aria-current="page" href="rutas.html">Destinos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="paquetes.html">Paquetes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="barcos.html">Barcos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="comprar.html">Comprar</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="~{fragments/header :: navBar}"></header>
     <!--body-->
-    <main class="py-4">
+    <main class="py-4 container">
         <h1 class="text-dark text-center">Conoce a nuestra flota</h1>
         <br>
-        <div class="container" id="fleet-container"></div>
+        <div th:each="barco, iterStat : ${barcos}">
+            <div class="row featurette">
+                <!-- Texto -->
+                <div th:class="'col-md-7 ' + (${iterStat.index} % 2 == 1 ? 'order-md-2 text-start' : 'text-end')">
+                    <h3 class="featurette-heading">
+                        <span th:text="${barco.nombre}">Nombre</span>
+                        <br>
+                        <small class="text-ocean" th:text="${barco.modelobarco}">Modelo</small>
+                    </h3>
+                    <p class="lead">
+                        <strong>Capitán:</strong> <span th:text="${barco.capitan}">Capitán</span><br>
+                        <strong>Camarotes y Suites:</strong> <span th:text="${barco.capacidad}">0</span> Cabinas<br>
+                        <strong>Recreación:</strong> <span th:text="${barco.recreacion}">Actividades</span>
+                    </p>
+                    <a th:href="@{/paquetes}" class="btn btn-dark btn-lg mt-3">
+                        Ver destinos disponibles
+                    </a>
+                </div>
+
+                <!-- Imagen -->
+                <div th:class="'col-md-5 ' + (${iterStat.index} % 2 == 1 ? 'order-md-1' : '')">
+                    <img th:src="${barco.imagen}" th:alt="${barco.nombre}" class="img-fluid mx-auto">
+                </div>
+            </div>
+
+            <!-- Separador, menos en el último -->
+            <hr class="featurette-divider" th:if="${!iterStat.last}">
+        </div>
     </main>
 
-    <!--Footer-->
-    <footer class="row row-cols-5 py-5 mt-5 p-2 border-top bg-header text-white">
-        <div class="col">
-            <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32"><!--contenedorgrafico BootstrapIcons-->
-                    <use xlink:href="#bootstrap" /><!--ref icono predeterminado-->
-                </svg>
-            </a>
-            <p class="text-white">&copy;2025 TuCrucerito Corp.</p>
-        </div>
-
-        <div class="col">
-
-        </div>
-
-        <div class="col">
-            <h5>Info</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Terminos y condiciones</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Más sobre nosotros</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Contáctanos</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">FAQS</a>
-                </li>
-            </ul>
-
-        </div>
-
-        <div class="col">
-            <h5>Redes Sociales</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a href="https://www.instagram.com" class="nav-link p-0 text-muted">Instagram</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="https://www.facebook.com" class="nav-link p-0 text-muted">Facebook</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="x.com" class="nav-link p-0 text-muted">X</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
-    <script src="../static/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <footer th:replace="~{fragments/footer :: footerContent}"></footer>
+    <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 
 </body>
-
-<script>
-    const ships = [
-        {
-            name: "Aurora Sea",
-            tagline: "Lujo en cada ola",
-            captain: "Elena Morales",
-            capacity: "3,200 pasajeros",
-            suites: "150 de lujo con vista al mar",
-            recreation: "Spa, piscina infinita, teatro, casino",
-            model: "Oceanliner Class X",
-            image: "https://cdn-3.expansion.mx/dims4/default/e771a6a/2147483647/strip/true/crop/5995x4234+0+0/resize/1200x848!/format/webp/quality/60/?url=https%3A%2F%2Fcdn-3.expansion.mx%2Fc1%2Fec%2Fc371673b403a993283b6ff277687%2F1666103786-rci-ic-crowns-edge-cgi23-ret-crop-lr.JPG"
-        },
-        {
-            name: "Estrella del Norte",
-            tagline: "Tu guía en el horizonte",
-            captain: "Jean-Luc Rousseau",
-            capacity: "4,500 pasajeros",
-            suites: "200 premium",
-            recreation: "Club nocturno, restaurantes gourmet, gimnasio panorámico",
-            model: "Arctic Voyager 5000",
-            image: "https://upload.wikimedia.org/wikipedia/commons/b/b3/Queen_Mary_2_Boston_July_2015_01_%28cropped%29.jpg"
-        },
-        {
-            name: "Mar de Cristal",
-            tagline: "Serenidad en movimiento",
-            captain: "Rodrigo Sánchez",
-            capacity: "2,800 pasajeros",
-            suites: "120 panorámicas",
-            recreation: "Parque acuático, cine 4D, centro de yoga",
-            model: "Serenity 88",
-            image: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Icon_of_the_Seas.jpg"
-        },
-        {
-            name: "Titan Horizon",
-            tagline: "Donde el poder y la elegancia se encuentran",
-            captain: "Margaret O'Connell",
-            capacity: "5,100 pasajeros",
-            suites: "250 executive",
-            recreation: "Simulador de surf, pista de patinaje, centro comercial",
-            model: "Horizon Max-Class 2025",
-            image: "https://i.blogs.es/d82af3/12/1366_2000.jpeg"
-        },
-        {
-            name: "Velero Celeste",
-            tagline: "Una joya clásica del océano",
-            captain: "Francisco Navarro",
-            capacity: "1,800 pasajeros",
-            suites: "90 elegantes",
-            recreation: "Biblioteca náutica, piano bar, solárium",
-            model: "Classic Wind 75",
-            image: "https://royalcaribbean.com.pe/img/barcos/222_imagen_2625.jpg"
-        }
-    ];
-
-    const container = document.getElementById("fleet-container");
-
-    ships.forEach((ship, i) => {
-        const row = document.createElement("div");
-        row.className = "row featurette";
-
-
-        const isOdd = i % 2 === 1;
-        const textClass = isOdd ? "order-md-2" : "text-end";
-        const imgClass = isOdd ? "order-md-1" : "";
-
-
-        row.innerHTML = `
-        <div class="col-md-7 ${textClass}">
-          <h3 class="featurette-heading">
-            ${ship.name}. <span class="text-ocean">${ship.tagline}</span>
-          </h3>
-          <p class="lead">
-            <strong>Capitán:</strong> ${ship.captain}<br>
-            <strong>Capacidad:</strong> ${ship.capacity}<br>
-            <strong>Suites:</strong> ${ship.suites}<br>
-            <strong>Áreas de recreación:</strong> ${ship.recreation}<br>
-            <strong>Modelo:</strong> ${ship.model}<br>
-          </p>
-          <a href="paquetes.html" class="btn btn-dark btn-lg mt-3">
-            Ver destinos disponibles
-          </a>
-        </div>
-        <div class="col-md-5 ${imgClass}">
-          <img src="${ship.image}" class="img-fluid mx-auto" alt="${ship.name}">
-        </div>
-      `;
-        container.appendChild(row);
-
-        if (i < ships.length - 1) {
-            const hr = document.createElement("hr");
-            hr.className = "featurette-divider";
-            container.appendChild(hr);
-        }
-    });
-</script>
 
 </html>
