@@ -21,9 +21,27 @@ public class CabinaService {
         //el enum ya tiene un num de personas maximo
     }
 
+    //adicion, listado, consultas, eliminacion, busquedas
+
+    //adicion no
+    //listado(arriba)
+
+    //consultas
     public Cabina buscarPorNombreCabina(String nombre_cab) {
         return obtenerTodoCabinas().stream()
-                .filter(c -> c.getCabinatipo().nombre_cabina.equalsIgnoreCase(nombre_cab))
+                .filter(c -> c.getCabinatipo().getNombre_cabina().equalsIgnoreCase(nombre_cab))
                 .findFirst().orElse(null);
     }
+
+    public Cabina buscarPorcantmaxperCabina(int cantmax) {
+        return obtenerTodoCabinas().stream()
+                .filter(c -> c.getCabinatipo().getCant_max_per() == cantmax)
+                .findFirst().orElse(null);
+    }
+
+    //eliminacion
+
+
+
+
 }

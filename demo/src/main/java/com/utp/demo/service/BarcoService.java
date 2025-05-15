@@ -8,6 +8,8 @@ import com.utp.demo.model.Barcos.Modelobarco;
 @Service
 public class BarcoService {
 
+
+    //listado
     public List<Barcos> obtenerBarcos() {
         return List.of(
             new Barcos("B001", "Aurora Sea", "Elena Morales", 
@@ -37,17 +39,40 @@ public class BarcoService {
         );         
     }
 
-    public Barcos buscarPorBarco(String id) {
+    //Adicion, listado, consultas, eliminación , busquedas
+    //no adicion
+    //Listado(arriba)
+    //consultas
+    public Barcos buscarPoridBarco(String id) {
         return obtenerBarcos().stream()
                 .filter(r -> r.getId_barco().equalsIgnoreCase(id))
                 .findFirst()
                 .orElse(null);
     }
 
+    public Barcos buscarPornombreBarco(String nombre) {
+        return obtenerBarcos().stream()
+                .filter(r -> r.getNombre().equalsIgnoreCase(nombre))
+                .findFirst()
+                .orElse(null);
+    }
 
-     
+    public Barcos buscarPormodeloBarco(String modelo) {
+        return obtenerBarcos().stream()
+                .filter(r -> r.getModelobarco().getModelo().equalsIgnoreCase(modelo))
+                .findFirst().orElse(null);
+    }
 
+    public Barcos buscarPorcapiBarco(String capi) {
+        return obtenerBarcos().stream()
+                .filter(r -> r.getCapitan().equalsIgnoreCase(capi))
+                .findFirst().orElse(null);
+    }
+
+    //eliminacion
     
+
+
 
     
 }

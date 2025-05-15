@@ -24,10 +24,26 @@ public class RutaService {
                         "https://www.ncl.com/sites/default/files/1000x667miamibahamas.jpg"));
     }
 
+    //adicion, listado, consultas, eliminacion, busquedas
+    //adicion puede ser
+    //listado(arriba)
+
+    //consultas
     public Ruta buscarPorNombreRuta(String nombre) {
         return obtenerTodoRutas().stream()
                 .filter(r -> r.getNombre_ruta().equalsIgnoreCase(nombre))
                 .findFirst()
                 .orElse(null);
     }
+
+    public Ruta buscarPorsalidaRuta(String salida) {
+        return obtenerTodoRutas().stream()
+                .filter(r -> r.getSalida().equalsIgnoreCase(salida))
+                .findFirst()
+                .orElse(null);
+    }
+
+    //eliminacion(?)
+
+    
 }

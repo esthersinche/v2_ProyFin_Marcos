@@ -8,7 +8,7 @@ public class Barcos {
         MMODEL("Grande", 20, 26, 30, 24, 20),
         LMODEL("Largo", 40, 50, 30, 35, 25);
 
-        private final String modelo;
+        public final String modelo;
         private final int cant_cabinas_inf;
         private final int cant_cabinas_ext;
         private final int cant_cabinas_cbal;
