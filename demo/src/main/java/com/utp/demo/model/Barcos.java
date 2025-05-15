@@ -1,14 +1,14 @@
 package com.utp.demo.model;
 
 public class Barcos {
+    //private Cabina cabinaue;
 
     public enum Modelobarco {
-
         SMODEL("Pequeño", 15, 15, 18, 16, 16),
         MMODEL("Grande", 20, 26, 30, 24, 20),
         LMODEL("Largo", 40, 50, 30, 35, 25);
 
-        private final String modelo;
+        public final String modelo;
         private final int cant_cabinas_inf;
         private final int cant_cabinas_ext;
         private final int cant_cabinas_cbal;
@@ -56,17 +56,17 @@ public class Barcos {
     private String nombre;
     private String capitan;
     private Modelobarco modelobarco;
-    private int capacidad;
+    //private String modelobarco;
+    //private int capacidad;
     private String recreacion;
     private String imagen;
 
-    public Barcos(String id_barco, String nombre, String capitan, Modelobarco modelobarco, int capacidad,
-            String recreacion, String imagen) {
+    public Barcos(String id_barco, String nombre, String capitan, Modelobarco modelobarco, String recreacion,
+            String imagen) {
         this.id_barco = id_barco;
         this.nombre = nombre;
         this.capitan = capitan;
         this.modelobarco = modelobarco;
-        this.capacidad = capacidad;
         this.recreacion = recreacion;
         this.imagen = imagen;
     }
@@ -103,14 +103,6 @@ public class Barcos {
         this.modelobarco = modelobarco;
     }
 
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
-    }
-
     public String getRecreacion() {
         return recreacion;
     }
@@ -135,14 +127,14 @@ public class Barcos {
     }
 
     //capacidad
-    /*public int getCapacidad(){
-        int cap_inf= modelobarco.getCant_cabinas_inf() * Cabina.Cabina_tipo.inf.cant_max_per;
-        int cap_ext= modelobarco.getCant_cabinas_ext() * Cabina.Cabina_tipo.ext.cant_max_per;
-        int cap_cbal= modelobarco.getCant_cabinas_cbal() * Cabina.Cabina_tipo.cbal.cant_max_per;
-        int cap_suit= modelobarco.getCant_cabinas_suit() * Cabina.Cabina_tipo.suit.cant_max_per;
-        int cap_fam= modelobarco.getCant_cabinas_fam() * Cabina.Cabina_tipo.fam.cant_max_per;
+    public int getCapacidad() {
+        int cap_inf = modelobarco.getCant_cabinas_inf() * Cabina.Cabina_tipo.inf.cant_max_per;
+        int cap_ext = modelobarco.getCant_cabinas_ext() * Cabina.Cabina_tipo.ext.cant_max_per;
+        int cap_cbal = modelobarco.getCant_cabinas_cbal() * Cabina.Cabina_tipo.cbal.cant_max_per;
+        int cap_suit = modelobarco.getCant_cabinas_suit() * Cabina.Cabina_tipo.suit.cant_max_per;
+        int cap_fam = modelobarco.getCant_cabinas_fam() * Cabina.Cabina_tipo.fam.cant_max_per;
 
         return cap_inf + cap_ext + cap_cbal + cap_suit + cap_fam;
     }
-     */
+
 }

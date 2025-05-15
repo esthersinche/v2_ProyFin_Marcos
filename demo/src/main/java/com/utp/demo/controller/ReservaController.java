@@ -92,6 +92,7 @@ public class ReservaController {
         reserva.setCantidadAdultos(cantidadAdultos);
         reserva.setCantidadNinos(cantidadNinos);
 
+        /*POR EDITAR!!!!!!!!!!!!!!!!!!!!!!
         // Calcular total
         double total = 0;
         double precioRuta = reserva.getRuta().getPrecio_ruta();
@@ -128,7 +129,7 @@ public class ReservaController {
         total += (adicionalesNinos * adicionalNino);
 
         reserva.setTotal(total);
-
+         */
         return "redirect:/resumen";
     }
 
