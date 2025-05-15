@@ -5,7 +5,7 @@ public class Ruta {
     private String nombre_ruta;
     private String descripcion_ruta;
     private String dias;
-    private double precio_ruta;
+    private double precio_ruta;//por unidad
     private String salida;
     private String imagen;
 

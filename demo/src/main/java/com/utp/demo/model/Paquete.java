@@ -1,18 +1,20 @@
 package com.utp.demo.model;
 
+import com.utp.demo.model.Cabina.Cabina_tipo;
+
 public class Paquete {
 
     private String nombre_paq;
-    private Cabina cabina_paq;
+    private Cabina_tipo cabinatipo_paq;
     private String descripcion_paq;
-    private double precio_paq;//por una persona, se multiplicara al comprar
-    
+    private Ruta ruta;
+    //private double precio_paq;//por una persona, se multiplicara al comprar
 
-    public Paquete(String nombre_paq, Cabina cabina_paq, String descripcion_paq, double precio_paq) {
+    public Paquete(String nombre_paq, Cabina_tipo cabinatipo_paq, String descripcion_paq, Ruta ruta) {
         this.nombre_paq = nombre_paq;
-        this.cabina_paq = cabina_paq;
+        this.cabinatipo_paq = cabinatipo_paq;
         this.descripcion_paq = descripcion_paq;
-        this.precio_paq = precio_paq;
+        this.ruta = ruta;
     }
 
     public String getNombre_paq() {
@@ -23,12 +25,12 @@ public class Paquete {
         this.nombre_paq = nombre_paq;
     }
 
-    public Cabina getCabina_paq() {
-        return cabina_paq;
+    public Cabina_tipo getCabinatipo_paq() {
+        return cabinatipo_paq;
     }
 
-    public void setCabina_paq(Cabina cabina_paq) {
-        this.cabina_paq = cabina_paq;
+    public void setCabinatipo_paq(Cabina_tipo cabinatipo_paq) {
+        this.cabinatipo_paq = cabinatipo_paq;
     }
 
     public String getDescripcion_paq() {
@@ -39,18 +41,19 @@ public class Paquete {
         this.descripcion_paq = descripcion_paq;
     }
 
-    public double getPrecio_paq() {
-        return precio_paq;
+    public Ruta getRuta() {
+        return ruta;
     }
 
-    public void setPrecio_paq(double precio_paq) {
-        this.precio_paq = precio_paq;
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
     }
 
-    
 
-    
+    public double getPrec_paq_uni(){
+        return this.cabinatipo_paq.getPrec_cabina_per() + 300 + ruta.getPrecio_ruta();
+    }//300 es precio descripcion paquetes, lo hare dsps no hay tiempo
+    //en otra clase multiplicarlo por la cant de personas
 
-    
 
 }

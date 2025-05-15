@@ -9,9 +9,9 @@ public class Cabina {
         suit("Suite", 6, 216.10),
         fam("Familiar/Conectada", 8, 298.60);
 
-        private final String nombre_cabina;
+        public final String nombre_cabina;
         public final int cant_max_per;
-        private final double prec_cabina_per;
+        public final double prec_cabina_per;
 
         private Cabina_tipo(String nombre_cabina, int cant_max_per, double prec_cabina_per) {
             this.nombre_cabina = nombre_cabina;
