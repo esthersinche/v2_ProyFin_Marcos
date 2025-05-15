@@ -2,7 +2,7 @@ package com.utp.demo.model;
 
 public class Barcos {
 
-    public enum Modelobarco{
+    public enum Modelobarco {
 
         SMODEL("Pequeño", 15, 15, 18, 16, 16),
         MMODEL("Grande", 20, 26, 30, 24, 20),
@@ -49,7 +49,6 @@ public class Barcos {
             return cant_cabinas_fam;
         }
 
-
     }
 //si no funciona borran el enum y el constructor y los getters y setters dsps le quitan
 //el comentario a modelo barcvo y lo generan de nuevo con sourceaction
@@ -94,14 +93,6 @@ public class Barcos {
 
     public void setCapitan(String capitan) {
         this.capitan = capitan;
-    }
-
-    public Modelobarco getModelobarco() {
-        return modelobarco;
-    }
-
-    public void setModelobarco(Modelobarco modelobarco) {
-        this.modelobarco = modelobarco;
     }
 
     public int getCapacidad() {
@@ -154,5 +145,4 @@ public class Barcos {
         return cap_inf + cap_ext + cap_cbal + cap_suit + cap_fam;
     }
      */
-
 }
