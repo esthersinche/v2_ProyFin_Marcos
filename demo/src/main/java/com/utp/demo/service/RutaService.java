@@ -13,7 +13,8 @@ public class RutaService {
         // modificar datossss
         return List.of(
                 new Ruta("Caribe Occidental",
-                        "Visita playas de arena blanca y aguas cristalinas.", "7 días", 1500.0, "Puerto Miami: 13 de Julio",
+                        "Visita Cozumel, Roatán y Costa Maya… playas de arena blanca y aguas cristalinas.", "7 días",
+                        1500.0, "Puerto Miami: 13 de Julio",
                         "https://acrobatadelcamino.com/wp-content/uploads/2022/10/mejores-islas-del-caribe.jpg"),
                 new Ruta("Mediterráneo Clásico", "Italia, Grecia y España", "10 días", 2200.0, "Barcelona",
                         "https://www.enroma.com/wp-content/uploads/2020/04/Porto-di-Civitavecchia.jpg"),
@@ -23,10 +24,23 @@ public class RutaService {
                         "https://www.ncl.com/sites/default/files/1000x667miamibahamas.jpg"));
     }
 
+    //adicion, listado, consultas, eliminacion, busquedas
+    //adicion puede ser
+    //listado(arriba)
+    //consultas
     public Ruta buscarPorNombreRuta(String nombre) {
         return obtenerTodoRutas().stream()
                 .filter(r -> r.getNombre_ruta().equalsIgnoreCase(nombre))
                 .findFirst()
                 .orElse(null);
     }
+
+    public Ruta buscarPorsalidaRuta(String salida) {
+        return obtenerTodoRutas().stream()
+                .filter(r -> r.getSalida().equalsIgnoreCase(salida))
+                .findFirst()
+                .orElse(null);
+    }
+
+    //eliminacion(?)
 }

@@ -66,6 +66,7 @@ public class ReservaController {
         return "redirect:/elegirpaquete";
     }
 
+    /*CAMBIAR!!!!!!!!!!
     // Paso 3: Paquetes y Cabina
     @GetMapping("/elegirpaquete")
     public String mostrarPaquetesYCabinas(Model model) {
@@ -73,6 +74,7 @@ public class ReservaController {
         model.addAttribute("cabinas", cabinaService.obtenerTodoCabinas());
         return "elegirpaquete";
     }
+     */
 
     @PostMapping("/guardarPaquete")
     public String guardarPaqueteCabina(
