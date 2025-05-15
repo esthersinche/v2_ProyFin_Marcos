@@ -101,7 +101,7 @@ public class Barcos {
 
     public void setModelobarco(Modelobarco modelobarco) {
         this.modelobarco = modelobarco;
-    }
+
 
     public String getRecreacion() {
         return recreacion;
