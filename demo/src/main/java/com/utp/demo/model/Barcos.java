@@ -2,8 +2,6 @@ package com.utp.demo.model;
 
 public class Barcos {
 
-<<<<<<< Updated upstream
-=======
     public enum Modelobarco {
         SMODEL("Pequeño", 15, 15, 18, 16, 16),
         MMODEL("Grande", 20, 26, 30, 24, 20),
@@ -54,24 +52,22 @@ public class Barcos {
 //si no funciona borran el enum y el constructor y los getters y setters dsps le quitan
 //el comentario a modelo barcvo y lo generan de nuevo con sourceaction
 
->>>>>>> Stashed changes
     private String id_barco;
     private String nombre;
     private String capitan;
+    Modelobarco modelobarco;
     // faltaría lo de suites
     private int capacidad;
     private String recreacion;
-    private String modelo;
     private String imagen;
 
-    public Barcos(String id_barco, String nombre, String capitan, int capacidad, String recreacion, String modelo,
-            String imagen) {
+    public Barcos(String id_barco, String nombre, String capitan, Modelobarco modelobarco, int capacidad, String recreacion, String imagen) {
         this.id_barco = id_barco;
         this.nombre = nombre;
         this.capitan = capitan;
+        this.modelobarco = modelobarco;
         this.capacidad = capacidad;
         this.recreacion = recreacion;
-        this.modelo = modelo;
         this.imagen = imagen;
     }
 
@@ -115,20 +111,20 @@ public class Barcos {
         this.recreacion = recreacion;
     }
 
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
     public String getImagen() {
         return imagen;
     }
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public Modelobarco getModelobarco() {
+        return modelobarco;
+    }
+
+    public void setModelobarco(Modelobarco modelobarco) {
+        this.modelobarco = modelobarco;
     }
 
 }
