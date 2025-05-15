@@ -3,7 +3,7 @@ package com.utp.demo.model;
 public class Barcos {
     //private Cabina cabinaue;
 
-    public enum Modelobarco{
+    public enum Modelobarco {
         SMODEL("Pequeño", 15, 15, 18, 16, 16),
         MMODEL("Grande", 20, 26, 30, 24, 20),
         LMODEL("Largo", 40, 50, 30, 35, 25);
@@ -48,7 +48,7 @@ public class Barcos {
         public int getCant_cabinas_fam() {
             return cant_cabinas_fam;
         }
-  
+
     }
 //si no funciona borran el enum y el constructor y los getters y setters dsps le quitan
 //el comentario a modelo barcvo y lo generan de nuevo con sourceaction
@@ -120,21 +120,23 @@ public class Barcos {
     }
 
     //total de cabinas
-    public int getTotalcabinas(){
-        return modelobarco.getCant_cabinas_inf() + modelobarco.getCant_cabinas_ext() +
-        modelobarco.getCant_cabinas_cbal() + modelobarco.getCant_cabinas_suit() + 
-        modelobarco.getCant_cabinas_fam();
+    public int getTotalcabinas() {
+        return modelobarco.getCant_cabinas_inf() + modelobarco.getCant_cabinas_ext()
+                + modelobarco.getCant_cabinas_cbal() + modelobarco.getCant_cabinas_suit()
+                + modelobarco.getCant_cabinas_fam();
     }
 
     //capacidad
-    public int getCapacidad(){
-        int cap_inf= modelobarco.getCant_cabinas_inf() * Cabina.Cabina_tipo.inf.cant_max_per;
-        int cap_ext= modelobarco.getCant_cabinas_ext() * Cabina.Cabina_tipo.ext.cant_max_per;
-        int cap_cbal= modelobarco.getCant_cabinas_cbal() * Cabina.Cabina_tipo.cbal.cant_max_per;
-        int cap_suit= modelobarco.getCant_cabinas_suit() * Cabina.Cabina_tipo.suit.cant_max_per;
-        int cap_fam= modelobarco.getCant_cabinas_fam() * Cabina.Cabina_tipo.fam.cant_max_per;
+    public int getCapacidad() {
+        int cap_inf = modelobarco.getCant_cabinas_inf() * Cabina.Cabina_tipo.inf.cant_max_per;
+        int cap_ext = modelobarco.getCant_cabinas_ext() * Cabina.Cabina_tipo.ext.cant_max_per;
+        int cap_cbal = modelobarco.getCant_cabinas_cbal() * Cabina.Cabina_tipo.cbal.cant_max_per;
+        int cap_suit = modelobarco.getCant_cabinas_suit() * Cabina.Cabina_tipo.suit.cant_max_per;
+        int cap_fam = modelobarco.getCant_cabinas_fam() * Cabina.Cabina_tipo.fam.cant_max_per;
 
         return cap_inf + cap_ext + cap_cbal + cap_suit + cap_fam;
-    }   
+    }
 
-}
+     
+} 
+    
