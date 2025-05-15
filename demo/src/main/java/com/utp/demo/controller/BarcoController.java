@@ -1,6 +1,8 @@
 package com.utp.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.utp.demo.service.BarcoService;
 
