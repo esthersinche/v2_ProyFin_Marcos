@@ -11,24 +11,9 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/rutas")
-    public String rutas() {
-        return "rutas";
-    }
-
     @GetMapping("/paquetes")
     public String paquetes() {
         return "paquetes";
-    }
-
-    @GetMapping("/barcos")
-    public String barcos() {
-        return "barcos";
-    }
-
-    @GetMapping("/comprar")
-    public String comprar() {
-        return "comprar";
     }
 
 }
