@@ -12,24 +12,7 @@
 </head>
 
 <body class="bg-white">
-  <header>
-    <nav class="navbar navbar-expand-lg bg-header">
-      <div class="container-fluid">
-        <a class="navbar-brand text-white" href="main.html">TuCrucerito.com</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link active text-white" th:href="@{/rutas}">Destinos</a></li>
-            <li class="nav-item"><a class="nav-link active text-white" th:href="@{/paquetes}">Paquetes</a></li>
-            <li class="nav-item"><a class="nav-link active text-white" th:href="@{/barcos}">Barcos</a></li>
-            <li class="nav-item"><a class="nav-link active text-white" th:href="@{/comprar}">Comprar</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <header th:replace="~{fragments/header :: navBar}"></header>
 
   <div class="position-relative m-4 p-5">
     <div class="position-relative m-4">
@@ -71,32 +54,9 @@
     </form>
   </main>
 
-  <footer class="row row-cols-5 py-5 mt-5 border-top bg-header text-white">
-    <div class="col">
-      <a href="#" class="d-flex align-items-center mb-3 link-dark text-decoration-none"></a>
-      <p class="text-white">&copy;2025 TuCrucerito Corp.</p>
-    </div>
-    <div class="col"></div>
-    <div class="col">
-      <h5>Info</h5>
-      <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Términos y condiciones</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Más sobre nosotros</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Contáctanos</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-      </ul>
-    </div>
-    <div class="col">
-      <h5>Redes sociales</h5>
-      <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="https://www.instagram.com" class="nav-link p-0 text-muted">Instagram</a></li>
-        <li class="nav-item mb-2"><a href="https://www.facebook.com" class="nav-link p-0 text-muted">Facebook</a></li>
-        <li class="nav-item mb-2"><a href="https://x.com" class="nav-link p-0 text-muted">X</a></li>
-      </ul>
-    </div>
-  </footer>
+  <footer th:replace="~{fragments/footer :: footerContent}"></footer>
 
-<script src="../static/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 
 <script>
   (function () {

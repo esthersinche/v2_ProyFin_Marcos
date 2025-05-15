@@ -12,35 +12,7 @@
 
 <body class="bg-white">
     <!--Header-->
-    <!--Aquí va el header-->
-    <header>
-        <nav class="navbar navbar-expand-lg bg-header">
-            <div class="container-fluid">
-                <i class="bi bi-tsunami" style="color: aliceblue;"></i>
-                <a class="navbar-brand text-white ms-2" href="main.html">TuCrucerito.com</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                        <li class="nav-item">
-                            <a class="nav-link active text-white" aria-current="page" href="rutas.html">Destinos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="paquetes.html">Paquetes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="barcos.html">Barcos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="comprar.html">Comprar</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="~{fragments/header :: navBar}"></header>
     <!--body-->
     <main class="py-4 container">
         <h1 class="text-dark text-center">Conoce a nuestra flota</h1>
@@ -75,55 +47,7 @@
         </div>
     </main>
 
-    <!--Footer-->
-    <footer class="row row-cols-5 py-5 mt-5 p-2 border-top bg-header text-white">
-        <div class="col">
-            <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32"><!--contenedorgrafico BootstrapIcons-->
-                    <use xlink:href="#bootstrap" /><!--ref icono predeterminado-->
-                </svg>
-            </a>
-            <p class="text-white">&copy;2025 TuCrucerito Corp.</p>
-        </div>
-
-        <div class="col">
-
-        </div>
-
-        <div class="col">
-            <h5>Info</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Terminos y condiciones</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Más sobre nosotros</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Contáctanos</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">FAQS</a>
-                </li>
-            </ul>
-
-        </div>
-
-        <div class="col">
-            <h5>Redes Sociales</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a href="https://www.instagram.com" class="nav-link p-0 text-muted">Instagram</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="https://www.facebook.com" class="nav-link p-0 text-muted">Facebook</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="x.com" class="nav-link p-0 text-muted">X</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <footer th:replace="~{fragments/footer :: footerContent}"></footer>
     <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 
 </body>
