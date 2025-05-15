@@ -9,6 +9,8 @@ import com.utp.demo.model.Barcos;
 @Service
 public class BarcoService {
 
+    /* 
+
     public List<Barcos> obtenerBarcos() {
         return List.of(
                 new Barcos("B001", "Aurora Sea", "Elena Morales", 800, "Spa, Piscina infinita, Auditorio, Casino, Cafetería Elegante", "Small", "https://cdn-3.expansion.mx/dims4/default/e771a6a/2147483647/strip/true/crop/5995x4234+0+0/resize/1200x848!/format/webp/quality/60/?url=https%3A%2F%2Fcdn-3.expansion.mx%2Fc1%2Fec%2Fc371673b403a993283b6ff277687%2F1666103786-rci-ic-crowns-edge-cgi23-ret-crop-lr.JPG"),
@@ -24,5 +26,7 @@ public class BarcoService {
                 .filter(r -> r.getId_barco().equalsIgnoreCase(id))
                 .findFirst()
                 .orElse(null);
-    }
+    }*/
+
+    
 }

@@ -2,6 +2,7 @@ package com.utp.demo.model;
 
 public class Cliente {
 
+    private String dni_cliente;
     private String nombre;
     private String apellido;
     private String correo;
@@ -12,12 +13,21 @@ public class Cliente {
         // Obligatorio para Spring y formularios
     }
 
-    public Cliente(String nombre, String apellido, String correo, int celular, String ciudad) {
+    public Cliente(String dni_cliente, String nombre, String apellido, String correo, int celular, String ciudad) {
+        this.dni_cliente = dni_cliente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.celular = celular;
         this.ciudad = ciudad;
+    }
+
+    public String getDni_cliente() {
+        return dni_cliente;
+    }
+
+    public void setDni_cliente(String dni_cliente) {
+        this.dni_cliente = dni_cliente;
     }
 
     public String getNombre() {
@@ -59,5 +69,7 @@ public class Cliente {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
+
+    
 
 }
