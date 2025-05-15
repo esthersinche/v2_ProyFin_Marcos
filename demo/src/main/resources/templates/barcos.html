@@ -28,7 +28,8 @@
                     </h3>
                     <p class="lead">
                         <strong>Capitán:</strong> <span th:text="${barco.capitan}">Capitán</span><br>
-                        <strong>Camarotes y Suites:</strong> <span th:text="${barco.capacidad}">0</span> Cabinas<br>
+                        <strong>Camarotes y Suites:</strong> <span th:text="${barco.getTotalcabinas()}">0</span> Cabinas<br>
+                        <strong>Capacidad:</strong> <span th:text="${barco.getCapacidad()}">0</span> Pasajeros<br>
                         <strong>Recreación:</strong> <span th:text="${barco.recreacion}">Actividades</span>
                     </p>
                     <a th:href="@{/paquetes}" class="btn btn-dark btn-lg mt-3">
