@@ -153,4 +153,11 @@ public class PaqueteService {
                 .toList();
     }
 
+    public Paquete buscarPorNombrePaquete(String nombrePaquete) {
+        return ObtenertodoPaquetes().stream()
+                .filter(p -> p.getNombre_paq().equalsIgnoreCase(nombrePaquete))
+                .findFirst()
+                .orElse(null);
+    }
+
 }

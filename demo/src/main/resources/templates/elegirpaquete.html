@@ -11,8 +11,10 @@
 </head>
 
 <body class="bg-white">
+
   <header th:replace="~{fragments/header :: navBar}"></header>
 
+  <!-- Barra de progreso -->
   <div class="position-relative m-4 p-5">
     <div class="position-relative m-4">
       <div class="progress" role="progressbar" style="height: 1px;">
@@ -25,30 +27,28 @@
   </div>
 
   <main class="container">
-    <h1 class="text-center text-dark mb-4">Selecciona tu paquete</h1>
+    <h1 class="text-center text-dark mb-4">Elige tu paquete</h1>
 
     <form th:action="@{/guardarPaquete}" method="post" class="needs-validation" novalidate>
-      <div class="mb-3">
-        <label for="paqueteSelect" class="form-label">Paquete disponible</label>
-        <select class="form-select" id="paqueteSelect" name="nombrePaquete" required>
+      <div class="mb-4">
+        <label for="nombrePaquete" class="form-label">Selecciona un paquete:</label>
+        <select id="nombrePaquete" name="nombrePaquete" class="form-select" required onchange="actualizarDetalle()">
           <option disabled selected value="">-- Selecciona un paquete --</option>
-          <option th:each="paquete : ${paquetes}" 
-                  th:value="${paquete.nombre_paq}"
-                  th:text="${paquete.nombre_paq}">
-          </option>
+          <option th:each="p : ${paquetes}" th:value="${p.nombre_paq}" th:text="${p.nombre_paq}"></option>
         </select>
         <div class="invalid-feedback">Debes seleccionar un paquete.</div>
       </div>
 
-      <div id="infoPaquete" class="card border-secondary p-3" th:if="${paquetes}">
-        <h5>Detalles del paquete</h5>
-        <p><strong>Cabina:</strong> <span id="cabinaTipo"></span></p>
-        <p><strong>Descripción:</strong> <span id="descripcionPaq"></span></p>
-        <p><strong>Precio por persona:</strong> S/. <span id="precioPaq"></span></p>
+      <!-- Detalle dinámico -->
+      <div id="detallePaquete" class="card p-4 shadow-sm bg-light d-none">
+        <h5 id="detalleTitulo" class="mb-2"></h5>
+        <p id="detalleDescripcion" class="mb-1"></p>
+        <p><strong>Tipo de Cabina:</strong> <span id="detalleCabina"></span></p>
+        <p><strong>Precio unitario (por persona):</strong> S/. <span id="detallePrecio"></span></p>
       </div>
 
       <div class="text-center mt-4">
-        <button type="submit" class="btn btn-ocean btn-lg">Finalizar</button>
+        <button type="submit" class="btn btn-ocean btn-lg">Continuar</button>
       </div>
     </form>
   </main>
@@ -56,25 +56,40 @@
   <footer th:replace="~{fragments/footer :: footerContent}"></footer>
 
   <script th:inline="javascript">
-    /*<![CDATA[*/
+    // Lista de paquetes en JS desde el modelo
     const paquetes = /*[[${paquetes}]]*/ [];
-    const select = document.getElementById('paqueteSelect');
-    const cabinaSpan = document.getElementById('cabinaTipo');
-    const descSpan = document.getElementById('descripcionPaq');
-    const precioSpan = document.getElementById('precioPaq');
 
-    select.addEventListener('change', () => {
-      const selected = paquetes.find(p => p.nombre_paq === select.value);
-      if (selected) {
-        cabinaSpan.textContent = selected.cabinatipo_paq.nombre_cabina;
-        descSpan.textContent = selected.descripcion_paq;
-        precioSpan.textContent = selected.prec_paq_uni;
+    function actualizarDetalle() {
+      const select = document.getElementById('nombrePaquete');
+      const detalle = document.getElementById('detallePaquete');
+      const seleccionado = select.value;
+
+      const paquete = paquetes.find(p => p.nombre_paq === seleccionado);
+      if (paquete) {
+        document.getElementById('detalleTitulo').innerText = paquete.nombre_paq;
+        document.getElementById('detalleDescripcion').innerText = paquete.descripcion_paq;
+        document.getElementById('detalleCabina').innerText = paquete.cabinatipo_paq.nombre_cabina;
+        document.getElementById('detallePrecio').innerText = paquete.prec_paq_uni.toFixed(2);
+        detalle.classList.remove('d-none');
       }
-    });
-    /*]]>*/
+    }
+
+    // Validación
+    (function () {
+      'use strict';
+      const forms = document.querySelectorAll('.needs-validation');
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
   </script>
 
-  <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 </body>
 
 </html>

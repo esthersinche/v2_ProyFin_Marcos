@@ -80,8 +80,7 @@ public class ReservaController {
             @ModelAttribute("reserva") Reserva reserva) {
 
         // Buscar el paquete seleccionado
-        List<Paquete> paquetes = paqueteService.buscarPorNombrePaquetes(List.of(nombrePaquete));
-        Paquete paquete = paquetes.get(0); // Solo uno seleccionado
+        Paquete paquete = paqueteService.buscarPorNombrePaquete(nombrePaquete);
 
         // Obtener cabina desde el tipo de cabina del paquete
         Cabina cabina = cabinaService.buscarPorTipoCabina(paquete.getCabinatipo_paq());
@@ -91,7 +90,7 @@ public class ReservaController {
         reserva.setCabina(cabina);
 
         // Calcular total
-        int cantidad = reserva.getCantidadPasajeros(); // ya no separamos niños
+        int cantidad = reserva.getCantidadPasajeros();
         double precioUnitario = paquete.getPrec_paq_uni();
         double total = cantidad * precioUnitario;
 
