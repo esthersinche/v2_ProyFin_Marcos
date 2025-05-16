@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paquetes</title>
-    
-   <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+
+    <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/scss/custom.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -80,32 +80,34 @@
 
         <!--Div para el contenido de paquetes-->
         <!---->
-        <div class="container paquetes">
+        <form class="container paquetes" method="get" action="/paquetes">
             <div class="p-5 mb-4 rounded-3 bg-aquamarine">
                 <div class="container-fluid py-5">
                     <h2 class="display-5 fw-bold">Filtros Avanzados</h2>
                     <div class="row justify-content-center g-5">
                         <div class="col-md-4">
-                            <label for="destino" class="form-label">Destino</label>
-                            <select class="form-select" id="destino" required>
+                            <label for="ruta" class="form-label">Ruta</label>
+                            <select class="form-select" id="ruta" name="ruta">
                                 <option value="">Elige..</option>
-                                <option>United States</option>
+                                <option th:each=" ruta : ${nombre_rutas}" th:value="${ruta}" th:text="${ruta}"></option>
                             </select>
                             <div class="invalid-Feedback">Seleccione un destino válido.</div>
                         </div>
                         <div class="col-md-4">
-                            <label for="cantperso" class="form-label">Cant. de Personas</label>
-                            <select class="form-select" id="cantperso" required>
+                            <label for="cantperso" class="form-label">Cant. de Pasajeros</label>
+                            <select class="form-select" id="cantperso" name="cantmaxper">
                                 <option value="">Elige..</option>
-                                <option>California</option>
+                                <option th:each=" cantperso : ${cant_personas}" th:value="${cantperso}"
+                                    th:text="${cantperso}"></option>
                             </select>
                             <div class="invalid-Feedback">Seleccione una cantidad válida.</div>
                         </div>
                         <div class="col-md-4">
-                            <label for="barcos" class="form-label">Barcos</label>
-                            <select class="form-select" id="barcos" required>
+                            <label for="modelobarcos" class="form-label">Modelo de Barcos</label>
+                            <select class="form-select" id="modelobarcos" name="modelo">
                                 <option value="">Elige..</option>
-                                <option>tipobarco</option>
+                                <option th:each=" modelobarco : ${modelos_barco}" th:value="${modelobarco}"
+                                    th:text="${modelobarco}"></option>
                             </select>
                             <div class="invalid-Feedback">Seleccione una barco disponible.</div>
                         </div>
@@ -123,9 +125,48 @@
 
                         </div>
                     </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn bg-aquamarine btn-outline-light">Filtrar</button>
+                    </div>
                 </div>
 
             </div>
+            <!--Tarjetas-->
+
+            <div class="container px-4 py-3 rounded-2" id="paquetescards">
+                <h2 class="pb-2 border-bottom">Paquetes</h2>
+                <div class="row row-cols-1 row-cols-lg-3 align-items-stretch
+                g-4 py-5">
+                    <!--Donde se automatizara-->
+                    <div class="col" th:each=" paquete , stat : ${paquetes}">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                            style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR40_EHfGqczcPWFg2Ydwc7EsWij6tyHz3VGQ&s); background-size: cover;">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3" th:text="${paquete.nombre_paq}">
+                                </h3>
+                                <ul class="d-flex list-unstyled mt-auto">
+                                    <li class="me-auto">
+                                        <i class="bi bi-person"></i>
+                                        <small th:text="${paquete.cabinatipo_paq.cant_max_per}"></small>
+                                    </li>
+
+                                    <li class="d-flex align-items-center me-3">
+                                        <i class="bi bi-geo-alt-fill me-2"></i>
+                                        <small th:text="${paquete.ruta_paq.nombre_ruta}"></small>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i class="bi bi-calendar2-heart me-2"></i>
+                                        <small th:text="${paquete.ruta_paq.dias}"></small>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--
             <div class="container px-4 py-3 rounded-2" id="paquetescards">
                 <h2 class="pb-2 border-bottom">Paquetes</h2>
                 <div class="row row-cols-1 row-cols-lg-3 align-items-stretch
@@ -139,28 +180,28 @@
                                 <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Caribe, Mediterráneo</h3>
                                 <ul class="d-flex list-unstyled mt-auto">
                                     <li class="me-auto">
-                                        <!--
+                                        
                                         <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" 
-                                        class="rounded-circle border border-white"> -->
+                                        class="rounded-circle border border-white"> 
                                         <i class="bi bi-person"></i>
                                         <small>4</small>
                                     </li>
 
                                     <li class="d-flex align-items-center me-3">
-                                        <!--
+                                        
                                         <svg class="bi me-2" width="1em" height="1em" role="img" 
                                             aria-label="Location">
                                             <use xlink:href="bootstrap-icons.svg#geo-fill"></use>
-                                        </svg>-->
+                                        </svg>
                                         <i class="bi bi-geo-alt-fill me-2"></i>
                                         <small>Bahamas</small>
                                     </li>
                                     <li class="d-flex align-items-center">
-                                        <!--
+                                        
                                         <svg class="bi me-2" width="1em" height="1em" role="img" 
                                         aria-label="Duration">
                                         <use xlink:href="#calendar3"></use>
-                                        </svg>-->
+                                        </svg>
                                         <i class="bi bi-calendar2-heart me-2"></i>
                                         <small>14d</small>
                                     </li>
@@ -373,7 +414,7 @@
                                 <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3">Estados Unidos, Alaska</h3>
                                 <ul class="d-flex list-unstyled mt-auto">
                                     <li class="me-auto">
-                                        <!--<img  alt="" width="32" height="32" class="rounded-circle ">-->
+                                        <img  alt="" width="32" height="32" class="rounded-circle "
                                         <i class="bi bi-person"></i>
                                         <small>2</small>
                                     </li>
@@ -550,8 +591,9 @@
                     </div>
 
                 </div>
-            </div>
-        </div>
+            </div>-->
+
+        </form> <!--cambiar a div sino funciona-->
 
     </main>
 
