@@ -46,18 +46,7 @@ public class RutaController {
 
         List<Ruta> filtradas = stream.collect(Collectors.toList());
 
-        // 3) Genero las listas de opciones para los checkboxes
-        List<String> puertosDisponibles = todas.stream()
-                .map(Ruta::getSalida)
-                .distinct()
-                .toList();
-
-        List<Barcos.Modelobarco> modelosDisponibles = List.of(Barcos.Modelobarco.values());
-
-        // 4) Inyecto TODO en el modelo (¡nunca null!)
         model.addAttribute("rutas", filtradas);
-        model.addAttribute("puertosDisponibles", puertosDisponibles);
-        model.addAttribute("modelosDisponibles", modelosDisponibles);
 
         // Si no llegaron params, inyecto listas vacías para Thymeleaf
         model.addAttribute("selectedSalida", salida == null ? List.<String>of() : salida);
