@@ -120,6 +120,22 @@ public class PaqueteService {
 
     }
 
+    //Charisse metodos para ReservaController, no tocar!!!
+    public Paquete buscarPorNombreYRuta(String nombrePaquete, String nombreRuta) {
+        return ObtenertodoPaquetes().stream()
+                .filter(p -> p.getNombre_paq().equalsIgnoreCase(nombrePaquete)
+                && p.getRuta_paq().getNombre_ruta().equalsIgnoreCase(nombreRuta))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public List<Paquete> obtenerPaquetesPorRuta(String nombreRuta) {
+        return ObtenertodoPaquetes().stream()
+                .filter(p -> p.getRuta_paq().getNombre_ruta().equalsIgnoreCase(nombreRuta))
+                .toList();
+    }
+    //Charisse metodos para ReservaController, no tocar!!!
+
     // reserva controlador, no tocar
     public List<Paquete> buscarPorNombrePaquetes(List<String> nombres_paquetes) {
         return ObtenertodoPaquetes().stream()
