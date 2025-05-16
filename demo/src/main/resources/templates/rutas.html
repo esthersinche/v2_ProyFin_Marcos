@@ -18,78 +18,80 @@
         <div class="row">
             <!-- Sidebar de filtros -->
             <aside class="col-md-3 mb-4">
-                <div class="accordion" id="filterAccordion">
-                    <!-- Fechas -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingDate">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseDate" aria-expanded="true" aria-controls="collapseDate">
-                                Fecha de salida
-                            </button>
-                        </h2>
-                        <div id="collapseDate" class="accordion-collapse collapse show"
-                            data-bs-parent="#filterAccordion">
-                            <div class="accordion-body">
-                                <label class="form-label">Desde:</label>
-                                <input type="date" class="form-control mb-2">
-                                <label class="form-label">Hasta:</label>
-                                <input type="date" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Puertos -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingPort">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapsePort" aria-expanded="false" aria-controls="collapsePort">
-                                Puertos de salida
-                            </button>
-                        </h2>
-                        <div id="collapsePort" class="accordion-collapse collapse" data-bs-parent="#filterAccordion">
-                            <div class="accordion-body">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="portMiami">
-                                    <label class="form-check-label" for="portMiami">Miami</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="portFtLaud">
-                                    <label class="form-check-label" for="portFtLaud">Fort Lauderdale</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="portCanav">
-                                    <label class="form-check-label" for="portCanav">Puerto Canaveral</label>
+                <form th:action="@{/rutas}" method="get">
+                    <div class="accordion" id="filterAccordion">
+
+                        <!-- Puertos -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingPort">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapsePort">
+                                    Puertos de salida
+                                </button>
+                            </h2>
+                            <div id="collapsePort" class="accordion-collapse collapse"
+                                data-bs-parent="#filterAccordion">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="salida" id="Barcelona"
+                                            value="Barcelona" th:checked="${selectedSalida.contains('Barcelona')}" />
+                                        <label class="form-check-label" for="Barcelona">Barcelona</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="salida" id="Seattle"
+                                            value="Seattle" th:checked="${selectedSalida.contains('Seattle')}" />
+                                        <label class="form-check-label" for="Seattle">Seattle</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="salida" id="Miami"
+                                            value="Miami" th:checked="${selectedSalida.contains('Miami')}" />
+                                        <label class="form-check-label" for="Miami">Miami</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Barcos -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingShip">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseShip" aria-expanded="false" aria-controls="collapseShip">
-                                Compañías / Barcos
-                            </button>
-                        </h2>
-                        <div id="collapseShip" class="accordion-collapse collapse" data-bs-parent="#filterAccordion">
-                            <div class="accordion-body">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="shipRC">
-                                    <label class="form-check-label" for="shipRC">Royal Caribbean</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="shipMSC">
-                                    <label class="form-check-label" for="shipMSC">MSC Cruises</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="shipCarnival">
-                                    <label class="form-check-label" for="shipCarnival">Carnival</label>
+
+                        <!-- Modelos de Barcos -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingShip">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseShip">
+                                    Modelos de Barcos
+                                </button>
+                            </h2>
+                            <div id="collapseShip" class="accordion-collapse collapse"
+                                data-bs-parent="#filterAccordion">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="modelo" id="SMODEL"
+                                            value="SMODEL"
+                                            th:checked="${selectedModelos.contains(T(com.utp.demo.model.Barcos$Modelobarco).SMODEL)}" />
+                                        <label class="form-check-label" for="SMODEL">SMODEL</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="modelo" id="MMODEL"
+                                            value="MMODEL"
+                                            th:checked="${selectedModelos.contains(T(com.utp.demo.model.Barcos$Modelobarco).MMODEL)}" />
+                                        <label class="form-check-label" for="MMODEL">MMODEL</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="modelo" id="LMODEL"
+                                            value="LMODEL"
+                                            th:checked="${selectedModelos.contains(T(com.utp.demo.model.Barcos$Modelobarco).LMODEL)}" />
+                                        <label class="form-check-label" for="LMODEL">LMODEL</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                </div>
-                <!-- Botón de aplicar filtros -->
-                <button class="btn btn-ocean w-100 mt-3">Aplicar filtros</button>
+
+                    <button type="submit" class="btn btn-ocean w-100 mt-3">
+                        Aplicar filtros
+                    </button>
+                </form>
             </aside>
 
             <!-- Sección de cards -->
@@ -123,11 +125,15 @@
                                                 Duración: <span th:text="${ruta.dias}">0 días</span>
                                             </li>
                                             <li class="list-group-item">
+                                                Modelo de Barco: <span th:text="${ruta.getModelobarco()}">Puerto</span>
+                                            </li>
+                                            <li class="list-group-item">
                                                 Precio: $<span th:text="${ruta.precio_ruta}">0.0</span>
                                             </li>
                                             <li class="list-group-item">
                                                 Salida: <span th:text="${ruta.salida}">Puerto</span>
                                             </li>
+
                                         </ul>
                                         <a th:href="@{/paquetes}" class="btn btn-ocean mt-auto">
                                             Ver paquetes

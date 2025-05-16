@@ -11,9 +11,10 @@ public class MainController {
         return "main";
     }
 
+    /* 
     @GetMapping("/paquetes")
     public String paquetes() {
         return "paquetes";
-    }
+    }*/
 
 }
