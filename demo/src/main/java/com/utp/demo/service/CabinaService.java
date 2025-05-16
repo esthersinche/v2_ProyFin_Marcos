@@ -16,15 +16,15 @@ public class CabinaService {
                 new Cabina(Cabina_tipo.ext, 0, 0),
                 new Cabina(Cabina_tipo.cbal, 0, 0),
                 new Cabina(Cabina_tipo.suit, 0, 0),
-                new Cabina(Cabina_tipo.fam, 0, 0)
-        );//los numeros se quedan en int ya que se llenara en lo que es compra, debido a q
-        //el enum ya tiene un num de personas maximo
+                new Cabina(Cabina_tipo.fam, 0, 0));// los numeros se quedan en int ya que se llenara en lo que es
+                                                   // compra, debido a q
+                                                   // el enum ya tiene un num de personas maximo
     }
 
-    //adicion, listado, consultas, eliminacion, busquedas
-    //adicion no
-    //listado(arriba)
-    //consultas
+    // adicion, listado, consultas, eliminacion, busquedas
+    // adicion no
+    // listado(arriba)
+    // consultas
     public Cabina buscarPorNombreCabina(String nombre_cab) {
         return obtenerTodoCabinas().stream()
                 .filter(c -> c.getCabinatipo().getNombre_cabina().equalsIgnoreCase(nombre_cab))
@@ -37,5 +37,12 @@ public class CabinaService {
                 .findFirst().orElse(null);
     }
 
-    //eliminacion
+    public Cabina buscarPorTipoCabina(Cabina_tipo tipo) {
+        return obtenerTodoCabinas().stream()
+                .filter(c -> c.getCabinatipo().equals(tipo))
+                .findFirst()
+                .orElse(null);
+    }
+
+    // eliminacion
 }

@@ -1,100 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/scss/custom.css}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <link th:href="@{/scss/custom.css}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
   <title>Elegir Paquete</title>
 </head>
 
 <body class="bg-white">
-  <!--Header-->
   <header th:replace="~{fragments/header :: navBar}"></header>
 
-  <!-- Progress Bar -->
   <div class="position-relative m-4 p-5">
     <div class="position-relative m-4">
       <div class="progress" role="progressbar" style="height: 1px;">
         <div class="progress-bar bg-ocean" style="width: 75%"></div>
       </div>
-      <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-ocean rounded-pill"
-        style="width: 2rem; height:2rem;">1</button>
-      <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-ocean rounded-pill"
-        style="width: 2rem; height:2rem;">2</button>
-      <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-ocean rounded-pill"
-        style="width: 2rem; height:2rem;">3</button>
+      <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-ocean rounded-pill" style="width: 2rem; height:2rem;">1</button>
+      <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-ocean rounded-pill" style="width: 2rem; height:2rem;">2</button>
+      <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-ocean rounded-pill" style="width: 2rem; height:2rem;">3</button>
     </div>
   </div>
 
   <main class="container">
-    <h1 class="text-center text-dark mb-4">Elige tu Paquete y Cabina</h1>
+    <h1 class="text-center text-dark mb-4">Selecciona tu paquete</h1>
 
-    <form th:action="@{/guardarPaquete}" th:object="${reserva}" method="post" class="needs-validation" novalidate>
-      <!-- Paquetes (Checkbox) -->
-      <div class="mb-4">
-        <label class="form-label">Selecciona tus paquetes</label>
-        <div class="form-check" th:each="paquete : ${paquetes}">
-          <input class="form-check-input" type="checkbox" th:value="${paquete.id}" th:field="*{paquetesSeleccionados}"
-            id="paquete-${paquete.id}">
-          <label class="form-check-label" th:for="${'paquete-' + paquete.id}" th:text="${paquete.nombre}"></label>
-        </div>
-      </div>
-
-      <!-- Cabinas (Combobox) -->
-      <div class="mb-4">
-        <label class="form-label">Selecciona tu cabina</label>
-        <select class="form-select" th:field="*{cabinaId}" required>
-          <option value="" disabled selected>-- Elige tu cabina --</option>
-          <option th:each="cabina : ${cabinas}" th:value="${cabina.id}" th:text="${cabina.tipo}"></option>
+    <form th:action="@{/guardarPaquete}" method="post" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="paqueteSelect" class="form-label">Paquete disponible</label>
+        <select class="form-select" id="paqueteSelect" name="nombrePaquete" required>
+          <option disabled selected value="">-- Selecciona un paquete --</option>
+          <option th:each="paquete : ${paquetes}" 
+                  th:value="${paquete.nombre_paq}"
+                  th:text="${paquete.nombre_paq}">
+          </option>
         </select>
-        <div class="invalid-feedback">Debes seleccionar una cabina.</div>
+        <div class="invalid-feedback">Debes seleccionar un paquete.</div>
       </div>
 
-      <!-- Cantidad de cabinas -->
-      <div class="mb-4">
-        <label class="form-label">Cantidad de cabinas</label>
-        <input type="number" min="1" class="form-control" th:field="*{cantidadCabinas}" required>
-        <div class="invalid-feedback">Ingresa una cantidad válida.</div>
+      <div id="infoPaquete" class="card border-secondary p-3" th:if="${paquetes}">
+        <h5>Detalles del paquete</h5>
+        <p><strong>Cabina:</strong> <span id="cabinaTipo"></span></p>
+        <p><strong>Descripción:</strong> <span id="descripcionPaq"></span></p>
+        <p><strong>Precio por persona:</strong> S/. <span id="precioPaq"></span></p>
       </div>
 
-      <!-- Adicional de personas/niños -->
-      <div class="mb-4">
-        <label class="form-label">Cantidad de personas adicionales</label>
-        <input type="number" min="0" class="form-control" th:field="*{personasAdicionales}">
-      </div>
-
-      <div class="mb-4">
-        <label class="form-label">Cantidad de niños adicionales</label>
-        <input type="number" min="0" class="form-control" th:field="*{ninosAdicionales}">
-      </div>
-
-      <!-- Botón -->
-      <div class="text-center">
+      <div class="text-center mt-4">
         <button type="submit" class="btn btn-ocean btn-lg">Finalizar</button>
       </div>
     </form>
   </main>
 
-  <!--Footer-->
   <footer th:replace="~{fragments/footer :: footerContent}"></footer>
 
-<script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
-  <script>
-    (() => {
-      'use strict';
-      const form = document.querySelector('.needs-validation');
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    })();
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    const paquetes = /*[[${paquetes}]]*/ [];
+    const select = document.getElementById('paqueteSelect');
+    const cabinaSpan = document.getElementById('cabinaTipo');
+    const descSpan = document.getElementById('descripcionPaq');
+    const precioSpan = document.getElementById('precioPaq');
+
+    select.addEventListener('change', () => {
+      const selected = paquetes.find(p => p.nombre_paq === select.value);
+      if (selected) {
+        cabinaSpan.textContent = selected.cabinatipo_paq.nombre_cabina;
+        descSpan.textContent = selected.descripcion_paq;
+        precioSpan.textContent = selected.prec_paq_uni;
+      }
+    });
+    /*]]>*/
   </script>
+
+  <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 </body>
 
 </html>

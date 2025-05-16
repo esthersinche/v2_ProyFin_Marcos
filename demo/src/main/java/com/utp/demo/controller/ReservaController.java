@@ -66,72 +66,37 @@ public class ReservaController {
         return "redirect:/elegirpaquete";
     }
 
-    /*CAMBIAR!!!!!!!!!!
-    // Paso 3: Paquetes y Cabina
     @GetMapping("/elegirpaquete")
-    public String mostrarPaquetesYCabinas(Model model) {
-        model.addAttribute("paquetes", paqueteService.obtenerTodoPaquetes());
-        model.addAttribute("cabinas", cabinaService.obtenerTodoCabinas());
+    public String mostrarPaquetesPorRuta(Model model, @ModelAttribute("reserva") Reserva reserva) {
+        Ruta rutaSeleccionada = reserva.getRuta();
+        List<Paquete> paquetes = paqueteService.obtenerPaquetesPorRuta(rutaSeleccionada.getNombre_ruta());
+        model.addAttribute("paquetes", paquetes);
         return "elegirpaquete";
     }
-     */
 
     @PostMapping("/guardarPaquete")
     public String guardarPaqueteCabina(
-            @RequestParam List<String> paquetesSeleccionados,
-            @RequestParam String nombre_cab,
-            @RequestParam int cantidadAdultos,
-            @RequestParam int cantidadNinos,
+            @RequestParam String nombrePaquete,
             @ModelAttribute("reserva") Reserva reserva) {
 
-        // Obtener objetos reales
-        List<Paquete> paquetes = paqueteService.buscarPorNombrePaquetes(paquetesSeleccionados);
-        Cabina cabina = cabinaService.buscarPorNombreCabina(nombre_cab);
+        // Buscar el paquete seleccionado
+        List<Paquete> paquetes = paqueteService.buscarPorNombrePaquetes(List.of(nombrePaquete));
+        Paquete paquete = paquetes.get(0); // Solo uno seleccionado
 
-        // Guardar datos en reserva
+        // Obtener cabina desde el tipo de cabina del paquete
+        Cabina cabina = cabinaService.buscarPorTipoCabina(paquete.getCabinatipo_paq());
+
+        // Setear en la reserva
+        reserva.setPaquetes(List.of(paquete));
         reserva.setCabina(cabina);
-        reserva.setPaquetes(paquetes);
-        reserva.setCantidadAdultos(cantidadAdultos);
-        reserva.setCantidadNinos(cantidadNinos);
 
-        /*POR EDITAR!!!!!!!!!!!!!!!!!!!!!!
         // Calcular total
-        double total = 0;
-        double precioRuta = reserva.getRuta().getPrecio_ruta();
-        double precioCabina = cabina.getPrecio();
-
-        // 1. Ruta
-        total += cantidadAdultos * precioRuta;
-        total += cantidadNinos * (precioRuta * 0.65);
-
-        // 2. Paquetes
-        for (Paquete paquete : paquetes) {
-            boolean esParaNinos = paquete.getNombre_paq().toLowerCase().contains("niños");
-            if (esParaNinos) {
-                total += cantidadNinos * paquete.getPrecio_paq();
-            } else {
-                total += cantidadAdultos * paquete.getPrecio_paq();
-                total += cantidadNinos * (paquete.getPrecio_paq() * 0.65);
-            }
-        }
-
-        // 3. Cabina
-        total += precioCabina;
-
-        int maxAdultos = cabina.getMaximoAdultos();
-        int maxNinos = cabina.getMaximoNinos();
-
-        int adicionalesAdultos = Math.max(0, cantidadAdultos - maxAdultos);
-        int adicionalesNinos = Math.max(0, cantidadNinos - maxNinos);
-
-        double adicionalAdulto = precioCabina / maxAdultos;
-        double adicionalNino = precioCabina / maxNinos;
-
-        total += (adicionalesAdultos * adicionalAdulto);
-        total += (adicionalesNinos * adicionalNino);
+        int cantidad = reserva.getCantidadPasajeros(); // ya no separamos niños
+        double precioUnitario = paquete.getPrec_paq_uni();
+        double total = cantidad * precioUnitario;
 
         reserva.setTotal(total);
-         */
+
         return "redirect:/resumen";
     }
 

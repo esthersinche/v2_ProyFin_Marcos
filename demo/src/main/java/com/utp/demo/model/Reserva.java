@@ -10,8 +10,7 @@ public class Reserva {
     private Cabina cabina;
 
     // Cantidades de pasajeros
-    private int cantidadAdultos;
-    private int cantidadNinos;
+    private int cantidadPasajeros;
 
     // Total calculado de la reserva
     private double total;
@@ -21,7 +20,6 @@ public class Reserva {
         // para instanciarlo automaticamente
     }
 
-    // Getters y Setters
     public Cliente getCliente() {
         return cliente;
     }
@@ -54,20 +52,12 @@ public class Reserva {
         this.cabina = cabina;
     }
 
-    public int getCantidadAdultos() {
-        return cantidadAdultos;
+    public int getCantidadPasajeros() {
+        return cantidadPasajeros;
     }
 
-    public void setCantidadAdultos(int cantidadAdultos) {
-        this.cantidadAdultos = cantidadAdultos;
-    }
-
-    public int getCantidadNinos() {
-        return cantidadNinos;
-    }
-
-    public void setCantidadNinos(int cantidadNinos) {
-        this.cantidadNinos = cantidadNinos;
+    public void setCantidadPasajeros(int cantidadPasajeros) {
+        this.cantidadPasajeros = cantidadPasajeros;
     }
 
     public double getTotal() {
@@ -77,4 +67,5 @@ public class Reserva {
     public void setTotal(double total) {
         this.total = total;
     }
+
 }
