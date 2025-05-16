@@ -160,4 +160,12 @@ public class PaqueteService {
                 .orElse(null);
     }
 
+    public Paquete buscarPorNombreYRuta(String nombrePaquete, String nombreRuta) {
+        return ObtenertodoPaquetes().stream()
+                .filter(p -> p.getNombre_paq().equalsIgnoreCase(nombrePaquete) &&
+                        p.getRuta_paq().getNombre_ruta().equalsIgnoreCase(nombreRuta))
+                .findFirst()
+                .orElse(null);
+    }
+
 }

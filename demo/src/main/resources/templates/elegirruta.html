@@ -58,23 +58,6 @@
 
 <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 
-<script>
-  (function () {
-    'use strict';
-    const form = document.querySelector('.needs-validation');
-    form.addEventListener('submit', function (event) {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      } else {
-        // redirige solo si todo es válido
-        event.preventDefault();
-        window.location.href = 'elegirruta.html';
-      }
-      form.classList.add('was-validated');
-    }, false);
-  })();
-</script>
 
 </body>
 

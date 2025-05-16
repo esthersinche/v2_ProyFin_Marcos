@@ -69,7 +69,19 @@ public class ReservaController {
     @GetMapping("/elegirpaquete")
     public String mostrarPaquetesPorRuta(Model model, @ModelAttribute("reserva") Reserva reserva) {
         Ruta rutaSeleccionada = reserva.getRuta();
+
+        if (rutaSeleccionada == null) {
+            System.out.println("La ruta en la reserva es NULL");
+        } else {
+            System.out.println("Ruta seleccionada: " + rutaSeleccionada.getNombre_ruta());
+        }
+
         List<Paquete> paquetes = paqueteService.obtenerPaquetesPorRuta(rutaSeleccionada.getNombre_ruta());
+
+        if (paquetes.isEmpty()) {
+            System.out.println("No se encontraron paquetes para esa ruta");
+        }
+
         model.addAttribute("paquetes", paquetes);
         return "elegirpaquete";
     }
@@ -80,7 +92,8 @@ public class ReservaController {
             @ModelAttribute("reserva") Reserva reserva) {
 
         // Buscar el paquete seleccionado
-        Paquete paquete = paqueteService.buscarPorNombrePaquete(nombrePaquete);
+        String nombreRuta = reserva.getRuta().getNombre_ruta();
+        Paquete paquete = paqueteService.buscarPorNombreYRuta(nombrePaquete, nombreRuta);
 
         // Obtener cabina desde el tipo de cabina del paquete
         Cabina cabina = cabinaService.buscarPorTipoCabina(paquete.getCabinatipo_paq());
