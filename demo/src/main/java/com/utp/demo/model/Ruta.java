@@ -1,30 +1,51 @@
 package com.utp.demo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+//@Entity
+//@Table(name= "Ruta")
 public class Ruta {
-
+    //@Id
+    //@Column(name = "Id_ruta")
+    private String Id_ruta;
+    //@Column(name = "nombre_ruta", nullable= false)
     private String nombre_ruta;
+    //@Column(name = "descripcion_ruta", length= 800)
     private String descripcion_ruta;
-    private String dias;
+    //@Column(name = "dias_ruta")
+    private String dias_ruta;
+    //@Column(name = "precio_ruta")
     private double precio_ruta;//por unidad
+    //@Column(name = "salida")
     private String salida;
+    //@Column(name = "imagen")
     private String imagen;
-// Nuevo:
-    private Barcos.Modelobarco modelobarco;
 
-    public Ruta(String nombre_ruta,
-            String descripcion_ruta,
-            String dias,
-            double precio_ruta,
-            String salida,
-            String imagen,
-            Barcos.Modelobarco modelobarco) {
+    //@ManyToMany(mappedBy= "listarutasxmodelo")
+    private List<Barcos_modelo> modelosconxruta= new ArrayList<>();
+
+    public Ruta() {
+    }
+
+    public Ruta(String id_ruta, String nombre_ruta, String descripcion_ruta, String dias_ruta, double precio_ruta,
+            String salida, String imagen) {
+        Id_ruta = id_ruta;
         this.nombre_ruta = nombre_ruta;
         this.descripcion_ruta = descripcion_ruta;
-        this.dias = dias;
+        this.dias_ruta = dias_ruta;
         this.precio_ruta = precio_ruta;
         this.salida = salida;
         this.imagen = imagen;
-        this.modelobarco = modelobarco;
+    }
+
+    public String getId_ruta() {
+        return Id_ruta;
+    }
+
+    public void setId_ruta(String id_ruta) {
+        Id_ruta = id_ruta;
     }
 
     public String getNombre_ruta() {
@@ -43,12 +64,12 @@ public class Ruta {
         this.descripcion_ruta = descripcion_ruta;
     }
 
-    public String getDias() {
-        return dias;
+    public String getDias_ruta() {
+        return dias_ruta;
     }
 
-    public void setDias(String dias) {
-        this.dias = dias;
+    public void setDias_ruta(String dias_ruta) {
+        this.dias_ruta = dias_ruta;
     }
 
     public double getPrecio_ruta() {
@@ -75,12 +96,17 @@ public class Ruta {
         this.imagen = imagen;
     }
 
-    public Barcos.Modelobarco getModelobarco() {
-        return modelobarco;
+    public List<Barcos_modelo> getModelosconxruta() {
+        return modelosconxruta;
     }
 
-    public void setModelobarco(Barcos.Modelobarco modelobarco) {
-        this.modelobarco = modelobarco;
+    public void setModelosconxruta(List<Barcos_modelo> modelosconxruta) {
+        this.modelosconxruta = modelosconxruta;
     }
+
+    
+
+
+    
 
 }
