@@ -1,140 +1,71 @@
 package com.utp.demo.model;
 
-public class Barcos {
-    //private Cabina cabinaue;
 
-    public enum Modelobarco {
-        SMODEL("Pequeño", 15, 15, 18, 16, 16),
-        MMODEL("Grande", 20, 26, 30, 24, 20),
-        LMODEL("Largo", 40, 50, 30, 35, 25);
+//@Entity
+//Table(name= "Barcos")
+public abstract class Barcos {
 
-        public final String modelo;
-        private final int cant_cabinas_inf;
-        private final int cant_cabinas_ext;
-        private final int cant_cabinas_cbal;
-        private final int cant_cabinas_suit;
-        private final int cant_cabinas_fam;
+    //@Id
+    private String ID_barco;
+    private String nombre_barco;
+    private String capitan_barco;
+    //el nombre del modelo estara en las hijas
+    //la capacidad es un metodo
+    //ruta sera lista inicializada en cada modelo de barco
+    private String imagen_barco;
 
-        private Modelobarco(String modelo, int cant_cabinas_inf, int cant_cabinas_ext, int cant_cabinas_cbal,
-                int cant_cabinas_suit, int cant_cabinas_fam) {
-            this.modelo = modelo;
-            this.cant_cabinas_inf = cant_cabinas_inf;
-            this.cant_cabinas_ext = cant_cabinas_ext;
-            this.cant_cabinas_cbal = cant_cabinas_cbal;
-            this.cant_cabinas_suit = cant_cabinas_suit;
-            this.cant_cabinas_fam = cant_cabinas_fam;
-        }
-
-        public String getModelo() {
-            return modelo;
-        }
-
-        public int getCant_cabinas_inf() {
-            return cant_cabinas_inf;
-        }
-
-        public int getCant_cabinas_ext() {
-            return cant_cabinas_ext;
-        }
-
-        public int getCant_cabinas_cbal() {
-            return cant_cabinas_cbal;
-        }
-
-        public int getCant_cabinas_suit() {
-            return cant_cabinas_suit;
-        }
-
-        public int getCant_cabinas_fam() {
-            return cant_cabinas_fam;
-        }
-
-    }
-//si no funciona borran el enum y el constructor y los getters y setters dsps le quitan
-//el comentario a modelo barcvo y lo generan de nuevo con sourceaction
-    private String id_barco;
-    private String nombre;
-    private String capitan;
-    private Modelobarco modelobarco;
-    //private String modelobarco;
-    //private int capacidad;
-    private String recreacion;
-    private String imagen;
-
-    public Barcos(String id_barco, String nombre, String capitan, Modelobarco modelobarco, String recreacion,
-            String imagen) {
-        this.id_barco = id_barco;
-        this.nombre = nombre;
-        this.capitan = capitan;
-        this.modelobarco = modelobarco;
-        this.recreacion = recreacion;
-        this.imagen = imagen;
+    public Barcos(String iD_barco, String nombre_barco, String capitan_barco, String imagen_barco) {
+        ID_barco = iD_barco;
+        this.nombre_barco = nombre_barco;
+        this.capitan_barco = capitan_barco;
+        this.imagen_barco = imagen_barco;
     }
 
-    public String getId_barco() {
-        return id_barco;
+    public String getID_barco() {
+        return ID_barco;
     }
 
-    public void setId_barco(String id_barco) {
-        this.id_barco = id_barco;
+    public void setID_barco(String iD_barco) {
+        ID_barco = iD_barco;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombre_barco() {
+        return nombre_barco;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre_barco(String nombre_barco) {
+        this.nombre_barco = nombre_barco;
     }
 
-    public String getCapitan() {
-        return capitan;
+    public String getCapitan_barco() {
+        return capitan_barco;
     }
 
-    public void setCapitan(String capitan) {
-        this.capitan = capitan;
+    public void setCapitan_barco(String capitan_barco) {
+        this.capitan_barco = capitan_barco;
     }
 
-    public Modelobarco getModelobarco() {
-        return modelobarco;
+    public String getImagen_barco() {
+        return imagen_barco;
     }
 
-    public void setModelobarco(Modelobarco modelobarco) {
-        this.modelobarco = modelobarco;
+    public void setImagen_barco(String imagen_barco) {
+        this.imagen_barco = imagen_barco;
     }
 
-    public String getRecreacion() {
-        return recreacion;
-    }
+    //metodos abstractos para modelos de barco (3)
+    public abstract String getModelo_barco();
+    
 
-    public void setRecreacion(String recreacion) {
-        this.recreacion = recreacion;
-    }
+    
 
-    public String getImagen() {
-        return imagen;
-    }
+    
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
+    
 
-    //total de cabinas
-    public int getTotalcabinas() {
-        return modelobarco.getCant_cabinas_inf() + modelobarco.getCant_cabinas_ext()
-                + modelobarco.getCant_cabinas_cbal() + modelobarco.getCant_cabinas_suit()
-                + modelobarco.getCant_cabinas_fam();
-    }
 
-    //capacidad
-    public int getCapacidad() {
-        int cap_inf = modelobarco.getCant_cabinas_inf() * Cabina.Cabina_tipo.inf.cant_max_per;
-        int cap_ext = modelobarco.getCant_cabinas_ext() * Cabina.Cabina_tipo.ext.cant_max_per;
-        int cap_cbal = modelobarco.getCant_cabinas_cbal() * Cabina.Cabina_tipo.cbal.cant_max_per;
-        int cap_suit = modelobarco.getCant_cabinas_suit() * Cabina.Cabina_tipo.suit.cant_max_per;
-        int cap_fam = modelobarco.getCant_cabinas_fam() * Cabina.Cabina_tipo.fam.cant_max_per;
+    
 
-        return cap_inf + cap_ext + cap_cbal + cap_suit + cap_fam;
-    }
+
 
 }
