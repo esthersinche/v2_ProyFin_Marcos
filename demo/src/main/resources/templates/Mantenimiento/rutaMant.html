@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento de Rutas</title>
+    <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/scss/custom.css}" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <!--Aquí va el header-->
+    <header th:replace="~{fragments/headerAdmin :: wiwi}"></header>
+    <div class="container py-5">
+        <h2 class="mb-4">Mantenimiento de Rutas</h2>
+        <div class="card shadow">
+            <div class="card-body">
+                <form th:action="@{/rutas}" th:object="${ruta}" method="post">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label for="idRuta" class="form-label">ID Ruta</label>
+                            <input type="text" class="form-control" id="idRuta" th:field="*{idRuta}"
+                                placeholder="Código" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="nombreRuta" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombreRuta" th:field="*{nombreRuta}"
+                                placeholder="Nombre de la ruta" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="diasRuta" class="form-label">Duración (días)</label>
+                            <input type="number" min="1" class="form-control" id="diasRuta" th:field="*{diasRuta}"
+                                placeholder="Número de días" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="precioRuta" class="form-label">Precio</label>
+                            <input type="number" step="0.01" class="form-control" id="precioRuta"
+                                th:field="*{precioRuta}" placeholder="Precio en USD" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="salida" class="form-label">Puerto de Salida</label>
+                            <select class="form-select" id="salida" th:field="*{salida}" required>
+                                <option th:each="p : ${puertos}" th:value="${p.id}" th:text="${p.nombre}">Puerto
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="descRuta" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descRuta" th:field="*{descRuta}" rows="3"
+                                placeholder="Descripción de la ruta" required></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="imagenRuta" class="form-label">Imagen (URL)</label>
+                            <input type="url" class="form-control" id="imagenRuta" th:field="*{imagenUrl}"
+                                placeholder="Enlace de la imagen">
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-between">
+                        <div>
+                            <button type="button" class="btn btn-info me-2"
+                                th:onclick="|location='@{/rutas/buscar/{id}(id=${ruta.idRuta})}'|">Buscar</button>
+                            <button type="button" class="btn btn-warning me-2">Editar</button>
+                            <button type="button" class="btn btn-danger">Eliminar</button>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

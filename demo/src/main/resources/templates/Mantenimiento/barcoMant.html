@@ -1,0 +1,78 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento de Barcos</title>
+    <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/scss/custom.css}" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <!--Aquí va el header-->
+    <header th:replace="~{fragments/headerAdmin :: wiwi}"></header>
+    <div class="container py-5">
+        <h2 class="mb-4">Mantenimiento de Barcos</h2>
+        <div class="card shadow">
+            <div class="card-body">
+                <form th:action="@{/barcos}" th:object="${barco}" method="post" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label for="idBarco" class="form-label">ID Barco</label>
+                            <input type="text" class="form-control" id="idBarco" th:field="*{idBarco}"
+                                placeholder="Código" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="nombreBarco" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombreBarco" th:field="*{nombreBarco}"
+                                placeholder="Nombre del barco" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="capitanBarco" class="form-label">Capitán</label>
+                            <input type="text" class="form-control" id="capitanBarco" th:field="*{capitanBarco}"
+                                placeholder="Nombre del capitán" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="imagenBarco" class="form-label">Imagen Barco</label>
+                            <input class="form-control" type="file" id="imagenBarco" th:field="*{imagenFile}">
+                            <small class="form-text text-muted">Sube una imagen o deja el campo vacío para usar
+                                URL.</small>
+                            <input type="url" class="form-control mt-2" id="imagenUrl" th:field="*{imagenUrl}"
+                                placeholder="Enlace de imagen">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="modeloBarco" class="form-label">Modelo</label>
+                            <select class="form-select" id="modeloBarco" th:field="*{modeloBarco}" required>
+                                <option th:each="m : ${modelos}" th:value="${m}" th:text="${m}">Modelo</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="rutasBarco" class="form-label">Rutas Asignadas</label>
+                            <select class="form-select" id="rutasBarco" th:field="*{rutas}" multiple size="5">
+                                <option th:each="r : ${rutasDisponibles}" th:value="${r.id}" th:text="${r.nombre}">Ruta
+                                </option>
+                            </select>
+                            <small class="form-text text-muted">Mantén Ctrl (o Cmd) para seleccionar múltiples
+                                rutas.</small>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-between">
+                        <div>
+                            <button type="button" class="btn btn-ocean me-2">Buscar</button>
+                            <button type="button" class="btn btn-warning me-2">Editar</button>
+                            <button type="button" class="btn btn-danger">Eliminar</button>
+                        </div>
+                        <button type="submit" class="btn btn-apple">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
