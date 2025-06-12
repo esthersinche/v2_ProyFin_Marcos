@@ -1,32 +1,55 @@
 package com.utp.demo.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-//@Entity
-//Table(name= "Barcos")
-public abstract class Barcos {
+@Entity
+@Table(name = "BARCO")
+public class Barcos {
 
-    //@Id
-    private String ID_barco;
-    private String nombre_barco;
-    private String capitan_barco;
-    //el nombre del modelo estara en las hijas
-    //la capacidad es un metodo
-    //ruta sera lista inicializada en cada modelo de barco
-    private String imagen_barco;
+    @Id
+    @Column(name = "id_barco")
+    private String id_barco; // ID único del barco
+    @Column(name = "nombre")
+    private String nombre_barco; // Nombre del barco
+    @Column(name = "capitan")
+    private String capitan_barco; // Nombre del capitán del barco
 
-    public Barcos(String iD_barco, String nombre_barco, String capitan_barco, String imagen_barco) {
-        ID_barco = iD_barco;
+    @ManyToOne
+    @JoinColumn(name = "modelo", foreignKey = @ForeignKey(name = "FK_Barco_Modelo")) // Relación con MODELOBARCO
+    private Modelobarco modelo; // Relación con el modelo del barco
+    @Column(name = "recreacion")
+    private String recreacion; // Actividades recreativas a bordo del barco
+    @Column(name = "imagen")
+    private String imagen_barco; // URL de la imagen del barco
+
+    // Constructor vacío
+    public Barcos() {
+    }
+
+    // Constructor con parámetros
+    public Barcos(String id_barco, String nombre_barco, String capitan_barco, Modelobarco modelo, String recreacion,
+            String imagen_barco) {
+        this.id_barco = id_barco;
         this.nombre_barco = nombre_barco;
         this.capitan_barco = capitan_barco;
+        this.modelo = modelo;
+        this.recreacion = recreacion;
         this.imagen_barco = imagen_barco;
     }
 
-    public String getID_barco() {
-        return ID_barco;
+    // Getters y Setters
+    public String getId_barco() {
+        return id_barco;
     }
 
-    public void setID_barco(String iD_barco) {
-        ID_barco = iD_barco;
+    public void setId_barco(String id_barco) {
+        this.id_barco = id_barco;
     }
 
     public String getNombre_barco() {
@@ -45,6 +68,22 @@ public abstract class Barcos {
         this.capitan_barco = capitan_barco;
     }
 
+    public Modelobarco getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelobarco modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getRecreacion() {
+        return recreacion;
+    }
+
+    public void setRecreacion(String recreacion) {
+        this.recreacion = recreacion;
+    }
+
     public String getImagen_barco() {
         return imagen_barco;
     }
@@ -52,20 +91,4 @@ public abstract class Barcos {
     public void setImagen_barco(String imagen_barco) {
         this.imagen_barco = imagen_barco;
     }
-
-    //metodos abstractos para modelos de barco (3)
-    public abstract String getModelo_barco();
-    
-
-    
-
-    
-
-    
-
-
-    
-
-
-
 }

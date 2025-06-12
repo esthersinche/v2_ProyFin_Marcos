@@ -1,19 +1,32 @@
 package com.utp.demo.model;
 
-//@Entity
-//Table(name= "Cabina_tipo")
-public class Cabina_tipo {//metadata
-    //@Id
-    //@Column(name= "cab_tipo")
-    private String cab_tipo_id;//inf, ext, cbal, suit, fam
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "CABINATIPO") // Ajustamos el nombre de la tabla según la base de datos
+public class Cabina_tipo {
+
+    @Id
+    @Column(name = "cabinatipo") // Usamos @Id para la clave primaria
+    private String cab_tipo_id; // id único del tipo de cabina (inf, ext, cbal, suit, fam)
+
+    @Column(name = "nombre_cabina") // El nombre de la cabina
     private String nombre_cab;
+
+    @Column(name = "cant_max_per") // La cantidad máxima de personas por cabina
     private int cant_max_per;
+
+    @Column(name = "prec_cabina_per") // Precio por cabina
     private double prec_cabina_per;
 
-    //para el jpa
+    // Constructor vacío para JPA
     public Cabina_tipo() {
     }
 
+    // Constructor con parámetros
     public Cabina_tipo(String cab_tipo_id, String nombre_cab, int cant_max_per, double prec_cabina_per) {
         this.cab_tipo_id = cab_tipo_id;
         this.nombre_cab = nombre_cab;
@@ -21,6 +34,7 @@ public class Cabina_tipo {//metadata
         this.prec_cabina_per = prec_cabina_per;
     }
 
+    // Getters y Setters
     public String getCab_tipo_id() {
         return cab_tipo_id;
     }
@@ -52,20 +66,4 @@ public class Cabina_tipo {//metadata
     public void setPrec_cabina_per(double prec_cabina_per) {
         this.prec_cabina_per = prec_cabina_per;
     }
-
-    //metodos adicionales?
-
-    
-
-    
-
-    
-    
-
-
-    
-
-
-    
-
 }

@@ -1,32 +1,41 @@
 package com.utp.demo.model;
 
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-//@Entity
-//@Table(name= "tipos")
+@Entity
+@Table(name = "tipos") // Relacionado con la tabla "tipos" de la base de datos
 public class Barcos_modelo_tipocabina {
-    //@EmbeddedId
-    private Barcos_modelo_tipocabinaId idparaelcoso;
-    //@ManyToOne
-    //@MapsId("modelo_barco")
-    //@JoinColumn(name= "modelo_barco")
-    private Barcos_modelo bar_model;
-    //@ManyToOne
-    //@MapsId("cab_tipo_id")
-    //@JoinColumn(name= "cab_tipo_id")
+
+    @EmbeddedId
+    private Barcos_modelo_tipocabinaId idparaelcoso; // Identificador compuesto
+
+    @ManyToOne
+    @JoinColumn(name = "modelo", insertable = false, updatable = false) // Relaciona con Modelobarco
+    private Modelobarco bar_model;
+
+    @ManyToOne
+    @JoinColumn(name = "cabinatipo", insertable = false, updatable = false) // Relaciona con Cabina_tipo
     private Cabina_tipo cab_type;
 
-    private int cant;
+    private int cant; // Cantidad de cabinas de este tipo para este modelo
 
+    // Constructor vacío
     public Barcos_modelo_tipocabina() {
     }
 
-    public Barcos_modelo_tipocabina(Barcos_modelo bar_model, Cabina_tipo cab_type, int cant) {
+    // Constructor con parámetros
+    public Barcos_modelo_tipocabina(Modelobarco bar_model, Cabina_tipo cab_type, int cant) {
         this.bar_model = bar_model;
         this.cab_type = cab_type;
         this.cant = cant;
-        this.idparaelcoso= new Barcos_modelo_tipocabinaId(bar_model.getModelo_barco(), cab_type.getCab_tipo_id());
+        this.idparaelcoso = new Barcos_modelo_tipocabinaId(bar_model.getModelo_barco(), cab_type.getCab_tipo_id());
     }
 
+    // Getters y Setters
     public Barcos_modelo_tipocabinaId getIdparaelcoso() {
         return idparaelcoso;
     }
@@ -35,11 +44,11 @@ public class Barcos_modelo_tipocabina {
         this.idparaelcoso = idparaelcoso;
     }
 
-    public Barcos_modelo getBar_model() {
+    public Modelobarco getBar_model() {
         return bar_model;
     }
 
-    public void setBar_model(Barcos_modelo bar_model) {
+    public void setBar_model(Modelobarco bar_model) {
         this.bar_model = bar_model;
     }
 
@@ -58,13 +67,4 @@ public class Barcos_modelo_tipocabina {
     public void setCant(int cant) {
         this.cant = cant;
     }
-
-    
-
-    
-
-    
-
-
-    
 }

@@ -1,27 +1,34 @@
 package com.utp.demo.model;
 
-//cabina asignada a una reserva
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-//@Entity
-//Table(name= "Cabina")
+@Entity
+@Table(name = "CABINA") // Asumiendo que la tabla es "CABINA" en tu base de datos
+public class Cabina_Inst extends Cabina {
 
-public class Cabina_Inst extends Cabina{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // El ID de la cabina será autogenerado
+    @Column(name = "cabina_id") // Mapeamos el campo "cabina_id" en la tabla CABINA
+    private Long cabina_id;
 
-    //@Id
-    //GeneratedValue(strategy= GenerationType.IDENTITY)
-    //@Column(name= "cabina_id")
-    private Long cabina_id;//no tiene nada q ver con cabina_tipo_id solo sirve para conectar con reserva
-    //y para diferenciar instancias concretas en JPA, no esta en el constructor pq se genera solo
-
-    //@ManyToOne
-    //@JoinColumn(name= "Cabina_tipo")
+    @ManyToOne
+    @JoinColumn(name = "cabina_tipo", referencedColumnName = "cabinatipo") // Relación con CABINATIPO
     private Cabina_tipo cab_tipo;
 
+    // Constructor para crear la instancia de Cabina_Inst
     public Cabina_Inst(int numadultos, int numninos, Cabina_tipo cab_tipo) {
-        super(numadultos, numninos);
+        super(numadultos, numninos); // Llamamos al constructor de la clase padre Cabina
         this.cab_tipo = cab_tipo;
     }
 
+    // Getters y setters
     public Long getCabina_id() {
         return cabina_id;
     }
@@ -38,31 +45,20 @@ public class Cabina_Inst extends Cabina{
         this.cab_tipo = cab_tipo;
     }
 
-//metodos abstractos
+    // Métodos abstractos implementados de la clase Cabina
 
     @Override
     public int getCant_max_per() {
-        return cab_tipo.getCant_max_per();
+        return cab_tipo.getCant_max_per(); // Retorna la capacidad máxima de la cabina
     }
 
     @Override
     public String getNombre_cab() {
-        return cab_tipo.getNombre_cab();
+        return cab_tipo.getNombre_cab(); // Retorna el nombre de la cabina
     }
 
     @Override
     public double getPrec_cabina_per() {
-        return cab_tipo.getPrec_cabina_per();
+        return cab_tipo.getPrec_cabina_per(); // Retorna el precio de la cabina
     }
-
-    
-
-    
-    
-
-
-
-
-
-    
 }

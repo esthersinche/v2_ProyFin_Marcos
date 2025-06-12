@@ -1,48 +1,48 @@
 package com.utp.demo.service;
 
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.utp.demo.model.Cabina;
-import com.utp.demo.model.Cabina.Cabina_tipo;
+import com.utp.demo.model.Cabina_tipo;
+import com.utp.demo.repository.CabinaRepository; // Asegúrate de tener un repositorio para acceder a las cabinas
 
 @Service
 public class CabinaService {
 
-    public List<Cabina> obtenerTodoCabinas() {
-        return List.of(
-                new Cabina(Cabina_tipo.inf, 0, 0),
-                new Cabina(Cabina_tipo.ext, 0, 0),
-                new Cabina(Cabina_tipo.cbal, 0, 0),
-                new Cabina(Cabina_tipo.suit, 0, 0),
-                new Cabina(Cabina_tipo.fam, 0, 0));// los numeros se quedan en int ya que se llenara en lo que es
-                                                   // compra, debido a q
-                                                   // el enum ya tiene un num de personas maximo
+    @Autowired
+    private CabinaRepository cabinaRepository; // Usando el repositorio para acceder a las cabinas desde la base de
+                                               // datos
+
+    // Obtener todas las cabinas desde la base de datos
+    public List<Cabina> obtenerTodasCabinas() {
+        return cabinaRepository.findAll(); // Reemplazamos los datos hardcodeados con la consulta a la base de datos
     }
 
-    // adicion, listado, consultas, eliminacion, busquedas
-    // adicion no
-    // listado(arriba)
-    // consultas
+    // Consultas
     public Cabina buscarPorNombreCabina(String nombre_cab) {
-        return obtenerTodoCabinas().stream()
-                .filter(c -> c.getCabinatipo().getNombre_cabina().equalsIgnoreCase(nombre_cab))
-                .findFirst().orElse(null);
+        return obtenerTodasCabinas().stream()
+                .filter(c -> c.getCabinatipo().getNombre_cab().equalsIgnoreCase(nombre_cab))
+                .findFirst()
+                .orElse(null); // Si no se encuentra, se devuelve null
     }
 
-    public Cabina buscarPorcantmaxperCabina(int cantmax) {
-        return obtenerTodoCabinas().stream()
-                .filter(c -> c.getCabinatipo().getCant_max_per() == cantmax)
-                .findFirst().orElse(null);
+    public Cabina buscarPorCantMaxPerCabina(int cantMax) {
+        return obtenerTodasCabinas().stream()
+                .filter(c -> c.getCabinatipo().getCant_max_per() == cantMax)
+                .findFirst()
+                .orElse(null); // Si no se encuentra, se devuelve null
     }
 
     public Cabina buscarPorTipoCabina(Cabina_tipo tipo) {
-        return obtenerTodoCabinas().stream()
-                .filter(c -> c.getCabinatipo().equals(tipo))
+        return obtenerTodasCabinas().stream()
+                .filter(c -> c.getCabinatipo().equals(tipo)) // Compara el tipo de cabina
                 .findFirst()
-                .orElse(null);
+                .orElse(null); // Si no se encuentra, se devuelve null
     }
 
-    // eliminacion
+    // Eliminación de una cabina (si es necesario)
+    public void eliminarCabina(Cabina cabina) {
+        cabinaRepository.delete(cabina);
+    }
 }

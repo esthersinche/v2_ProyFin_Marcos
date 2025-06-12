@@ -1,25 +1,46 @@
 package com.utp.demo.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 import java.util.List;
 
+@Entity
+@Table(name = "RESERVA")
 public class Reserva {
 
-    private Cliente cliente;
-    private Ruta ruta;
-    private List<Paquete> paquetes;
-    private Cabina cabina;
+    @ManyToOne
+    @JoinColumn(name = "dni_cliente", referencedColumnName = "dni_cliente") // Relación con Cliente
+    private Cliente cliente; // Cliente que realiza la reserva
 
-    // Cantidades de pasajeros
-    private int cantidadPasajeros;
+    @ManyToOne
+    @JoinColumn(name = "id_ruta", referencedColumnName = "id_ruta") // Relación con Ruta
+    private Ruta ruta; // Ruta seleccionada para la reserva
 
-    // Total calculado de la reserva
-    private double total;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_paquete") // Relación con Paquete
+    private List<Paquete> paquetes; // Paquetes seleccionados para la reserva
+
+    @ManyToOne
+    @JoinColumn(name = "id_cabina", referencedColumnName = "id_cabina") // Relación con Cabina
+    private Cabina cabina; // Cabina reservada
+
+    @Column(name = "cantidad_pasajeros")
+    private int cantidadPasajeros; // Número de pasajeros
+
+    @Column(name = "total")
+    private double total; // Total de la reserva
 
     public Reserva() {
-        // Constructor vacío Spring necesita poder crear el objeto sin argumentos.
-        // para instanciarlo automaticamente
+        // Constructor vacío para JPA
     }
 
+    // Getters y setters
     public Cliente getCliente() {
         return cliente;
     }
