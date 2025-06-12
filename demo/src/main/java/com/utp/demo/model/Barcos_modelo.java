@@ -5,12 +5,14 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "BARCO")
+@Table(name = "MODELOBARCO")
 public class Barcos_modelo extends Barcos {
 
+    @Id
     @Column(name = "modelo")
     private String modelo_barco;//SMODEL, MMODEL, LMODEL
 
@@ -18,7 +20,8 @@ public class Barcos_modelo extends Barcos {
     private List<Barcos_modelo_tipocabina> listacabxtipoxmodelo = new ArrayList<>();
 
     public Barcos_modelo(String iD_barco, String nombre_barco, String capitan_barco, String imagen_barco,
-            String modelo_barco, String descripcion, /*List<Ruta> listarutasxmodelo,*/ List<Barcos_modelo_tipocabina> listacabxtipoxmodelo) {
+            String modelo_barco, String descripcion,
+            /*List<Ruta> listarutasxmodelo,*/ List<Barcos_modelo_tipocabina> listacabxtipoxmodelo) {
         super(iD_barco, nombre_barco, capitan_barco, imagen_barco, descripcion);
         this.modelo_barco = modelo_barco;
         /* this.listarutasxmodelo = listarutasxmodelo;*/
