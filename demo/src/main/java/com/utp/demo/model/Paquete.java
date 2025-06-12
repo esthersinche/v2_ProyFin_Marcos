@@ -2,24 +2,30 @@ package com.utp.demo.model;
 
 import java.util.List;
 
-//@Entity
-//@Table(name= "Paquete")
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name= "Paquete")
 public class Paquete {
-    //@Id
-    //@Column(name= "Id_paquete")
+    @Id
+    @Column(name= "Id_paquete")
     private String Id_paquete;
-    //@Column(name= "nom_paquete")
+    @Column(name= "nom_paquete")
     private String nom_paquete;
-    //@Column(name= "desc_paquete")
+    @Column(name= "desc_paquete")
     private String desc_paquete;
-    //@ManyToMany
-    //@JoinTable(
-    //name= "Paq_Beneficios",
-    //joinColumns= @JoinColumn(name= "Id_paquete"),
-    //inverseJoinColumns= @JoinColumn(name= "id_bene")
-    //)
+    @ManyToMany
+    @JoinTable(name= "Paq_Beneficios",joinColumns= @JoinColumn(name= "Id_paquete"),
+    inverseJoinColumns= @JoinColumn(name= "id_bene")
+    )
     private List<Beneficio> listabeneficiosxpaq;
-    //@Column(name= "prec_paquete_uni")
+    @Column(name= "prec_paquete_uni")
     private double prec_paquete_uni;
     
     public Paquete() {

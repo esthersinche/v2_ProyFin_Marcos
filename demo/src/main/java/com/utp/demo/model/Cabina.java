@@ -1,39 +1,27 @@
 package com.utp.demo.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+
 //solo la clase para q extienda a la implementacion los metdos y los datos
 //esto es Reserva Cabina mas q nada debido al numadultos y numninos, osea la cabina reservada por el
 //cliente
-
+@MappedSuperclass
 public abstract class Cabina {
-
+    @Column(name= "numadultos")
     private int numadultos;
-    private int numninos;
- 
-
-    public Cabina(int numadultos, int numninos) {
-        this.numadultos = numadultos;
-        this.numninos = numninos;
+    
+    public Cabina(int numadultos) {
+        this.numadultos = numadultos;       
     }
-
     
     public int getNumadultos() {
         return numadultos;
     }
 
-
     public void setNumadultos(int numadultos) {
         this.numadultos = numadultos;
     }
-
-
-    public int getNumninos() {
-        return numninos;
-    }
-
-
-    public void setNumninos(int numninos) {
-        this.numninos = numninos;
-    }
-
 
     //metodos abstractos
     public abstract String getNombre_cab();
@@ -41,7 +29,7 @@ public abstract class Cabina {
     public abstract double getPrec_cabina_per();
 
     public int getNumtotalper(){
-        return this.numadultos + this.numninos;
+        return this.numadultos;
     }//devuelve numeor total de personas , es mas como para reserva y eso
 
 

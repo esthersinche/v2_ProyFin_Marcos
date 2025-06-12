@@ -1,7 +1,6 @@
 package com.utp.demo.model;
 
 import java.io.Serializable;
-//para evitar posibles duplicas en lo q es tipos/Barcos_modelo_tipocabina
 import java.util.Objects;
 
 
@@ -47,26 +46,6 @@ public class Barcos_modelo_tipocabinaId implements Serializable{
         return Objects.equals(modelo_barco, that.modelo_barco) &&
                Objects.equals(cab_tipo_id, that.cab_tipo_id);
     }
-
-    
-  
-    
-
-    
-
-    
-
-    
-
-    
-
-
-
-    
-
-
-
-
 
     
 }

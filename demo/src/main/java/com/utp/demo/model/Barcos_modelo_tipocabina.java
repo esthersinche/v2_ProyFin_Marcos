@@ -1,20 +1,27 @@
 package com.utp.demo.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
 
-//@Entity
-//@Table(name= "tipos")
+@Entity
+@Table(name= "tipos")
 public class Barcos_modelo_tipocabina {
-    //@EmbeddedId
+    @EmbeddedId
     private Barcos_modelo_tipocabinaId idparaelcoso;
-    //@ManyToOne
-    //@MapsId("modelo_barco")
-    //@JoinColumn(name= "modelo_barco")
+    @ManyToOne
+    @MapsId("modelo_barco")
+    @JoinColumn(name= "modelo_barco")
     private Barcos_modelo bar_model;
-    //@ManyToOne
-    //@MapsId("cab_tipo_id")
-    //@JoinColumn(name= "cab_tipo_id")
+    @ManyToOne
+    @MapsId("cab_tipo_id")
+    @JoinColumn(name= "cab_tipo_id")
     private Cabina_tipo cab_type;
-
+    @Column(name= "cantidad")
     private int cant;
 
     public Barcos_modelo_tipocabina() {
@@ -59,12 +66,5 @@ public class Barcos_modelo_tipocabina {
         this.cant = cant;
     }
 
-    
 
-    
-
-    
-
-
-    
 }

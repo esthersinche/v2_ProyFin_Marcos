@@ -19,14 +19,14 @@ public class Barcos_modelo extends Barcos {
     /*private List<Ruta> listarutasxmodelo;//cada modelo tiene ciertas rutas q puede ir*/
     private List<Barcos_modelo_tipocabina> listacabxtipoxmodelo = new ArrayList<>();
 
-    public Barcos_modelo(String iD_barco, String nombre_barco, String capitan_barco, String imagen_barco,
-            String modelo_barco, String descripcion,
-            /*List<Ruta> listarutasxmodelo,*/ List<Barcos_modelo_tipocabina> listacabxtipoxmodelo) {
-        super(iD_barco, nombre_barco, capitan_barco, imagen_barco, descripcion);
-        this.modelo_barco = modelo_barco;
-        /* this.listarutasxmodelo = listarutasxmodelo;*/
-        this.listacabxtipoxmodelo = listacabxtipoxmodelo;
+    
 
+    public Barcos_modelo(String iD_barco, String nombre_barco, String capitan_barco, Barcos_modelo modelo,
+            String imagen_barco, String descripcion, String modelo_barco,
+            List<Barcos_modelo_tipocabina> listacabxtipoxmodelo) {
+        super(iD_barco, nombre_barco, capitan_barco, modelo, imagen_barco, descripcion);
+        this.modelo_barco = modelo_barco;
+        this.listacabxtipoxmodelo = listacabxtipoxmodelo;
     }
 
     @Override

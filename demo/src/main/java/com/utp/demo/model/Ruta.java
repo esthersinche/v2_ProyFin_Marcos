@@ -3,28 +3,34 @@ package com.utp.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
-//@Entity
-//@Table(name= "Ruta")
+
+@Entity
+@Table(name= "RUTA")
 public class Ruta {
-    //@Id
-    //@Column(name = "Id_ruta")
+    @Id
+    @Column(name = "id_ruta")
     private String Id_ruta;
-    //@Column(name = "nombre_ruta", nullable= false)
+    @Column(name = "nombre_ruta", nullable= false)
     private String nombre_ruta;
-    //@Column(name = "descripcion_ruta", length= 800)
+    @Column(name = "descripcion_ruta", length= 800)
     private String descripcion_ruta;
-    //@Column(name = "dias_ruta")
+    @Column(name = "dias")
     private String dias_ruta;
-    //@Column(name = "precio_ruta")
+    @Column(name = "precio_ruta")
     private double precio_ruta;//por unidad
-    //@Column(name = "salida")
+    @Column(name = "salida")
     private String salida;
-    //@Column(name = "imagen")
+    @Column(name = "imagen")
     private String imagen;
 
-    //@ManyToMany(mappedBy= "listarutasxmodelo")
-    private List<Barcos_modelo> modelosconxruta= new ArrayList<>();
+    @ManyToMany(mappedBy= "RUTA_BARCO")
+    private List<Barcos> barcosxruta= new ArrayList<>();
 
     public Ruta() {
     }
@@ -96,12 +102,12 @@ public class Ruta {
         this.imagen = imagen;
     }
 
-    public List<Barcos_modelo> getModelosconxruta() {
-        return modelosconxruta;
+    public List<Barcos> getBarcosxruta() {
+        return barcosxruta;
     }
 
-    public void setModelosconxruta(List<Barcos_modelo> modelosconxruta) {
-        this.modelosconxruta = modelosconxruta;
+    public void setModelosconxruta(List<Barcos> barcosxruta) {
+        this.barcosxruta = barcosxruta;
     }
 
     

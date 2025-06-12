@@ -1,23 +1,46 @@
 package com.utp.demo.model;
 
-public class Cliente {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name= "CLIENTE")
+public class Cliente {
+    @Id
+    @Column(name = "dni_cliente")
+    private int dni_cliente;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "apellido")
     private String apellido;
+    @Column(name = "correo")
     private String correo;
+    @Column(name = "celular")
     private int celular;
+    @Column(name = "ciudad")
     private String ciudad;
 
     public Cliente() {
         // Obligatorio para Spring y formularios
     }
 
-    public Cliente(String nombre, String apellido, String correo, int celular, String ciudad) {
-        this.nombre = nombre;
+    public Cliente(String apellido, int celular, String ciudad, String correo, int dni_cliente, String nombre) {
         this.apellido = apellido;
-        this.correo = correo;
         this.celular = celular;
         this.ciudad = ciudad;
+        this.correo = correo;
+        this.dni_cliente = dni_cliente;
+        this.nombre = nombre;
+    }
+
+    public int getDni_cliente() {
+        return dni_cliente;
+    }
+
+    public void setDni_cliente(int dni_cliente) {
+        this.dni_cliente = dni_cliente;
     }
 
     public String getNombre() {
@@ -59,5 +82,8 @@ public class Cliente {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
+
+
+    
 
 }

@@ -3,18 +3,24 @@ package com.utp.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Entity
-//@Table(name= "Beneficio")
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name= "Beneficio")
 public class Beneficio {
-    //@Id
-    //Column(name= "Id_bene")
+    @Id
+    @Column(name= "Id_bene")
     private String id_bene;
-    //Column(name= "nombre_bene")
+    @Column(name= "nombre_bene")
     private String nombre_bene;
-    //Column(name= "desc_bene")
+    @Column(name= "desc_bene")
     private String desc_bene;
 
-    //@ManyToMany(mappedBy= "listabeneficiosxpaq")
+    @ManyToMany(mappedBy= "listabeneficiosxpaq")
     private List<Paquete> listapaqxbene= new ArrayList<>();
     
     public Beneficio() {
@@ -58,8 +64,4 @@ public class Beneficio {
         this.listapaqxbene = listapaqxbene;
     }
 
-    
-
-    
-    
 }

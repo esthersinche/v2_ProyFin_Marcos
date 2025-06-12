@@ -1,13 +1,21 @@
 package com.utp.demo.model;
 
-//@Entity
-//Table(name= "Cabina_tipo")
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name= "Cabina_tipo")
 public class Cabina_tipo {//metadata
-    //@Id
-    //@Column(name= "cab_tipo")
+    @Id
+    @Column(name= "cabinatipo")
     private String cab_tipo_id;//inf, ext, cbal, suit, fam
+    @Column(name= "nombre_cabina")
     private String nombre_cab;
+    @Column(name= "cant_max_per")
     private int cant_max_per;
+    @Column(name= "prec_cabina_per")
     private double prec_cabina_per;
 
     //para el jpa
@@ -55,17 +63,5 @@ public class Cabina_tipo {//metadata
 
     //metodos adicionales?
 
-    
-
-    
-
-    
-    
-
-
-    
-
-
-    
 
 }

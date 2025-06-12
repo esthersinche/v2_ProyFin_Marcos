@@ -1,24 +1,33 @@
 package com.utp.demo.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 //cabina asignada a una reserva
 
-//@Entity
-//Table(name= "Cabina")
+@Entity
+@Table(name= "Cabina")
 
 public class Cabina_Inst extends Cabina{
 
-    //@Id
-    //GeneratedValue(strategy= GenerationType.IDENTITY)
-    //@Column(name= "cabina_id")
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name= "cabina_id")
     private Long cabina_id;//no tiene nada q ver con cabina_tipo_id solo sirve para conectar con reserva
     //y para diferenciar instancias concretas en JPA, no esta en el constructor pq se genera solo
 
-    //@ManyToOne
-    //@JoinColumn(name= "Cabina_tipo")
+    @ManyToOne
+    @JoinColumn(name= "Cabina_tipo")
     private Cabina_tipo cab_tipo;
 
-    public Cabina_Inst(int numadultos, int numninos, Cabina_tipo cab_tipo) {
-        super(numadultos, numninos);
+    public Cabina_Inst(int numadultos, Cabina_tipo cab_tipo) {
+        super(numadultos);
         this.cab_tipo = cab_tipo;
     }
 
@@ -55,14 +64,4 @@ public class Cabina_Inst extends Cabina{
         return cab_tipo.getPrec_cabina_per();
     }
 
-    
-
-    
-    
-
-
-
-
-
-    
 }
