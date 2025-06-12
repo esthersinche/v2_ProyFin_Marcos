@@ -15,7 +15,7 @@ public class Barcos_modelo {
 
     @Id
     @Column(name = "modelo")
-    private final String modelo_barco;//SMODEL, MMODEL, LMODEL
+    private String modelo_barco;//SMODEL, MMODEL, LMODEL
 
     /*private List<Ruta> listarutasxmodelo;//cada modelo tiene ciertas rutas q puede ir*/
     @OneToMany(mappedBy= "bar_model")
@@ -24,6 +24,9 @@ public class Barcos_modelo {
 
     public Barcos_modelo(String modelo_barco) {
         this.modelo_barco = modelo_barco;
+    }
+
+    public Barcos_modelo() {
     }
 
     public String getModelo_barco() {
