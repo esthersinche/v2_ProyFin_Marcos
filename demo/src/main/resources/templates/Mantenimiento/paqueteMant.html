@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento de Paquetes</title>
+    <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/scss/custom.css}" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <!--Aquí va el header-->
+    <header th:replace="~{fragments/headerAdmin :: wiwi}"></header>
+    <div class="container py-5">
+        <h2 class="mb-4">Mantenimiento de Paquetes</h2>
+        <div class="card shadow">
+            <div class="card-body">
+                <form th:action="@{/paquetes}" th:object="${paquete}" method="post">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label for="idPaquete" class="form-label">ID Paquete</label>
+                            <input type="text" class="form-control" id="idPaquete" th:field="*{idPaquete}"
+                                placeholder="Código" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="nomPaquete" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nomPaquete" th:field="*{nomPaquete}"
+                                placeholder="Nombre del paquete" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="descPaquete" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descPaquete" th:field="*{descPaquete}" rows="2"
+                                placeholder="Descripción breve" required></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="beneficios" class="form-label">Beneficios Asignados</label>
+                            <select class="form-select" id="beneficios" th:field="*{beneficios}" multiple size="5">
+                                <option th:each="b : ${beneficiosDisponibles}" th:value="${b.id}" th:text="${b.nombre}">
+                                    Beneficio</option>
+                            </select>
+                            <small class="form-text text-muted">Mantén Ctrl (o Cmd) para seleccionar múltiples
+                                beneficios.</small>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-between">
+                        <div>
+                            <button type="button" class="btn btn-info me-2"
+                                th:onclick="|location='@{/paquetes/buscar/{id}(id=${paquete.idPaquete})}'|">Buscar</button>
+                            <button type="button" class="btn btn-warning me-2">Editar</button>
+                            <button type="button" class="btn btn-danger">Eliminar</button>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
