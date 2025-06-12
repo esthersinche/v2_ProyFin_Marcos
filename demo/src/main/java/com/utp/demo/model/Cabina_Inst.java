@@ -47,7 +47,10 @@ public class Cabina_Inst extends Cabina{
         this.cab_tipo = cab_tipo;
     }
 
-//metodos abstractos
+    @Override
+    public String getCab_tipo_id() {
+        return cab_tipo.getCab_tipo_id();
+    }
 
     @Override
     public int getCant_max_per() {
@@ -61,7 +64,10 @@ public class Cabina_Inst extends Cabina{
 
     @Override
     public double getPrec_cabina_per() {
-        return cab_tipo.getPrec_cabina_per();
+        return cab_tipo.getCant_max_per();
     }
+
+//metodos abstractos
+
 
 }

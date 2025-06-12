@@ -24,6 +24,7 @@ public abstract class Cabina {
     }
 
     //metodos abstractos
+    public abstract String getCab_tipo_id();
     public abstract String getNombre_cab();
     public abstract int getCant_max_per();
     public abstract double getPrec_cabina_per();
