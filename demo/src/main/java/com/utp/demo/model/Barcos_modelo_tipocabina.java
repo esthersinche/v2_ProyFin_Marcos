@@ -66,5 +66,12 @@ public class Barcos_modelo_tipocabina {
         this.cant = cant;
     }
 
+    
 
+    
+
+    
+
+
+    
 }

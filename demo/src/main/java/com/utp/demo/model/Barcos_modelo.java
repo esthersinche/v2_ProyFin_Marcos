@@ -6,32 +6,36 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "MODELOBARCO")
-public class Barcos_modelo extends Barcos {
+public class Barcos_modelo {
 
     @Id
     @Column(name = "modelo")
-    private String modelo_barco;//SMODEL, MMODEL, LMODEL
+    private final String modelo_barco;//SMODEL, MMODEL, LMODEL
 
     /*private List<Ruta> listarutasxmodelo;//cada modelo tiene ciertas rutas q puede ir*/
+    @OneToMany(mappedBy= "bar_model")
     private List<Barcos_modelo_tipocabina> listacabxtipoxmodelo = new ArrayList<>();
+ 
 
-    
-
-    public Barcos_modelo(String iD_barco, String nombre_barco, String capitan_barco, Barcos_modelo modelo,
-            String imagen_barco, String descripcion, String modelo_barco,
-            List<Barcos_modelo_tipocabina> listacabxtipoxmodelo) {
-        super(iD_barco, nombre_barco, capitan_barco, modelo, imagen_barco, descripcion);
+    public Barcos_modelo(String modelo_barco) {
         this.modelo_barco = modelo_barco;
-        this.listacabxtipoxmodelo = listacabxtipoxmodelo;
     }
 
-    @Override
     public String getModelo_barco() {
         return modelo_barco;
+    }
+
+    public List<Barcos_modelo_tipocabina> getListacabxtipoxmodelo() {
+        return listacabxtipoxmodelo;
+    }
+
+    public void setListacabxtipoxmodelo(List<Barcos_modelo_tipocabina> listacabxtipoxmodelo) {
+        this.listacabxtipoxmodelo = listacabxtipoxmodelo;
     }
 
     //capacidad
