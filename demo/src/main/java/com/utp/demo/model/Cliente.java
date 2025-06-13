@@ -11,7 +11,7 @@ public class Cliente {
 
     @Id
     @Column(name = "dni_cliente")
-    private int dni_cliente;
+    private int dniCliente;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "apellido")
@@ -32,16 +32,16 @@ public class Cliente {
         this.celular = celular;
         this.ciudad = ciudad;
         this.correo = correo;
-        this.dni_cliente = dni_cliente;
+        this.dniCliente = dni_cliente;
         this.nombre = nombre;
     }
 
-    public int getDni_cliente() {
-        return dni_cliente;
+    public int getDniCliente() {
+        return dniCliente;
     }
 
-    public void setDni_cliente(int dni_cliente) {
-        this.dni_cliente = dni_cliente;
+    public void setDniCliente(int dni_cliente) {
+        this.dniCliente = dni_cliente;
     }
 
     public String getNombre() {
