@@ -66,20 +66,17 @@
                                 <div class="accordion-body">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="modelo" id="SMODEL"
-                                            value="SMODEL"
-                                            th:checked="${selectedModelos.contains(T(com.utp.demo.model.Barcos$Modelobarco).SMODEL)}" />
+                                            value="SMODEL" th:checked="${selectedModelos.contains('SMODEL')}" />
                                         <label class="form-check-label" for="SMODEL">SMODEL</label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="modelo" id="MMODEL"
-                                            value="MMODEL"
-                                            th:checked="${selectedModelos.contains(T(com.utp.demo.model.Barcos$Modelobarco).MMODEL)}" />
+                                            value="MMODEL" th:checked="${selectedModelos.contains('MMODEL')}" />
                                         <label class="form-check-label" for="MMODEL">MMODEL</label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="modelo" id="LMODEL"
-                                            value="LMODEL"
-                                            th:checked="${selectedModelos.contains(T(com.utp.demo.model.Barcos$Modelobarco).LMODEL)}" />
+                                            value="LMODEL" th:checked="${selectedModelos.contains('LMODEL')}" />
                                         <label class="form-check-label" for="LMODEL">LMODEL</label>
                                     </div>
                                 </div>
@@ -107,7 +104,7 @@
                                 <div th:class="${stat.index % 2 == 1} 
                          ? 'col-5 order-2' 
                          : 'col-5 order-1'">
-                                    <img th:src="${ruta.imagen}" th:alt="${ruta.nombre_ruta}"
+                                    <img th:src="@{${ruta.imagen}}" th:alt="${ruta.nombre_ruta}"
                                         class="img-fluid rounded-start h-100 w-100 object-fit-cover">
                                 </div>
 
@@ -122,10 +119,11 @@
                                         </p>
                                         <ul class="list-group list-group-flush mb-3">
                                             <li class="list-group-item">
-                                                Duración: <span th:text="${ruta.dias}">0 días</span>
+                                                Duración: <span th:text="${ruta.dias_ruta}">0 días</span>
                                             </li>
                                             <li class="list-group-item">
-                                                Modelo de Barco: <span th:text="${ruta.getModelobarco()}">Puerto</span>
+                                                Modelo de Barco: <span
+                                                    th:text="${ruta.modeloBarco != null ? ruta.modeloBarco.nombreModelo : 'No especificado'}">Modelo</span>
                                             </li>
                                             <li class="list-group-item">
                                                 Precio: $<span th:text="${ruta.precio_ruta}">0.0</span>

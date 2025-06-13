@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "BARCO")
-public abstract class Barcos {
+public class Barcos {
 
     @Id
     @Column(name = "id_barco")
@@ -101,6 +101,4 @@ public abstract class Barcos {
         return bar_model != null ? bar_model.getTotalcabinas() : 0;
     }
 
-    // Método abstracto para obtener el nombre del modelo
-    public abstract String getNombreModelo();
 }
