@@ -47,4 +47,14 @@ public class BarcoService {
     public void eliminarBarco(String id) {
         barcoRepository.deleteById(id);
     }
+
+    /** Devuelve solo los barcos que cubren la ruta indicada */
+    public List<Barcos> obtenerPorRuta(String rutaId) {
+        return barcoRepository.findAllByRutaId(rutaId);
+    }
+
+    /** Ya existente, renómbralo si quieres a buscarPorId */
+    public Barcos buscarPorId(String id) {
+        return barcoRepository.findById(id).orElse(null);
+    }
 }

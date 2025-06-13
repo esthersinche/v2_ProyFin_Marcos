@@ -9,6 +9,7 @@
 </head>
 
 <body class="bg-light">
+    
     <!--Aquí va el header-->
     <header th:replace="~{fragments/headerAdmin :: wiwi}"></header>
     <div class="container py-5">
@@ -34,15 +35,6 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="imagenBarco" class="form-label">Imagen Barco</label>
-                            <input class="form-control" type="file" id="imagenBarco" th:field="*{imagenFile}">
-                            <small class="form-text text-muted">Sube una imagen o deja el campo vacío para usar
-                                URL.</small>
-                            <input type="url" class="form-control mt-2" id="imagenUrl" th:field="*{imagenUrl}"
-                                placeholder="Enlace de imagen">
-                        </div>
-
-                        <div class="col-md-6">
                             <label for="modeloBarco" class="form-label">Modelo</label>
                             <select class="form-select" id="modeloBarco" th:field="*{modeloBarco}" required>
                                 <option th:each="m : ${modelos}" th:value="${m}" th:text="${m}">Modelo</option>
@@ -51,8 +43,8 @@
 
                         <div class="col-12">
                             <label for="rutasBarco" class="form-label">Rutas Asignadas</label>
-                            <select class="form-select" id="rutasBarco" th:field="*{rutas}" multiple size="5">
-                                <option th:each="r : ${rutasDisponibles}" th:value="${r.id}" th:text="${r.nombre}">Ruta
+                            <select class="form-select" id="rutasBarco" th:field="*{idsrutasbarco}" multiple size="5">
+                                <option th:each="r : ${rutasDisponibles}" th:value="${r.Idruta}" th:text="${r.nombreruta}">Ruta
                                 </option>
                             </select>
                             <small class="form-text text-muted">Mantén Ctrl (o Cmd) para seleccionar múltiples
@@ -71,7 +63,8 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> 
+    
     <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 </body>
 

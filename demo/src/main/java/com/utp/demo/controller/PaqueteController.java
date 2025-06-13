@@ -76,7 +76,7 @@ public class PaqueteController {
         List<String> nom_rutas = paqserv.obtenerTodosLosPaquetes().stream()
                 .map(p -> p.getRutaPaq())
                 .filter(r -> r != null)
-                .map(r -> r.getNombre_ruta())
+                .map(r -> r.getNombreruta())
                 .distinct()
                 .collect(Collectors.toList());
 

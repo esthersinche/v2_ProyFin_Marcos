@@ -33,7 +33,7 @@ public class LoginController {
         if (loginService.login(usuario, password)) {
             session.setAttribute("loggedUser", usuario);
             // Al validar bien, devolvemos barcoMant.html
-            return "Mantenimiento/barcoMant";
+            return "redirect:/Mantenimiento/barcoMant";//dsps de login el usuario tiene q hacer un nuevo get
         }
 
         model.addAttribute("error", "Credenciales inválidas");

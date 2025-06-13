@@ -17,23 +17,23 @@ public class Barcos {
 
     @Id
     @Column(name = "id_barco")
-    private String ID_barco;
+    private String IDbarco;
 
     @Column(name = "nombre_barco")
-    private String nombre_barco;
+    private String nombrebarco;
 
     @Column(name = "capitan_barco")
-    private String capitan_barco;
+    private String capitanbarco;
 
     @ManyToOne
     @JoinColumn(name = "modelo")
-    private Barcos_modelo bar_model;
+    private Barcos_modelo barmodel;
 
     @Column(name = "descripcion_barco")
-    private String descripcion_barco;
+    private String descripcionbarco;
 
     @Column(name = "imagen_barco")
-    private String imagen_barco;
+    private String imagenbarco;
 
     // --- RELACIÓN M:N INVERSA ---
     @ManyToMany(mappedBy = "barcos")
@@ -42,71 +42,73 @@ public class Barcos {
     public Barcos() {
     }
 
-    public Barcos(String iD_barco, String nombre_barco, String capitan_barco, Barcos_modelo bar_model,
-            String descripcion_barco, String imagen_barco) {
-        ID_barco = iD_barco;
-        this.nombre_barco = nombre_barco;
-        this.capitan_barco = capitan_barco;
-        this.bar_model = bar_model;
-        this.descripcion_barco = descripcion_barco;
-        this.imagen_barco = imagen_barco;
+    public Barcos(String iDbarco, String nombrebarco, String capitanbarco, Barcos_modelo barmodel,
+            String descripcionbarco, String imagenbarco, Set<Ruta> rutas) {
+        IDbarco = iDbarco;
+        this.nombrebarco = nombrebarco;
+        this.capitanbarco = capitanbarco;
+        this.barmodel = barmodel;
+        this.descripcionbarco = descripcionbarco;
+        this.imagenbarco = imagenbarco;
+        this.rutas = rutas;
+    }
+   
+
+    public String getIDbarco() {
+        return IDbarco;
     }
 
-    public String getID_barco() {
-        return ID_barco;
+    public void setIDbarco(String iDbarco) {
+        IDbarco = iDbarco;
     }
 
-    public void setID_barco(String iD_barco) {
-        ID_barco = iD_barco;
+    public String getNombrebarco() {
+        return nombrebarco;
     }
 
-    public String getNombre_barco() {
-        return nombre_barco;
+    public void setNombrebarco(String nombrebarco) {
+        this.nombrebarco = nombrebarco;
     }
 
-    public void setNombre_barco(String nombre_barco) {
-        this.nombre_barco = nombre_barco;
+    public String getCapitanbarco() {
+        return capitanbarco;
     }
 
-    public String getCapitan_barco() {
-        return capitan_barco;
+    public void setCapitanbarco(String capitanbarco) {
+        this.capitanbarco = capitanbarco;
     }
 
-    public void setCapitan_barco(String capitan_barco) {
-        this.capitan_barco = capitan_barco;
+    public Barcos_modelo getBarmodel() {
+        return barmodel;
     }
 
-    public Barcos_modelo getBar_model() {
-        return bar_model;
+    public void setBarmodel(Barcos_modelo barmodel) {
+        this.barmodel = barmodel;
     }
 
-    public void setBar_model(Barcos_modelo bar_model) {
-        this.bar_model = bar_model;
+    public String getDescripcionbarco() {
+        return descripcionbarco;
     }
 
-    public String getDescripcion_barco() {
-        return descripcion_barco;
+    public void setDescripcionbarco(String descripcionbarco) {
+        this.descripcionbarco = descripcionbarco;
     }
 
-    public void setDescripcion_barco(String descripcion_barco) {
-        this.descripcion_barco = descripcion_barco;
+    public String getImagenbarco() {
+        return imagenbarco;
     }
 
-    public String getImagen_barco() {
-        return imagen_barco;
-    }
-
-    public void setImagen_barco(String imagen_barco) {
-        this.imagen_barco = imagen_barco;
+    public void setImagenbarco(String imagenbarco) {
+        this.imagenbarco = imagenbarco;
     }
 
     // auxiliares
     public int getCapacidadTotal() {
-        return bar_model != null ? bar_model.getCapacidad() : 0;
+        return barmodel != null ? barmodel.getCapacidad() : 0;
     }
 
     public int getTotalCabinas() {
-        return bar_model != null ? bar_model.getTotalcabinas() : 0;
+        return barmodel != null ? barmodel.getTotalcabinas() : 0;
     }
 
     public Set<Ruta> getRutas() {

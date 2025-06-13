@@ -4,15 +4,20 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.utp.demo.model.Barcos;
 import com.utp.demo.model.Paquete;
 
 @Service
 public class PaqueteService {
 
     private final PaqueteRepository paqueteRepository;
+    private BarcoRepository barcoRepository;
 
-    public PaqueteService(PaqueteRepository paqueteRepository) {
+    
+
+    public PaqueteService(PaqueteRepository paqueteRepository, BarcoRepository barcoRepository) {
         this.paqueteRepository = paqueteRepository;
+        this.barcoRepository = barcoRepository;
     }
 
     // Obtener todos los paquetes
@@ -50,5 +55,19 @@ public class PaqueteService {
     // Buscar paquetes por capacidades máximas
     public List<Paquete> buscarPorCapacidadMaxima(List<Integer> capacidades) {
         return paqueteRepository.findByCabinaCantMaxPerIn(capacidades);
+    }
+
+    public List<Barcos> obtenerPorRuta(String rutaId) {
+        return barcoRepository.findAllByRutaId(rutaId);
+    }
+
+    //renómbralo si quieres a buscarPorId  qcy
+    public Barcos buscarPorIdBarco(String id) {
+        return barcoRepository.findById(id).orElse(null);
+    }
+
+    // Devuelve un paquete por su ID o null si no existe 
+    public Paquete buscarPorId(String id) {
+        return paqueteRepository.findById(id).orElse(null);
     }
 }

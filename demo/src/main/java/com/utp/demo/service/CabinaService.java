@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.utp.demo.model.Barcos;
 import com.utp.demo.model.Cabina_Inst;
 import com.utp.demo.model.Cabina_tipo;
 
@@ -11,9 +12,11 @@ import com.utp.demo.model.Cabina_tipo;
 public class CabinaService {
 
     private final CabinaRepository cabrepo;
+    private final BarcoService barcoserv;
 
-    public CabinaService(CabinaRepository cabrepo) {
+    public CabinaService(CabinaRepository cabrepo, BarcoService barcoserv) {
         this.cabrepo = cabrepo;
+        this.barcoserv = barcoserv;
     }
 
     // Obtener todas las cabinas
@@ -50,5 +53,22 @@ public class CabinaService {
     // DE RESERVA
     public Cabina_Inst buscarPorTipoCabina(Cabina_tipo tipoCabina) {
         return cabrepo.findFirstByCabTipo(tipoCabina);
+    }
+
+    /**
+     * Devuelve las instancias de cabina disponibles para un barco dado,
+     * inspeccionando su modelo y los tipos de cabina asociados.
+     */
+    public List<Cabina_Inst> obtenerPorBarco(String idBarco) {
+        Barcos barco = barcoserv.buscarPorIdBarco(idBarco);
+        if (barco == null || barco.getBarmodel() == null) {
+            return List.of();
+        }
+        // Extraer los IDs de cabina que el modelo soporta
+        List<String> tipoIds = barco.getBarmodel().getTiposDeCabina().stream()
+            .map(bmtc -> bmtc.getCab_type().getCab_tipo_id())
+            .toList();
+
+        return cabrepo.findByCabTipoIdIn(tipoIds);
     }
 }
