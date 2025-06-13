@@ -35,7 +35,7 @@ public class BarcoService {
 
     // Buscar por modelo (nombre del modelo)
     public Barcos buscarPorNombreModelo(String modeloNombre) {
-        return barcoRepository.findByModeloBarco_ModeloBarcoIgnoreCase(modeloNombre);
+        return barcoRepository.findByBar_model_Modelo_barcoIgnoreCase(modeloNombre);
     }
 
     // Guardar nuevo barco

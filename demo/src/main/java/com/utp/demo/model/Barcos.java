@@ -2,7 +2,6 @@ package com.utp.demo.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -23,8 +22,8 @@ public abstract class Barcos {
     private String capitan_barco;
 
     @ManyToOne
-    @JoinColumn(name = "modelo", foreignKey = @ForeignKey(name = "FK_Barco_Modelo"))
-    private Barcos_modelo modelo_barco;
+    @JoinColumn(name = "modelo")
+    private Barcos_modelo bar_model;
 
     @Column(name = "descripcion_barco")
     private String descripcion_barco;
@@ -35,12 +34,12 @@ public abstract class Barcos {
     public Barcos() {
     }
 
-    public Barcos(String id_barco, String nombre_barco, String capitan_barco, Barcos_modelo modelo_barco,
+    public Barcos(String iD_barco, String nombre_barco, String capitan_barco, Barcos_modelo bar_model,
             String descripcion_barco, String imagen_barco) {
-        this.ID_barco = id_barco;
+        ID_barco = iD_barco;
         this.nombre_barco = nombre_barco;
         this.capitan_barco = capitan_barco;
-        this.modelo_barco = modelo_barco;
+        this.bar_model = bar_model;
         this.descripcion_barco = descripcion_barco;
         this.imagen_barco = imagen_barco;
     }
@@ -49,8 +48,8 @@ public abstract class Barcos {
         return ID_barco;
     }
 
-    public void setID_barco(String ID_barco) {
-        this.ID_barco = ID_barco;
+    public void setID_barco(String iD_barco) {
+        ID_barco = iD_barco;
     }
 
     public String getNombre_barco() {
@@ -69,12 +68,12 @@ public abstract class Barcos {
         this.capitan_barco = capitan_barco;
     }
 
-    public Barcos_modelo getModelo_barco() {
-        return modelo_barco;
+    public Barcos_modelo getBar_model() {
+        return bar_model;
     }
 
-    public void setModelo_barco(Barcos_modelo modelo_barco) {
-        this.modelo_barco = modelo_barco;
+    public void setBar_model(Barcos_modelo bar_model) {
+        this.bar_model = bar_model;
     }
 
     public String getDescripcion_barco() {
@@ -95,11 +94,11 @@ public abstract class Barcos {
 
     // auxiliares
     public int getCapacidadTotal() {
-        return modelo_barco != null ? modelo_barco.getCapacidad() : 0;
+        return bar_model != null ? bar_model.getCapacidad() : 0;
     }
 
     public int getTotalCabinas() {
-        return modelo_barco != null ? modelo_barco.getTotalcabinas() : 0;
+        return bar_model != null ? bar_model.getTotalcabinas() : 0;
     }
 
     // Método abstracto para obtener el nombre del modelo

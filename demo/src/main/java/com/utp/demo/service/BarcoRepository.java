@@ -11,5 +11,5 @@ public interface BarcoRepository extends JpaRepository<Barcos, String> {
 
     Barcos findByCapitanBarcoIgnoreCase(String capitan);
 
-    Barcos findByModeloBarco_ModeloBarcoIgnoreCase(String modeloNombre);
+    Barcos findByBar_model_Modelo_barcoIgnoreCase(String modelo);
 }
