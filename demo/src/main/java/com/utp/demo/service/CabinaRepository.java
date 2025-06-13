@@ -25,4 +25,12 @@ public interface CabinaRepository extends JpaRepository<Cabina_Inst, Long> {
     """)
     Cabina_Inst findFirstByCabTipo(@Param("cabTipo") Cabina_tipo cabTipo);
 
+    @Query("""
+      SELECT c
+      FROM Cabina_Inst c
+      JOIN c.cab_tipo t
+      WHERE t.cab_tipo_id IN :ids
+    """)
+    List<Cabina_Inst> findByCabTipoIdIn(@Param("ids") List<String> ids);
+
 }

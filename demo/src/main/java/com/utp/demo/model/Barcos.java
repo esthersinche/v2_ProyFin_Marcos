@@ -17,7 +17,7 @@ public class Barcos {
 
     @Id
     @Column(name = "id_barco")
-    private String ID_barco;
+    private String Id_barco;
 
     @Column(name = "nombre_barco")
     private String nombre_barco;
@@ -44,7 +44,7 @@ public class Barcos {
 
     public Barcos(String iD_barco, String nombre_barco, String capitan_barco, Barcos_modelo bar_model,
             String descripcion_barco, String imagen_barco) {
-        ID_barco = iD_barco;
+        Id_barco = iD_barco;
         this.nombre_barco = nombre_barco;
         this.capitan_barco = capitan_barco;
         this.bar_model = bar_model;
@@ -52,12 +52,12 @@ public class Barcos {
         this.imagen_barco = imagen_barco;
     }
 
-    public String getID_barco() {
-        return ID_barco;
+    public String getId_barco() {
+        return Id_barco;
     }
 
-    public void setID_barco(String iD_barco) {
-        ID_barco = iD_barco;
+    public void setId_barco(String iD_barco) {
+        Id_barco = iD_barco;
     }
 
     public String getNombre_barco() {

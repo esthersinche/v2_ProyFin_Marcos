@@ -23,6 +23,11 @@ public class BarcoService {
         return barcoRepository.findById(id).orElse(null);
     }
 
+    // Obtener barcos disponibles para una ruta concreta
+    public List<Barcos> obtenerPorRuta(String idRuta) {
+        return barcoRepository.findAllByRutaId(idRuta);
+    }
+
     // Buscar por nombre del barco
     public Barcos buscarPorNombreBarco(String nombre) {
         return barcoRepository.findByNombreBarcoIgnoreCase(nombre);

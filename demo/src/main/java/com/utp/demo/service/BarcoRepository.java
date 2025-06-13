@@ -1,5 +1,7 @@
 package com.utp.demo.service;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +11,6 @@ import com.utp.demo.model.Barcos;
 
 @Repository
 public interface BarcoRepository extends JpaRepository<Barcos, String> {
-
 
     @Query("""
       SELECT b 
@@ -31,4 +32,13 @@ public interface BarcoRepository extends JpaRepository<Barcos, String> {
       WHERE LOWER(b.bar_model.modelo_barco) = LOWER(:modeloNombre)
     """)
     Barcos findByModeloNombreIgnoreCase(@Param("modeloNombre") String modeloNombre);
+
+    // Para obtener barcos asociados a una ruta
+    @Query("""
+       SELECT b
+       FROM Barcos b
+       JOIN b.rutas rb
+       WHERE rb.Id_ruta = :rutaId
+    """)
+    List<Barcos> findAllByRutaId(@Param("rutaId") String rutaId);
 }

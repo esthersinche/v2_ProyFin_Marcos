@@ -20,21 +20,17 @@ public class PaqueteService {
         return paqueteRepository.findAll();
     }
 
+    // <-- Nuevo -->
+    public Paquete buscarPorId(String id) {
+        return paqueteRepository.findById(id).orElse(null);
+    }
+
+    /* 
     // Buscar paquete por nombre y ruta
     public Paquete buscarPorNombreYRuta(String nombrePaquete, String nombreRuta) {
         return paqueteRepository
                 .findByNombrePaqAndRutaNombreIgnoreCase(nombrePaquete, nombreRuta)
                 .orElse(null);
-    }
-
-    // Buscar paquetes por nombre de ruta
-    public List<Paquete> obtenerPaquetesPorRuta(String nombreRuta) {
-        return paqueteRepository.findByRutaNombreIgnoreCase(nombreRuta);
-    }
-
-    // Buscar paquetes por lista de nombres
-    public List<Paquete> buscarPorNombrePaquetes(List<String> nombresPaquetes) {
-        return paqueteRepository.findByNombrePaqInIgnoreCase(nombresPaquetes);
     }
 
     // Buscar paquetes por múltiples rutas
@@ -45,10 +41,23 @@ public class PaqueteService {
     // Buscar paquetes por modelos de barco
     public List<Paquete> buscarPorModelos(List<String> modelos) {
         return paqueteRepository.findByModeloBarcoInIgnoreCase(modelos);
+
     }
+         // Buscar paquetes por nombre de ruta
+    public List<Paquete> obtenerPaquetesPorRuta(String nombreRuta) {
+        return paqueteRepository.findByRutaNombreIgnoreCase(nombreRuta);
+    }
+
+    
 
     // Buscar paquetes por capacidades máximas
     public List<Paquete> buscarPorCapacidadMaxima(List<Integer> capacidades) {
         return paqueteRepository.findByCabinaCantMaxPerIn(capacidades);
     }
+     */
+    // Buscar paquetes por lista de nombres
+    public List<Paquete> buscarPorNombrePaquetes(List<String> nombresPaquetes) {
+        return paqueteRepository.findByNombrePaqInIgnoreCase(nombresPaquetes);
+    }
+
 }

@@ -6,8 +6,6 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -27,7 +25,7 @@ public class Paquete {
 
     @Column(name = "precio_paq")
     private double prec_paquete_uni;
-
+    /* 
     @ManyToOne
     @JoinColumn(name = "cabinatipo")
     private Cabina_tipo cabinatipoPaq;
@@ -39,6 +37,7 @@ public class Paquete {
     @ManyToOne
     @JoinColumn(name = "id_modelo_barco")
     private Barcos_modelo modelobarcoPaq;
+     */
 
     @OneToMany(mappedBy = "paquete")
     private List<PaqueteBeneficio> beneficios = new ArrayList<>();
@@ -85,6 +84,7 @@ public class Paquete {
         this.prec_paquete_uni = prec_paquete_uni;
     }
 
+    /* 
     public Cabina_tipo getCabinatipoPaq() {
         return cabinatipoPaq;
     }
@@ -108,7 +108,7 @@ public class Paquete {
     public void setModelobarcoPaq(Barcos_modelo modelobarcoPaq) {
         this.modelobarcoPaq = modelobarcoPaq;
     }
-
+     */
     public List<PaqueteBeneficio> getBeneficios() {
         return beneficios;
     }
