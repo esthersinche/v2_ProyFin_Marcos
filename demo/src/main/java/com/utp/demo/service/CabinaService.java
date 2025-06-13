@@ -44,11 +44,11 @@ public class CabinaService {
 
     // Buscar por tipo de cabina (ID)
     public List<Cabina_Inst> buscarPorTipoCabina(String tipoId) {
-        return cabrepo.findByCab_tipo_Cab_tipo_id(tipoId);
+        return cabrepo.findByCabTipoId(tipoId);
     }
 
     // DE RESERVA
     public Cabina_Inst buscarPorTipoCabina(Cabina_tipo tipoCabina) {
-        return cabrepo.findFirstByCab_tipo(tipoCabina);
+        return cabrepo.findFirstByCabTipo(tipoCabina);
     }
 }

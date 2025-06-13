@@ -3,11 +3,30 @@ package com.utp.demo.service;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.utp.demo.model.Ruta;
 
 public interface RutaRepository extends JpaRepository<Ruta, String> {
-    Ruta findByNombreRutaIgnoreCase(String nombreRuta);
 
-    List<Ruta> findBySalidaIgnoreCase(String salida);
+    /**
+     * Busca ruta por nombre_ruta ignorando mayúsculas/minúsculas
+     */
+    @Query("""
+      SELECT r
+      FROM Ruta r
+      WHERE LOWER(r.nombre_ruta) = LOWER(:nombreRuta)
+    """)
+    Ruta findByNombreRutaIgnoreCase(@Param("nombreRuta") String nombreRuta);
+
+    /**
+     * Lista rutas filtrando por salida ignorando mayúsculas/minúsculas
+     */
+    @Query("""
+      SELECT r
+      FROM Ruta r
+      WHERE LOWER(r.salida) = LOWER(:salida)
+    """)
+    List<Ruta> findBySalidaIgnoreCase(@Param("salida") String salida);
 }
