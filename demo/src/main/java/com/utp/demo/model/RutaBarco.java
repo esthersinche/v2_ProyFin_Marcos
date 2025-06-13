@@ -34,7 +34,7 @@ public class RutaBarco {
     public RutaBarco(Ruta ruta, Barcos barco) {
         this.ruta = ruta;
         this.barco = barco;
-        this.id = new RutaBarcoId(ruta.getId_ruta(), barco.getId_barco());
+        this.id = new RutaBarcoId(ruta.getIdruta(), barco.getIDbarco());
     }
 
     public RutaBarcoId getId() {

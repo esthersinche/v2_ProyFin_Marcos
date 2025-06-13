@@ -14,24 +14,6 @@ public class ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
 
-    public Reserva iniciarReserva() {
-        Reserva r = new Reserva();
-        // Generar ID único
-        r.setId_reserva(UUID.randomUUID().toString());
-        return r;
-    }
-
-    // Guardar o actualizar una reserva
-    public Reserva guardar(Reserva reserva) {
-        return reservaRepository.save(reserva);
-    }
-
-    // Buscar reserva por ID
-    public Reserva buscar(String id) {
-
-        return reservaRepository.findById(id).orElse(null);
-    }
-
     // Obtiene todas las reservas
     public List<Reserva> obtenerTodasLasReservas() {
         return reservaRepository.findAll();
@@ -46,7 +28,8 @@ public class ReservaService {
     public boolean existePorId(String id) {
         return reservaRepository.existsById(id);
     }
-//metodo q necesitaba
+
+    //metodo q necesitaba
     public Reserva iniciarReserva() {
         Reserva r = new Reserva();
         // Generar ID único
