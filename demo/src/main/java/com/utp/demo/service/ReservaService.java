@@ -28,21 +28,40 @@ public class ReservaService {
 
     // Buscar reserva por ID
     public Reserva buscar(String id) {
+
         return reservaRepository.findById(id).orElse(null);
     }
 
-    // Obtener todas las reservas
+    // Obtiene todas las reservas
     public List<Reserva> obtenerTodasLasReservas() {
         return reservaRepository.findAll();
     }
 
-    // Eliminar reserva
+    // Elimina la reserva
     public void eliminarReserva(String id) {
         reservaRepository.deleteById(id);
     }
 
-    // Verificar existencia por ID
+    // Verifica si existe por ID
     public boolean existePorId(String id) {
         return reservaRepository.existsById(id);
     }
+//metodo q necesitaba
+    public Reserva iniciarReserva() {
+        Reserva r = new Reserva();
+        // Generar ID único
+        r.setId_reserva(UUID.randomUUID().toString());
+        return r;
+    }
+
+    // Guardar o actualizar una reserva
+    public Reserva guardar(Reserva reserva) {
+        return reservaRepository.save(reserva);
+    }
+
+    // Buscar reserva por ID
+    public Reserva buscar(String id) {
+        return reservaRepository.findById(id).orElse(null);
+    }
+
 }

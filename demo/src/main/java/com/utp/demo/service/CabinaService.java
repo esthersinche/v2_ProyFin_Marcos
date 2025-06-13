@@ -12,11 +12,12 @@ import com.utp.demo.model.Cabina_tipo;
 public class CabinaService {
 
     private final CabinaRepository cabrepo;
-    private final BarcoService barcoService;
+    private final BarcoService barcoserv;
 
-    public CabinaService(CabinaRepository cabrepo, BarcoService barcoService) {
+    public CabinaService(CabinaRepository cabrepo, BarcoService barcoserv) {
         this.cabrepo = cabrepo;
-        this.barcoService = barcoService;
+        this.barcoserv = barcoserv;
+
     }
 
     // Obtener todas las cabinas
@@ -60,14 +61,14 @@ public class CabinaService {
      * inspeccionando su modelo y los tipos de cabina asociados.
      */
     public List<Cabina_Inst> obtenerPorBarco(String idBarco) {
-        Barcos barco = barcoService.buscarPorIdBarco(idBarco);
-        if (barco == null || barco.getBar_model() == null) {
+        Barcos barco = barcoserv.buscarPorIdBarco(idBarco);
+        if (barco == null || barco.getBarmodel() == null) {
             return List.of();
         }
         // Extraer los IDs de cabina que el modelo soporta
-        List<String> tipoIds = barco.getBar_model().getTiposDeCabina().stream()
-                .map(bmtc -> bmtc.getCab_type().getCab_tipo_id())
-                .toList();
+        List<String> tipoIds = barco.getBarmodel().getTiposDeCabina().stream()
+            .map(bmtc -> bmtc.getCab_type().getCab_tipo_id())
+            .toList();
 
         return cabrepo.findByCabTipoIdIn(tipoIds);
     }

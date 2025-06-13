@@ -16,7 +16,7 @@ public interface RutaRepository extends JpaRepository<Ruta, String> {
     @Query("""
       SELECT r
       FROM Ruta r
-      WHERE LOWER(r.nombre_ruta) = LOWER(:nombreRuta)
+      WHERE LOWER(r.nombreruta) = LOWER(:nombreRuta)
     """)
     Ruta findByNombreRutaIgnoreCase(@Param("nombreRuta") String nombreRuta);
 

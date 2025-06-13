@@ -17,19 +17,19 @@ public class Ruta {
 
     @Id
     @Column(name = "id_ruta")
-    private String Id_ruta;
+    private String idruta;
 
     @Column(name = "nombre_ruta", nullable = false)
-    private String nombre_ruta;
+    private String nombreruta;
 
     @Column(name = "descripcion_ruta", length = 800)
-    private String descripcion_ruta;
+    private String descripcionruta;
 
     @Column(name = "dias")
-    private String dias_ruta;
+    private String diasruta;
 
     @Column(name = "precio_ruta")
-    private double precio_ruta;
+    private double precioruta;
 
     @Column(name = "salida")
     private String salida;
@@ -49,55 +49,56 @@ public class Ruta {
     public Ruta() {
     }
 
-    public Ruta(String id_ruta, String nombre_ruta, String descripcion_ruta, String dias_ruta, double precio_ruta,
-            String salida, String imagen) {
-        Id_ruta = id_ruta;
-        this.nombre_ruta = nombre_ruta;
-        this.descripcion_ruta = descripcion_ruta;
-        this.dias_ruta = dias_ruta;
-        this.precio_ruta = precio_ruta;
+    public Ruta(String idruta, String nombreruta, String descripcionruta, String diasruta, double precioruta,
+            String salida, String imagen, Set<Barcos> barcos) {
+        this.idruta = idruta;
+        this.nombreruta = nombreruta;
+        this.descripcionruta = descripcionruta;
+        this.diasruta = diasruta;
+        this.precioruta = precioruta;
         this.salida = salida;
         this.imagen = imagen;
+        this.barcos = barcos;
     }
 
-    public String getId_ruta() {
-        return Id_ruta;
+    public String getIdruta() {
+        return idruta;
     }
 
-    public void setId_ruta(String id_ruta) {
-        Id_ruta = id_ruta;
+    public void setIdruta(String idruta) {
+        this.idruta = idruta;
     }
 
-    public String getNombre_ruta() {
-        return nombre_ruta;
+    public String getNombreruta() {
+        return nombreruta;
     }
 
-    public void setNombre_ruta(String nombre_ruta) {
-        this.nombre_ruta = nombre_ruta;
+    public void setNombreruta(String nombreruta) {
+        this.nombreruta = nombreruta;
     }
 
-    public String getDescripcion_ruta() {
-        return descripcion_ruta;
+    public String getDescripcionruta() {
+        return descripcionruta;
     }
 
-    public void setDescripcion_ruta(String descripcion_ruta) {
-        this.descripcion_ruta = descripcion_ruta;
+    public void setDescripcionruta(String descripcionruta) {
+        this.descripcionruta = descripcionruta;
     }
 
-    public String getDias_ruta() {
-        return dias_ruta;
+    public String getDiasruta() {
+        return diasruta;
     }
 
-    public void setDias_ruta(String dias_ruta) {
-        this.dias_ruta = dias_ruta;
+    public void setDiasruta(String diasruta) {
+        this.diasruta = diasruta;
     }
 
-    public double getPrecio_ruta() {
-        return precio_ruta;
+    public double getPrecioruta() {
+        return precioruta;
     }
 
-    public void setPrecio_ruta(double precio_ruta) {
-        this.precio_ruta = precio_ruta;
+    public void setPrecioruta(double precioruta) {
+        this.precioruta = precioruta;
     }
 
     public String getSalida() {
@@ -123,5 +124,7 @@ public class Ruta {
     public void setBarcos(Set<Barcos> barcos) {
         this.barcos = barcos;
     }
+
+
 
 }

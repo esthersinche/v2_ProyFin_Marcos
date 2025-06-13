@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.utp.demo.model.Barcos;
+import com.utp.demo.model.Barcos_modelo;
 
 @Repository
 public interface BarcoRepository extends JpaRepository<Barcos, String> {
@@ -15,30 +16,36 @@ public interface BarcoRepository extends JpaRepository<Barcos, String> {
     @Query("""
       SELECT b 
       FROM Barcos b
-      WHERE LOWER(b.nombre_barco) = LOWER(:nombre)
+      WHERE LOWER(b.nombrebarco) = LOWER(:nombre)
     """)
     Barcos findByNombreBarcoIgnoreCase(@Param("nombre") String nombre);
 
     @Query("""
       SELECT b 
       FROM Barcos b
-      WHERE LOWER(b.capitan_barco) = LOWER(:capitan)
+      WHERE LOWER(b.capitanbarco) = LOWER(:capitan)
     """)
     Barcos findByCapitanBarcoIgnoreCase(@Param("capitan") String capitan);
 
     @Query("""
       SELECT b 
       FROM Barcos b 
-      WHERE LOWER(b.bar_model.modelo_barco) = LOWER(:modeloNombre)
+      WHERE LOWER(b.barmodel.modelo_barco) = LOWER(:modeloNombre)
     """)
     Barcos findByModeloNombreIgnoreCase(@Param("modeloNombre") String modeloNombre);
 
-    // Para obtener barcos asociados a una ruta
+
     @Query("""
-       SELECT b
-       FROM Barcos b
-       JOIN b.rutas rb
-       WHERE rb.Id_ruta = :rutaId
+        SELECT DISTINCT b.barmodel FROM Barcos b
+        """)
+        List<Barcos_modelo>findDistinctModelos();
+
+    @Query("""
+      SELECT b
+      FROM Barcos b
+      JOIN b.rutas r
+      WHERE r.idruta = :rutaId
     """)
     List<Barcos> findAllByRutaId(@Param("rutaId") String rutaId);
 }
+

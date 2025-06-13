@@ -1,95 +1,175 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>  <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">  
+    <link th:href="@{/scss/custom.css}" rel="stylesheet">  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">  
+    <title>Elegir Paquete</title>
+  </head>
+  <body class="bg-white">  
+    <header th:replace="~{fragments/header :: navBar}"></header>  <!-- Barra de progreso -->  <div class="position-relative m-4 p-5"><div class="position-relative m-4">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
-  <link th:href="@{/scss/custom.css}" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-  <title>Elegir Paquete</title>
-</head>
+  <div class="progress" role="progressbar" style="height: 1px;">
 
-<body class="bg-white">
+    <div class="progress-bar bg-ocean" style="width: 75%"></div>
 
-  <header th:replace="~{fragments/header :: navBar}"></header>
-
-  <!-- Barra de progreso -->
-  <div class="position-relative m-4 p-5">
-    <div class="position-relative m-4">
-      <div class="progress" role="progressbar" style="height: 1px;">
-        <div class="progress-bar bg-ocean" style="width: 75%"></div>
-      </div>
-      <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-ocean rounded-pill" style="width: 2rem; height:2rem;">1</button>
-      <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-ocean rounded-pill" style="width: 2rem; height:2rem;">2</button>
-      <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-ocean rounded-pill" style="width: 2rem; height:2rem;">3</button>
-    </div>
   </div>
 
-  <main class="container">
-    <h1 class="text-center text-dark mb-4">Elige tu paquete</h1>
+  <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-ocean rounded-pill"
 
-    <form th:action="@{/guardarPaquete}" method="post" class="needs-validation" novalidate>
-      <div class="mb-4">
-        <label for="nombrePaquete" class="form-label">Selecciona un paquete:</label>
-        <select id="nombrePaquete" name="nombrePaquete" class="form-select" required onchange="actualizarDetalle()">
-          <option disabled selected value="">-- Selecciona un paquete --</option>
-          <option th:each="p : ${paquetes}" th:value="${p.nombre_paq}" th:text="${p.nombre_paq}"></option>
-        </select>
-        <div class="invalid-feedback">Debes seleccionar un paquete.</div>
-      </div>
+    style="width: 2rem; height:2rem;">1</button>
 
-      <!-- Detalle dinámico -->
-      <div id="detallePaquete" class="card p-4 shadow-sm bg-light d-none">
-        <h5 id="detalleTitulo" class="mb-2"></h5>
-        <p id="detalleDescripcion" class="mb-1"></p>
-        <p><strong>Tipo de Cabina:</strong> <span id="detalleCabina"></span></p>
-        <p><strong>Precio unitario (por persona):</strong> S/. <span id="detallePrecio"></span></p>
-      </div>
+  <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-ocean rounded-pill"
 
-      <div class="text-center mt-4">
-        <button type="submit" class="btn btn-ocean btn-lg">Continuar</button>
-      </div>
-    </form>
-  </main>
+    style="width: 2rem; height:2rem;">2</button>
 
-  <footer th:replace="~{fragments/footer :: footerContent}"></footer>
+  <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-ocean rounded-pill"
 
-  <script th:inline="javascript">
+    style="width: 2rem; height:2rem;">3</button>
+
+</div>
+
+  </div>  <main class="container"><h1 class="text-center text-dark mb-4">Elige tu paquete</h1>
+
+
+
+<form th:action="@{/guardarPaquete}" method="post" class="needs-validation" novalidate>
+
+  <!-- Selección de paquete -->
+
+  <div class="mb-3">
+
+    <label for="id_paquete" class="form-label">Paquete</label>
+
+    <select id="id_paquete" name="id_paquete" class="form-select" required>
+
+      <option disabled selected value="">-- Selecciona un paquete --</option>
+
+      <option th:each="p : ${paquetes}" th:value="${p.id_paquete}" th:text="${p.nom_paquete}"></option>
+
+    </select>
+
+    <div class="invalid-feedback">Debes seleccionar un paquete.</div>
+
+  </div>
+
+
+
+  <!-- Selección de cabina -->
+
+  <div class="mb-3">
+
+    <label for="id_cabina" class="form-label">Tipo de Cabina</label>
+
+    <select id="id_cabina" name="id_cabina" class="form-select" required>
+
+      <option disabled selected value="">-- Selecciona tu cabina --</option>
+
+      <option th:each="c : ${cabinas}" th:value="${c.id_cabina}" th:text="${c.cab_tipo.nombre_cabina}"></option>
+
+    </select>
+
+    <div class="invalid-feedback">Debes seleccionar una cabina.</div>
+
+  </div>
+
+
+
+  <div class="text-center">
+
+    <button type="submit" class="btn btn-ocean btn-lg">Calcular Precio</button>
+
+  </div>
+
+</form>
+
+
+
+<!-- Detalle y confirmación -->
+
+<div th:if="${precioUnitario != null}" class="mt-4 p-4 bg-light rounded shadow-sm">
+
+  <h5>Precio unitario por pasajero: S/. <span th:text="${precioUnitario}"></span></h5>
+
+  <form th:action="@{/confirmarReserva}" method="post">
+
+    <input type="hidden" name="precioUnitario" th:value="${precioUnitario}" />
+
+    <div class="text-center mt-3">
+
+      <button type="submit" class="btn btn-ocean btn-lg">Confirmar Reserva</button>
+
+    </div>
+
+  </form>
+
+</div>
+
+  </main>  <footer th:replace="~{fragments/footer :: footerContent}"></footer>  <script th:inline="javascript">
+  
     // Lista de paquetes en JS desde el modelo
-    const paquetes = /*[[${paquetes}]]*/ [];
+  
+    const paquetes = /[[${paquetes}]]/[];
+  
 
+  
     function actualizarDetalle() {
+  
       const select = document.getElementById('nombrePaquete');
+  
       const detalle = document.getElementById('detallePaquete');
+  
       const seleccionado = select.value;
+  
 
+  
       const paquete = paquetes.find(p => p.nombre_paq === seleccionado);
+  
       if (paquete) {
+  
         document.getElementById('detalleTitulo').innerText = paquete.nombre_paq;
+  
         document.getElementById('detalleDescripcion').innerText = paquete.descripcion_paq;
+  
         document.getElementById('detalleCabina').innerText = paquete.cabinatipo_paq.nombre_cabina;
+  
         document.getElementById('detallePrecio').innerText = paquete.prec_paq_uni.toFixed(2);
+  
         detalle.classList.remove('d-none');
+  
       }
+  
     }
+  
 
+  
     // Validación
+  
     (function () {
+  
       'use strict';
+  
       const forms = document.querySelectorAll('.needs-validation');
+  
       Array.from(forms).forEach(form => {
+  
         form.addEventListener('submit', function (event) {
+  
           if (!form.checkValidity()) {
+  
             event.preventDefault();
+  
             event.stopPropagation();
+  
           }
+  
           form.classList.add('was-validated');
+  
         }, false);
+  
       });
+  
     })();
-  </script>
-
-</body>
-
-</html>
+  
+  </script></body></html>

@@ -22,7 +22,7 @@ public interface PaqueteRepository extends JpaRepository<Paquete, String> {
       SELECT p
       FROM Paquete p
       WHERE LOWER(p.nom_paquete) = LOWER(:nombrePaq)
-        AND LOWER(p.rutaPaq.nombre_ruta) = LOWER(:nombreRuta)
+        AND LOWER(p.rutaPaq.nombreruta) = LOWER(:nombreRuta)
     """)
     Optional<Paquete> findByNombrePaqAndRutaNombreIgnoreCase(
             @Param("nombrePaq") String nombrePaq,
@@ -32,15 +32,16 @@ public interface PaqueteRepository extends JpaRepository<Paquete, String> {
     @Query("""
       SELECT p
       FROM Paquete p
-      WHERE LOWER(p.rutaPaq.nombre_ruta) IN :nombreRuta
+      WHERE LOWER(p.rutaPaq.nombreruta) = LOWER(:nombreRuta)
     """)
     List<Paquete> findByRutaNombreIgnoreCase(@Param("nombreRuta") String nombreRuta);
+    // MULTIPLES : LIST<STRING>
 
 
     @Query("""
       SELECT p
       FROM Paquete p
-      WHERE LOWER(p.rutaPaq.nombre_ruta) IN :nombresRutas
+      WHERE LOWER(p.rutaPaq.nombreruta) IN :nombresRutas
     """)
     List<Paquete> findByRutaNombreInIgnoreCase(@Param("nombresRutas") List<String> nombresRutas);
 
