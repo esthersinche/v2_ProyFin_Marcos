@@ -9,7 +9,7 @@ import com.utp.demo.model.Barcos;
 public interface BarcoRepository extends JpaRepository<Barcos, String> {
     Barcos findByNombreBarcoIgnoreCase(String nombreBarco);
 
-    Barcos findByCapitanBarcoIgnoreCase(String capitan);
+    Barcos findByCapitan_barcoIgnoreCase(String nombre);
 
     Barcos findByBar_model_Modelo_barcoIgnoreCase(String modelo);
 }
