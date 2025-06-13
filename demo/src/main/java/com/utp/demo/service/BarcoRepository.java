@@ -10,6 +10,7 @@ import com.utp.demo.model.Barcos;
 @Repository
 public interface BarcoRepository extends JpaRepository<Barcos, String> {
 
+
     @Query("""
       SELECT b 
       FROM Barcos b

@@ -29,8 +29,8 @@ public class BarcoService {
     }
 
     // Buscar por capitán
-    public Barcos buscarPorCapitan(String capitan) {
-        return barcoRepository.findByCapitanBarcoIgnoreCase(capitan);
+    public Barcos buscarPorCapitan(String nombre) {
+        return barcoRepository.findByCapitan_barcoIgnoreCase(nombre);
     }
 
     // Buscar por modelo (nombre del modelo)
