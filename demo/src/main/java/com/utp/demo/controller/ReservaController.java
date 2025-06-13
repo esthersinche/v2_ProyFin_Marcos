@@ -83,22 +83,22 @@ public class ReservaController {
 
     @PostMapping("/guardarRuta")
     public String guardarRuta(
-            @RequestParam String id_ruta,
+            @RequestParam String idruta,
             @ModelAttribute("reserva") Reserva reserva,
             Model model) {
-        Ruta ruta = rutaService.buscarPorId(id_ruta);
+        Ruta ruta = rutaService.buscarPorId(idruta);
         reserva.setRuta(ruta);
         model.addAttribute("rutas", rutaService.obtenerTodasLasRutas());
-        model.addAttribute("selectedRuta", id_ruta);
-        model.addAttribute("barcos", barcoService.obtenerPorRuta(id_ruta));
+        model.addAttribute("selectedRuta", idruta);
+        model.addAttribute("barcos", barcoService.obtenerPorRuta(idruta));
         return "elegirruta";
     }
 
     @PostMapping("/guardarBarco")
     public String guardarBarco(
-            @RequestParam String id_barco,
+            @RequestParam String idbarco,
             @ModelAttribute("reserva") Reserva reserva) {
-        Barcos barco = barcoService.buscarPorIdBarco(id_barco);
+        Barcos barco = barcoService.buscarPorIdBarco(idbarco);
         reserva.setBarco(barco);
         return "redirect:/elegirpaquete";
     }
@@ -113,12 +113,12 @@ public class ReservaController {
 
     @PostMapping("/guardarPaquete")
     public String guardarPaquete(
-            @RequestParam String id_paquete,
-            @RequestParam String id_cabina,
+            @RequestParam String idpaquete,
+            @RequestParam String idcabina,
             @ModelAttribute("reserva") Reserva reserva,
             Model model) {
-        Paquete pq = paqueteService.buscarPorId(id_paquete);
-        Cabina_Inst cb = cabinaService.buscarPorIdCabina(Long.parseLong(id_cabina));
+        Paquete pq = paqueteService.buscarPorId(idpaquete);
+        Cabina_Inst cb = cabinaService.buscarPorIdCabina(Long.parseLong(idcabina));
         reserva.setPaquete(pq);
         reserva.setCabina(cb);
         double unitario = pq.getPrec_paquete_uni()
