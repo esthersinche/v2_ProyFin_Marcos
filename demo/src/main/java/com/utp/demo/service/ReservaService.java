@@ -14,13 +14,21 @@ public class ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
 
-    // Guarda o actualiza una reserva
-    public Reserva guardarReserva(Reserva reserva) {
+    public Reserva iniciarReserva() {
+        Reserva r = new Reserva();
+        // Generar ID único
+        r.setId_reserva(UUID.randomUUID().toString());
+        return r;
+    }
+
+    // Guardar o actualizar una reserva
+    public Reserva guardar(Reserva reserva) {
         return reservaRepository.save(reserva);
     }
 
-    // Busca reserva por ID
-    public Reserva buscarPorId(String id) {
+    // Buscar reserva por ID
+    public Reserva buscar(String id) {
+
         return reservaRepository.findById(id).orElse(null);
     }
 

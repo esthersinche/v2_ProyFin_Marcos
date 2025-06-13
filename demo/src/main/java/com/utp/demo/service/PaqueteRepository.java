@@ -1,7 +1,6 @@
 package com.utp.demo.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +10,14 @@ import com.utp.demo.model.Paquete;
 
 public interface PaqueteRepository extends JpaRepository<Paquete, String> {
 
+    @Query("""
+      SELECT p
+      FROM Paquete p
+      WHERE LOWER(p.nom_paquete) IN :nombres
+    """)
+    List<Paquete> findByNombrePaqInIgnoreCase(@Param("nombres") List<String> nombres);
+
+    /* 
     @Query("""
       SELECT p
       FROM Paquete p
@@ -30,12 +37,6 @@ public interface PaqueteRepository extends JpaRepository<Paquete, String> {
     List<Paquete> findByRutaNombreIgnoreCase(@Param("nombreRuta") String nombreRuta);
     // MULTIPLES : LIST<STRING>
 
-    @Query("""
-      SELECT p
-      FROM Paquete p
-      WHERE LOWER(p.nom_paquete) IN :nombres
-    """)
-    List<Paquete> findByNombrePaqInIgnoreCase(@Param("nombres") List<String> nombres);
 
     @Query("""
       SELECT p
@@ -57,5 +58,5 @@ public interface PaqueteRepository extends JpaRepository<Paquete, String> {
       WHERE p.cabinatipoPaq.cant_max_per IN :cantidades
     """)
     List<Paquete> findByCabinaCantMaxPerIn(@Param("cantidades") List<Integer> cantidades);
-
+     */
 }

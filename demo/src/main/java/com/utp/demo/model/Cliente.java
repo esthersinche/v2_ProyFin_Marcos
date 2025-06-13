@@ -6,8 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name= "CLIENTE")
+@Table(name = "CLIENTE")
 public class Cliente {
+
     @Id
     @Column(name = "dni_cliente")
     private int dni_cliente;
@@ -82,8 +83,5 @@ public class Cliente {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
-
-
-    
 
 }

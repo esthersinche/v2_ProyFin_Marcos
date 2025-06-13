@@ -18,6 +18,11 @@ public class RutaService {
         return rutaRepository.findAll();
     }
 
+    // Buscar por ID
+    public Ruta buscarPorId(String idRuta) {
+        return rutaRepository.findById(idRuta).orElse(null);
+    }
+
     // Buscar por nombre de ruta
     public Ruta buscarPorNombreRuta(String nombre) {
         return rutaRepository.findByNombreRutaIgnoreCase(nombre);
@@ -38,8 +43,4 @@ public class RutaService {
         rutaRepository.deleteById(idRuta);
     }
 
-    // Buscar por ID
-    public Ruta buscarPorId(String idRuta) {
-        return rutaRepository.findById(idRuta).orElse(null);
-    }
 }

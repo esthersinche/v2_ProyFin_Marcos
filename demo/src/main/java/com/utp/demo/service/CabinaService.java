@@ -17,6 +17,7 @@ public class CabinaService {
     public CabinaService(CabinaRepository cabrepo, BarcoService barcoserv) {
         this.cabrepo = cabrepo;
         this.barcoserv = barcoserv;
+
     }
 
     // Obtener todas las cabinas
@@ -71,4 +72,5 @@ public class CabinaService {
 
         return cabrepo.findByCabTipoIdIn(tipoIds);
     }
+
 }

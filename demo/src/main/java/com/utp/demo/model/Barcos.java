@@ -42,6 +42,7 @@ public class Barcos {
     public Barcos() {
     }
 
+
     public Barcos(String iDbarco, String nombrebarco, String capitanbarco, Barcos_modelo barmodel,
             String descripcionbarco, String imagenbarco, Set<Ruta> rutas) {
         IDbarco = iDbarco;
@@ -53,6 +54,7 @@ public class Barcos {
         this.rutas = rutas;
     }
    
+
 
     public String getIDbarco() {
         return IDbarco;

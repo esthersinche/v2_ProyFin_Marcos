@@ -1,12 +1,10 @@
 package com.utp.demo.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.utp.demo.model.Paquete;
 import com.utp.demo.service.PaqueteService;
@@ -24,18 +22,19 @@ public class PaqueteController {
 
     @GetMapping("/paquetes")
     public String listarpaquetes(
-            @RequestParam(name = "ruta", required = false) List<String> rutas,
-            @RequestParam(name = "cantmaxper", required = false) List<Integer> cantmaxpers,
-            @RequestParam(name = "modelo", required = false) List<String> modelos,
+            //@RequestParam(name = "ruta", required = false) List<String> rutas,
+            //@RequestParam(name = "cantmaxper", required = false) List<Integer> cantmaxpers,
+            //@RequestParam(name = "modelo", required = false) List<String> modelos,
             Model model) {
 
         // 1) Cargo todas las listas
-        List<Paquete> todalalistapaq = paqserv.obtenerTodosLosPaquetes();
-        boolean filtrosqm = false;
+        List<Paquete> paquetes = paqserv.obtenerTodosLosPaquetes();
+        model.addAttribute("paquetes", paquetes);
+        //boolean filtrosqm = false;
 
         // para recorrer la lista de paquetes
         // Stream<Paquete> stream = todalalistapaq.stream();
-
+        /*      
         // filtros ruta
         if (rutas != null && !rutas.isEmpty()) {
             // stream = stream.filter(r ->
@@ -108,7 +107,6 @@ public class PaqueteController {
          * List<String> nom_rutas = rutas_cbox_paq.stream().map(Ruta::getNombre_ruta)
          * .distinct().collect(Collectors.toList());
          */
-
         return "paquetes";
     }
 }

@@ -13,7 +13,6 @@ import com.utp.demo.model.Barcos_modelo;
 @Repository
 public interface BarcoRepository extends JpaRepository<Barcos, String> {
 
-
     @Query("""
       SELECT b 
       FROM Barcos b
@@ -34,6 +33,7 @@ public interface BarcoRepository extends JpaRepository<Barcos, String> {
       WHERE LOWER(b.barmodel.modelo_barco) = LOWER(:modeloNombre)
     """)
     Barcos findByModeloNombreIgnoreCase(@Param("modeloNombre") String modeloNombre);
+
 
     @Query("""
         SELECT DISTINCT b.barmodel FROM Barcos b

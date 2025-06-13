@@ -44,121 +44,64 @@
   </div>
 
 </div>
+    <div class="container">
+      <h2 class="text-dark text-center mb-4">Completa tus datos</h2>
 
+      <form class="row g-3 needs-validation" th:action="@{/reserva/cliente}" method="post" th:object="${cliente}"
+        novalidate>
+        <div class="col-md-4">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input id="nombre" type="text" th:field="*{nombre}" class="form-control" required>
+          <div class="invalid-feedback">Por favor ingresa tu nombre.</div>
+        </div>
+        <div class="col-md-4">
+          <label for="apellido" class="form-label">Apellido</label>
+          <input id="apellido" type="text" th:field="*{apellido}" class="form-control" required>
+          <div class="invalid-feedback">Por favor ingresa tu apellido.</div>
+        </div>
+        <div class="col-md-4">
+          <label for="correo" class="form-label">Correo electrónico</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text">@</span>
+            <input id="correo" type="email" th:field="*{correo}" class="form-control" required>
+            <div class="invalid-feedback">Introduce un correo válido.</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="celular" class="form-label">Número celular</label>
+          <input id="celular" type="text" th:field="*{celular}" pattern="[0-9]{9}" class="form-control" required>
+          <div class="invalid-feedback">Formato: 9 dígitos numéricos.</div>
+        </div>
+        <div class="col-md-3">
+          <label for="ciudad" class="form-label">Ciudad</label>
+          <select id="ciudad" class="form-select" th:field="*{ciudad}" required>
+            <option disabled selected value="">Elige tu ciudad</option>
+            <option value="Lima">Lima</option>
+            <option value="Ica">Ica</option>
+            <option value="Arequipa">Arequipa</option>
+            <option value="Ancash">Ancash</option>
+            <option value="Piura">Piura</option>
+          </select>
+          <div class="invalid-feedback">Debes seleccionar una ciudad.</div>
+        </div>
 
+        <div class="col-md-3">
+          <label for="cantidadPasajeros" class="form-label">Cantidad de pasajeros</label>
+          <input id="cantidadPasajeros" type="number" name="cantidadPasajeros" class="form-control" required min="1"
+            max="20">
+        </div>
 
-<div class="container">
-
-  <h2 class="text-dark text-center mb-4">Completa tus datos</h2>
-
-
-
-  <form class="row g-3 needs-validation" th:action="@{/reserva/cliente}" method="post" th:object="${cliente}"
-
-    novalidate>
-
-    <div class="col-md-4">
-
-      <label for="nombre" class="form-label">Nombre</label>
-
-      <input id="nombre" type="text" th:field="*{nombre}" class="form-control" required>
-
-      <div class="invalid-feedback">Por favor ingresa tu nombre.</div>
-
-    </div>
-
-    <div class="col-md-4">
-
-      <label for="apellido" class="form-label">Apellido</label>
-
-      <input id="apellido" type="text" th:field="*{apellido}" class="form-control" required>
-
-      <div class="invalid-feedback">Por favor ingresa tu apellido.</div>
-
-    </div>
-
-    <div class="col-md-4">
-
-      <label for="correo" class="form-label">Correo electrónico</label>
-
-      <div class="input-group has-validation">
-
-        <span class="input-group-text">@</span>
-
-        <input id="correo" type="email" th:field="*{correo}" class="form-control" required>
-
-        <div class="invalid-feedback">Introduce un correo válido.</div>
-
-      </div>
-
-    </div>
-
-    <div class="col-md-6">
-
-      <label for="celular" class="form-label">Número celular</label>
-
-      <input id="celular" type="text" th:field="*{celular}" pattern="[0-9]{9}" class="form-control" required>
-
-      <div class="invalid-feedback">Formato: 9 dígitos numéricos.</div>
-
-    </div>
-
-    <div class="col-md-3">
-
-      <label for="ciudad" class="form-label">Ciudad</label>
-
-      <select id="ciudad" class="form-select" th:field="*{ciudad}" required>
-
-        <option disabled selected value="">Elige tu ciudad</option>
-
-        <option value="Lima">Lima</option>
-
-        <option value="Ica">Ica</option>
-
-        <option value="Arequipa">Arequipa</option>
-
-        <option value="Ancash">Ancash</option>
-
-        <option value="Piura">Piura</option>
-
-      </select>
-
-      <div class="invalid-feedback">Debes seleccionar una ciudad.</div>
-
-    </div>
-
-
-
-    <div class="col-md-3">
-
-      <label for="cantidadPasajeros" class="form-label">Cantidad de pasajeros</label>
-
-      <input id="cantidadPasajeros" type="number" name="cantidadPasajeros" class="form-control" required min="1"
-
-        max="20">
-
-    </div>
-
-
-
-    <div class="col-12">
-
-      <div class="form-check">
-
-        <input class="form-check-input" type="checkbox" id="terminos" required>
-
-        <label class="form-check-label" for="terminos">Acepto los términos y condiciones</label>
-
-        <div class="invalid-feedback">Debes aceptar los términos.</div>
-
-      </div>
-
-    </div>
-
-    <div class="col-12 text-center">
-
-      <button class="btn btn-ocean btn-lg" type="submit">Siguiente</button>
-
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="terminos" required>
+            <label class="form-check-label" for="terminos">Acepto los términos y condiciones</label>
+            <div class="invalid-feedback">Debes aceptar los términos.</div>
+          </div>
+        </div>
+        <div class="col-12 text-center">
+          <button class="btn btn-ocean btn-lg" type="submit">Siguiente</button>
+        </div>
+      </form>
     </div>
 
   </form>

@@ -26,7 +26,6 @@ public interface CabinaRepository extends JpaRepository<Cabina_Inst, Long> {
     Cabina_Inst findFirstByCabTipo(@Param("cabTipo") Cabina_tipo cabTipo);
 
      // ya hay findByCabTipoId lol(?)
-
     @Query("""
       SELECT c
       FROM Cabina_Inst c
