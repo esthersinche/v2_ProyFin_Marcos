@@ -25,26 +25,17 @@ public class BarcoService {
 
     // Buscar por nombre del barco
     public Barcos buscarPorNombreBarco(String nombre) {
-        return barcoRepository.findAll().stream()
-                .filter(b -> b.getNombre_barco().equalsIgnoreCase(nombre))
-                .findFirst()
-                .orElse(null);
+        return barcoRepository.findByNombreBarcoIgnoreCase(nombre);
     }
 
     // Buscar por capitán
     public Barcos buscarPorCapitan(String capitan) {
-        return barcoRepository.findAll().stream()
-                .filter(b -> b.getCapitan_barco().equalsIgnoreCase(capitan))
-                .findFirst()
-                .orElse(null);
+        return barcoRepository.findByCapitanBarcoIgnoreCase(capitan);
     }
 
     // Buscar por modelo (nombre del modelo)
     public Barcos buscarPorNombreModelo(String modeloNombre) {
-        return barcoRepository.findAll().stream()
-                .filter(b -> b.getModelo_barco().equalsIgnoreCase(modeloNombre))
-                .findFirst()
-                .orElse(null);
+        return barcoRepository.findByModeloBarco_ModeloBarcoIgnoreCase(modeloNombre);
     }
 
     // Guardar nuevo barco

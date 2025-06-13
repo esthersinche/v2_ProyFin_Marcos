@@ -9,19 +9,23 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name= "tipos")
+@Table(name = "tipos")
 public class Barcos_modelo_tipocabina {
+
     @EmbeddedId
     private Barcos_modelo_tipocabinaId idparaelcoso;
+
     @ManyToOne
     @MapsId("modelo_barco")
-    @JoinColumn(name= "modelo_barco")
+    @JoinColumn(name = "modelo")
     private Barcos_modelo bar_model;
+
     @ManyToOne
     @MapsId("cab_tipo_id")
-    @JoinColumn(name= "cab_tipo_id")
+    @JoinColumn(name = "cabinatipo")
     private Cabina_tipo cab_type;
-    @Column(name= "cantidad")
+
+    @Column(name = "cantidad")
     private int cant;
 
     public Barcos_modelo_tipocabina() {
@@ -31,7 +35,7 @@ public class Barcos_modelo_tipocabina {
         this.bar_model = bar_model;
         this.cab_type = cab_type;
         this.cant = cant;
-        this.idparaelcoso= new Barcos_modelo_tipocabinaId(bar_model.getModelo_barco(), cab_type.getCab_tipo_id());
+        this.idparaelcoso = new Barcos_modelo_tipocabinaId(bar_model.getModelo_barco(), cab_type.getCab_tipo_id());
     }
 
     public Barcos_modelo_tipocabinaId getIdparaelcoso() {
@@ -65,13 +69,4 @@ public class Barcos_modelo_tipocabina {
     public void setCant(int cant) {
         this.cant = cant;
     }
-
-    
-
-    
-
-    
-
-
-    
 }

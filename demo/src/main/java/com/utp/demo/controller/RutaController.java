@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.utp.demo.model.Barcos;
 import com.utp.demo.model.Ruta;
 import com.utp.demo.service.RutaService;
 
@@ -25,34 +24,30 @@ public class RutaController {
     @GetMapping("/rutas")
     public String listarRutas(
             @RequestParam(name = "salida", required = false) List<String> salida,
-            @RequestParam(name = "modelo", required = false) List<Barcos.Modelobarco> modelo,
+            @RequestParam(name = "modelo", required = false) List<String> modelo,
             Model model) {
 
-        // 1) Cargo todas las rutas
-        List<Ruta> todas = rutaService.obtenerTodoRutas();
+        // 1. Obtener todas las rutas
+        List<Ruta> todas = rutaService.obtenerTodasLasRutas();
 
-        // 2) Inicio el stream para aplicar filtros
+        // 2. Aplicar filtros
         Stream<Ruta> stream = todas.stream();
 
-        // 2.a) Filtro por 'salida' si vino algo
         if (salida != null && !salida.isEmpty()) {
             stream = stream.filter(r -> salida.contains(r.getSalida()));
         }
 
-        // 2.b) Filtro por 'modelo' si vino algo
         if (modelo != null && !modelo.isEmpty()) {
-            stream = stream.filter(r -> modelo.contains(r.getModelobarco()));
+            stream = stream.filter(r -> modelo.contains(r.getModeloBarco().getModelo_barco()));
         }
 
         List<Ruta> filtradas = stream.collect(Collectors.toList());
 
+        // 3. Enviar resultados a la vista
         model.addAttribute("rutas", filtradas);
-
-        // Si no llegaron params, inyecto listas vacías para Thymeleaf
-        model.addAttribute("selectedSalida", salida == null ? List.<String>of() : salida);
-        model.addAttribute("selectedModelos", modelo == null ? List.<Barcos.Modelobarco>of() : modelo);
+        model.addAttribute("selectedSalida", salida == null ? List.of() : salida);
+        model.addAttribute("selectedModelos", modelo == null ? List.of() : modelo);
 
         return "rutas";
     }
-
 }

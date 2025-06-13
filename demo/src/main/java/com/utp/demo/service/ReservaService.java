@@ -1,7 +1,6 @@
 package com.utp.demo.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +20,10 @@ public class ReservaService {
 
     // Buscar reserva por ID
     public Reserva buscarPorId(String id) {
-        Optional<Reserva> optionalReserva = reservaRepository.findById(id);
-        return optionalReserva.orElse(null);
+        return reservaRepository.findById(id).orElse(null);
     }
 
-    // Obtener todas las reservas (por si quieres una lista general)
+    // Obtener todas las reservas
     public List<Reserva> obtenerTodasLasReservas() {
         return reservaRepository.findAll();
     }
@@ -35,7 +33,7 @@ public class ReservaService {
         reservaRepository.deleteById(id);
     }
 
-    // Verificar si existe una reserva por ID (útil antes de guardar)
+    // Verificar existencia por ID
     public boolean existePorId(String id) {
         return reservaRepository.existsById(id);
     }

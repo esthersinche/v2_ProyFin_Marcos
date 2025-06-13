@@ -3,11 +3,10 @@ package com.utp.demo.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+public class Barcos_modelo_tipocabinaId implements Serializable {
 
-public class Barcos_modelo_tipocabinaId implements Serializable{
     private String modelo_barco;
     private String cab_tipo_id;
-
 
     public Barcos_modelo_tipocabinaId() {
     }
@@ -34,18 +33,18 @@ public class Barcos_modelo_tipocabinaId implements Serializable{
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(modelo_barco, cab_tipo_id);
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Barcos_modelo_tipocabinaId))
+            return false;
+        Barcos_modelo_tipocabinaId that = (Barcos_modelo_tipocabinaId) o;
+        return Objects.equals(modelo_barco, that.modelo_barco) &&
+                Objects.equals(cab_tipo_id, that.cab_tipo_id);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Barcos_modelo_tipocabinaId)) return false;
-        Barcos_modelo_tipocabinaId that = (Barcos_modelo_tipocabinaId) o;
-        return Objects.equals(modelo_barco, that.modelo_barco) &&
-               Objects.equals(cab_tipo_id, that.cab_tipo_id);
+    public int hashCode() {
+        return Objects.hash(modelo_barco, cab_tipo_id);
     }
-
-    
 }

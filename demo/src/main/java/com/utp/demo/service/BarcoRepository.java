@@ -5,10 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import com.utp.demo.model.Barcos;
 
-
 @Repository
-public interface BarcoRepository extends JpaRepository<Barcos, String>{
+public interface BarcoRepository extends JpaRepository<Barcos, String> {
+    Barcos findByNombreBarcoIgnoreCase(String nombreBarco);
 
+    Barcos findByCapitanBarcoIgnoreCase(String capitan);
 
-    
+    Barcos findByModeloBarco_ModeloBarcoIgnoreCase(String modeloNombre);
 }

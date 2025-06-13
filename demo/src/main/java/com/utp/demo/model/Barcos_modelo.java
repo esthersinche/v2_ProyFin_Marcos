@@ -15,55 +15,45 @@ public class Barcos_modelo {
 
     @Id
     @Column(name = "modelo")
-    private String modelo_barco;//SMODEL, MMODEL, LMODEL
+    private String modelo_barco; // Ej. SMODEL, MMODEL, LMODEL
 
-    /*private List<Ruta> listarutasxmodelo;//cada modelo tiene ciertas rutas q puede ir*/
-    @OneToMany(mappedBy= "bar_model")
-    private List<Barcos_modelo_tipocabina> listacabxtipoxmodelo = new ArrayList<>();
- 
+    @OneToMany(mappedBy = "bar_model")
+    private List<Barcos_modelo_tipocabina> tiposDeCabina = new ArrayList<>();
+
+    public Barcos_modelo() {
+    }
 
     public Barcos_modelo(String modelo_barco) {
         this.modelo_barco = modelo_barco;
-    }
-
-    public Barcos_modelo() {
     }
 
     public String getModelo_barco() {
         return modelo_barco;
     }
 
-    public List<Barcos_modelo_tipocabina> getListacabxtipoxmodelo() {
-        return listacabxtipoxmodelo;
+    public void setModelo_barco(String modelo_barco) {
+        this.modelo_barco = modelo_barco;
     }
 
-    public void setListacabxtipoxmodelo(List<Barcos_modelo_tipocabina> listacabxtipoxmodelo) {
-        this.listacabxtipoxmodelo = listacabxtipoxmodelo;
+    public List<Barcos_modelo_tipocabina> getTiposDeCabina() {
+        return tiposDeCabina;
     }
 
-    //capacidad
+    public void setTiposDeCabina(List<Barcos_modelo_tipocabina> tiposDeCabina) {
+        this.tiposDeCabina = tiposDeCabina;
+    }
+
+    // Capacidad total del modelo
     public int getCapacidad() {
-        int totalcapacidad = 0;
-        for (Barcos_modelo_tipocabina bmtc : listacabxtipoxmodelo) {
-            int cantcab = bmtc.getCant();
-            int cant_max_per_cab = bmtc.getCab_type().getCant_max_per();
-            totalcapacidad += cantcab * cant_max_per_cab;
-
-        }
-        return totalcapacidad;
-
+        return tiposDeCabina.stream()
+                .mapToInt(bmtc -> bmtc.getCant() * bmtc.getCab_type().getCant_max_per())
+                .sum();
     }
 
-    //polimorfismo god
-    //total de cabinas
+    // Total de cabinas del modelo
     public int getTotalcabinas() {
-        int totalcabinas = 0;
-        for (Barcos_modelo_tipocabina bmtc : listacabxtipoxmodelo) {
-            totalcabinas += bmtc.getCant();
-        }
-
-        return totalcabinas;
+        return tiposDeCabina.stream()
+                .mapToInt(Barcos_modelo_tipocabina::getCant)
+                .sum();
     }
-
-    //polimorfismo god
 }

@@ -1,14 +1,14 @@
 package com.utp.demo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,31 +28,23 @@ public class Paquete {
     @Column(name = "prec_paquete_uni")
     private double prec_paquete_uni;
 
-    // Relación con Cabina_tipo
     @ManyToOne
-    @JoinColumn(name = "cabinatipo") // FK en la tabla Paquete
+    @JoinColumn(name = "cabinatipo")
     private Cabina_tipo cabinatipoPaq;
 
-    // Relación con Ruta
     @ManyToOne
-    @JoinColumn(name = "id_ruta") // FK en la tabla Paquete
+    @JoinColumn(name = "id_ruta")
     private Ruta rutaPaq;
 
-    // Relación con Barcos_modelo
     @ManyToOne
-    @JoinColumn(name = "id_modelo_barco") // FK en la tabla Paquete
+    @JoinColumn(name = "id_modelo_barco")
     private Barcos_modelo modelobarcoPaq;
 
-    // Relación con Beneficios (muchos a muchos)
-    @ManyToMany
-    @JoinTable(
-        name = "Paq_Beneficios",
-        joinColumns = @JoinColumn(name = "Id_paquete"),
-        inverseJoinColumns = @JoinColumn(name = "id_bene")
-    )
-    private List<Beneficio> listabeneficiosxpaq;
+    @OneToMany(mappedBy = "paquete")
+    private List<PaqueteBeneficio> beneficios = new ArrayList<>();
 
-    public Paquete() {}
+    public Paquete() {
+    }
 
     public Paquete(String id_paquete, String nom_paquete, String desc_paquete, double prec_paquete_uni) {
         this.id_paquete = id_paquete;
@@ -60,8 +52,6 @@ public class Paquete {
         this.desc_paquete = desc_paquete;
         this.prec_paquete_uni = prec_paquete_uni;
     }
-
-    // Getters y Setters
 
     public String getId_paquete() {
         return id_paquete;
@@ -119,15 +109,11 @@ public class Paquete {
         this.modelobarcoPaq = modelobarcoPaq;
     }
 
-    public List<Beneficio> getListabeneficiosxpaq() {
-        return listabeneficiosxpaq;
+    public List<PaqueteBeneficio> getBeneficios() {
+        return beneficios;
     }
 
-    public void setListabeneficiosxpaq(List<Beneficio> listabeneficiosxpaq) {
-        this.listabeneficiosxpaq = listabeneficiosxpaq;
-    }
-
-    public void addbene(Beneficio benef) {
-        this.listabeneficiosxpaq.add(benef);
+    public void setBeneficios(List<PaqueteBeneficio> beneficios) {
+        this.beneficios = beneficios;
     }
 }

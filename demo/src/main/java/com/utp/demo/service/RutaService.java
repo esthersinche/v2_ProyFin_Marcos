@@ -20,18 +20,12 @@ public class RutaService {
 
     // Buscar por nombre de ruta
     public Ruta buscarPorNombreRuta(String nombre) {
-        return rutaRepository.findAll().stream()
-                .filter(r -> r.getNombre_ruta().equalsIgnoreCase(nombre))
-                .findFirst()
-                .orElse(null);
+        return rutaRepository.findByNombreRutaIgnoreCase(nombre);
     }
 
-    // Buscar por salida
-    public Ruta buscarPorSalidaRuta(String salida) {
-        return rutaRepository.findAll().stream()
-                .filter(r -> r.getSalida().equalsIgnoreCase(salida))
-                .findFirst()
-                .orElse(null);
+    // Buscar por salida (puede haber varias rutas con misma salida)
+    public List<Ruta> buscarPorSalidaRuta(String salida) {
+        return rutaRepository.findBySalidaIgnoreCase(salida);
     }
 
     // Agregar una nueva ruta
@@ -44,7 +38,7 @@ public class RutaService {
         rutaRepository.deleteById(idRuta);
     }
 
-    // Buscar por ID (opcional)
+    // Buscar por ID
     public Ruta buscarPorId(String idRuta) {
         return rutaRepository.findById(idRuta).orElse(null);
     }

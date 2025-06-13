@@ -6,23 +6,26 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name= "Beneficio")
+@Table(name = "BENEFICIO")
 public class Beneficio {
+
     @Id
-    @Column(name= "Id_bene")
+    @Column(name = "id_beneficio")
     private String id_bene;
-    @Column(name= "nombre_bene")
+
+    @Column(name = "nombre_beneficio")
     private String nombre_bene;
-    @Column(name= "desc_bene")
+
+    @Column(name = "descripcion_beneficio")
     private String desc_bene;
 
-    @ManyToMany(mappedBy= "listabeneficiosxpaq")
-    private List<Paquete> listapaqxbene= new ArrayList<>();
-    
+    @OneToMany(mappedBy = "beneficio")
+    private List<PaqueteBeneficio> beneficiosPorPaquete = new ArrayList<>();
+
     public Beneficio() {
     }
 
@@ -56,12 +59,11 @@ public class Beneficio {
         this.desc_bene = desc_bene;
     }
 
-    public List<Paquete> getListapaqxbene() {
-        return listapaqxbene;
+    public List<PaqueteBeneficio> getBeneficiosPorPaquete() {
+        return beneficiosPorPaquete;
     }
 
-    public void setListapaqxbene(List<Paquete> listapaqxbene) {
-        this.listapaqxbene = listapaqxbene;
+    public void setBeneficiosPorPaquete(List<PaqueteBeneficio> beneficiosPorPaquete) {
+        this.beneficiosPorPaquete = beneficiosPorPaquete;
     }
-
 }

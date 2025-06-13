@@ -15,46 +15,40 @@ public class PaqueteService {
         this.paqueteRepository = paqueteRepository;
     }
 
-    // para obtener todos los paquetes
-    public List<Paquete> ObtenertodoPaquetes() {
+    // Obtener todos los paquetes
+    public List<Paquete> obtenerTodosLosPaquetes() {
         return paqueteRepository.findAll();
     }
 
-    // para buscar paquete por nombre y ruta
+    // Buscar paquete por nombre y ruta
     public Paquete buscarPorNombreYRuta(String nombrePaquete, String nombreRuta) {
         return paqueteRepository
                 .findByNombrePaqIgnoreCaseAndRutaPaq_NombreRutaIgnoreCase(nombrePaquete, nombreRuta)
                 .orElse(null);
     }
 
-    // para buscar paquetes por ruta
+    // Buscar paquetes por nombre de ruta
     public List<Paquete> obtenerPaquetesPorRuta(String nombreRuta) {
         return paqueteRepository.findByRutaPaq_NombreRutaIgnoreCase(nombreRuta);
     }
 
-    // para buscar paquetes por nombres
-    public List<Paquete> buscarPorNombrePaquetes(List<String> nombres_paquetes) {
-        return paqueteRepository.findByNombrePaqIn(nombres_paquetes);
+    // Buscar paquetes por lista de nombres
+    public List<Paquete> buscarPorNombrePaquetes(List<String> nombresPaquetes) {
+        return paqueteRepository.findByNombrePaqIn(nombresPaquetes);
     }
 
-    // para filtrar paquetes por nombre de ruta
-    public List<Paquete> buscarPorRutaPaquetes(List<Paquete> listafilteroforiginal, List<String> nom_ruta_paquetes) {
-        return listafilteroforiginal.stream()
-                .filter(p -> nom_ruta_paquetes.contains(p.getRutaPaq().getNombre_ruta()))
-                .toList();
+    // Buscar paquetes por múltiples rutas
+    public List<Paquete> buscarPorRutas(List<String> nombresRutas) {
+        return paqueteRepository.findByRutaPaq_NombreRutaIn(nombresRutas);
     }
 
-    // para filtrar paquetes por modelo de barco
-    public List<Paquete> buscarPorModeloPaquetes(List<Paquete> listafilteroforiginal, List<String> nom_modelo_paquetes) {
-        return listafilteroforiginal.stream()
-                .filter(p -> nom_modelo_paquetes.contains(p.getModelobarcoPaq().getModelo_barco()))
-                .toList();
+    // Buscar paquetes por modelos de barco
+    public List<Paquete> buscarPorModelos(List<String> modelos) {
+        return paqueteRepository.findByModelobarcoPaq_ModeloIn(modelos);
     }
 
-    // para filtrar paquetes por cantidad máxima de personas
-    public List<Paquete> buscarPorCantMaxPerPaquetes(List<Paquete> listafilteroforiginal, List<Integer> num_personas_paquetes) {
-        return listafilteroforiginal.stream()
-                .filter(p -> num_personas_paquetes.contains(p.getCabinatipoPaq().getCant_max_per()))
-                .toList();
+    // Buscar paquetes por capacidades máximas
+    public List<Paquete> buscarPorCapacidadMaxima(List<Integer> capacidades) {
+        return paqueteRepository.findByCabinatipoPaq_CantMaxPerIn(capacidades);
     }
 }

@@ -9,22 +9,21 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-//cabina asignada a una reserva
-
 @Entity
-@Table(name= "Cabina")
-
-public class Cabina_Inst extends Cabina{
+@Table(name = "CABINA")
+public class Cabina_Inst extends Cabina {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name= "cabina_id")
-    private Long cabina_id;//no tiene nada q ver con cabina_tipo_id solo sirve para conectar con reserva
-    //y para diferenciar instancias concretas en JPA, no esta en el constructor pq se genera solo
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cabina")
+    private Long cabina_id;
 
     @ManyToOne
-    @JoinColumn(name= "Cabina_tipo")
+    @JoinColumn(name = "cabinatipo")
     private Cabina_tipo cab_tipo;
+
+    public Cabina_Inst() {
+    }
 
     public Cabina_Inst(int numadultos, Cabina_tipo cab_tipo) {
         super(numadultos);
@@ -53,21 +52,17 @@ public class Cabina_Inst extends Cabina{
     }
 
     @Override
-    public int getCant_max_per() {
-        return cab_tipo.getCant_max_per();
-    }
-
-    @Override
     public String getNombre_cab() {
         return cab_tipo.getNombre_cab();
     }
 
     @Override
-    public double getPrec_cabina_per() {
+    public int getCant_max_per() {
         return cab_tipo.getCant_max_per();
     }
 
-//metodos abstractos
-
-
+    @Override
+    public double getPrec_cabina_per() {
+        return cab_tipo.getPrec_cabina_per();
+    }
 }
