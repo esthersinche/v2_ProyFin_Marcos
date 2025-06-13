@@ -80,93 +80,96 @@
 
         <!--Div para el contenido de paquetes-->
         <!---->
-        <form class="container paquetes" method="get" action="/paquetes">
-            <div class="p-5 mb-4 rounded-3 bg-aquamarine">
-                <div class="container-fluid py-5">
-                    <h2 class="display-5 fw-bold">Filtros Avanzados</h2>
-                    <div class="row justify-content-center g-5">
-                        <div class="col-md-4">
-                            <label for="ruta" class="form-label">Ruta</label>
-                            <select class="form-select" id="ruta" name="ruta">
-                                <option value="">Elige..</option>
-                                <option th:each=" ruta : ${nombre_rutas}" th:value="${ruta}" th:text="${ruta}"></option>
-                            </select>
-                            <div class="invalid-Feedback">Seleccione un destino válido.</div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="cantperso" class="form-label">Cant. de Pasajeros</label>
-                            <select class="form-select" id="cantperso" name="cantmaxper">
-                                <option value="">Elige..</option>
-                                <option th:each=" cantperso : ${cant_personas}" th:value="${cantperso}"
-                                    th:text="${cantperso}"></option>
-                            </select>
-                            <div class="invalid-Feedback">Seleccione una cantidad válida.</div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="modelobarcos" class="form-label">Modelo de Barcos</label>
-                            <select class="form-select" id="modelobarcos" name="modelo">
-                                <option value="">Elige..</option>
-                                <option th:each=" modelobarco : ${modelos_barco}" th:value="${modelobarco}"
-                                    th:text="${modelobarco}"></option>
-                            </select>
-                            <div class="invalid-Feedback">Seleccione una barco disponible.</div>
-                        </div>
-
-                        <div>
-                            <label for="customRange" class="form-label">Rango Dinero</label><br><br>
-                            <div class="slider-container">
-                                <div class="d-flex justify-content-between px-1 mb-2">
-                                    <span id="min-price" class="slider-value">0$</span>
-                                    <span id="max-price" class="slider-value">40,000$</span>
-                                </div>
-                                <input type="range" class="form-range" min="0" max="40000" step="5000" id="customRange"
-                                    data-mdb-range-init data-mdb-range-value-label="true">
+        <!-- Filtros -->
+        <div class="container paquetes mb-4">
+            <form method="get" th:action="@{/paquetes}">
+                <div class="p-5 mb-4 rounded-3 bg-aquamarine">
+                    <div class="container-fluid py-5">
+                        <h2 class="display-5 fw-bold">Filtros Avanzados</h2>
+                        <div class="row g-4">
+                            <!-- Ruta -->
+                            <div class="col-md-4">
+                                <label for="ruta" class="form-label">Ruta</label>
+                                <select id="ruta" name="ruta" class="form-select" multiple>
+                                    <option th:each="r : ${nombre_rutas}" th:value="${r}" th:text="${r}"
+                                        th:selected="${#lists.contains(rutas, r)}">Ruta</option>
+                                </select>
                             </div>
-
+                            <!-- Cant. de Pasajeros -->
+                            <div class="col-md-4">
+                                <label for="cantperso" class="form-label">Cant. de Pasajeros</label>
+                                <select id="cantperso" name="cantmaxper" class="form-select" multiple>
+                                    <option th:each="c : ${cant_personas}" th:value="${c}" th:text="${c}"
+                                        th:selected="${#lists.contains(cantmaxper, c)}">0</option>
+                                </select>
+                            </div>
+                            <!-- Modelo de Barcos -->
+                            <div class="col-md-4">
+                                <label for="modelobarcos" class="form-label">Modelo de Barcos</label>
+                                <select id="modelobarcos" name="modelo" class="form-select" multiple>
+                                    <option th:each="m : ${modelos_barco}" th:value="${m}" th:text="${m}"
+                                        th:selected="${#lists.contains(modelo, m)}">Modelo</option>
+                                </select>
+                            </div>
+                            <!-- Rango de Precio -->
+                            <div class="col-12">
+                                <label for="minPrecio" class="form-label">Precio Mínimo</label>
+                                <input type="number" id="minPrecio" name="minPrecio" class="form-control" min="0"
+                                    th:value="${minPrecio}" />
+                            </div>
+                            <div class="col-12">
+                                <label for="maxPrecio" class="form-label">Precio Máximo</label>
+                                <input type="number" id="maxPrecio" name="maxPrecio" class="form-control" min="0"
+                                    th:value="${maxPrecio}" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="mt-4">
-                        <button type="submit" class="btn bg-aquamarine btn-outline-light">Filtrar</button>
+                        <button type="submit" class="btn btn-outline-light mt-4">Filtrar</button>
                     </div>
                 </div>
+            </form>
+        </div>
 
-            </div>
-            <!--Tarjetas-->
-
-            <div class="container px-4 py-3 rounded-2" id="paquetescards">
-                <h2 class="pb-2 border-bottom">Paquetes</h2>
-                <div class="row row-cols-1 row-cols-lg-3 align-items-stretch
-                g-4 py-5">
-                    <!--Donde se automatizara-->
-                    <div class="col" th:each=" paquete , stat : ${paquetes}">
-                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                            style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR40_EHfGqczcPWFg2Ydwc7EsWij6tyHz3VGQ&s); background-size: cover;">
-                            <div class="d-flex flex-column h-100 p-5 pb-3 text-light text-shadow-1">
-                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold fs-3" th:text="${paquete.nombre_paq}">
-                                </h3>
-                                <ul class="d-flex list-unstyled mt-auto">
-                                    <li class="me-auto">
-                                        <i class="bi bi-person"></i>
-                                        <small th:text="${paquete.cabinatipo_paq.cant_max_per}"></small>
-                                    </li>
-
-                                    <li class="d-flex align-items-center me-3">
-                                        <i class="bi bi-geo-alt-fill me-2"></i>
-                                        <small th:text="${paquete.ruta_paq.nombre_ruta}"></small>
-                                    </li>
-                                    <li class="d-flex align-items-center">
-                                        <i class="bi bi-calendar2-heart me-2"></i>
-                                        <small th:text="${paquete.ruta_paq.dias}"></small>
-                                    </li>
+        <!-- Tarjetas de Paquetes -->
+        <div class="container px-4 py-3 rounded-2" id="paquetescards">
+            <h2 class="pb-2 border-bottom">Paquetes</h2>
+            <div class="row row-cols-1 row-cols-lg-3 g-4 py-5">
+                <div class="col" th:each="paq : ${paquetes}">
+                    <div class="card h-100 text-bg-dark rounded-4 shadow-lg"
+                        th:style="'background-image: url(' + ${paq.imagen_paquete} + '); background-size: cover;">
+                        <div class="card-body d-flex flex-column justify-content-between text-light text-shadow-1">
+                            <div>
+                                <h3 class="display-6 fw-bold fs-3" th:text="${paq.nom_paquete}"></h3>
+                                <p th:text="${paq.desc_paquete}"></p>
+                            </div>
+                            <ul class="list-unstyled d-flex mb-3">
+                                <li class="me-3">
+                                    <i class="bi bi-person"></i>
+                                    <small th:text="${paq.cabinatipoPaq.cant_max_per}"></small>
+                                </li>
+                                <li class="me-3">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    <small th:text="${paq.rutaPaq.nombre_ruta}"></small>
+                                </li>
+                                <li>
+                                    <i class="bi bi-cash-stack"></i>
+                                    <small th:text="${paq.prec_paquete_uni}"></small>
+                                </li>
+                            </ul>
+                            <div>
+                                <strong>Beneficios:</strong>
+                                <ul>
+                                    <li th:each="pb : ${paq.beneficios}" th:text="${pb.beneficio.nombre_bene}"></li>
                                 </ul>
-
                             </div>
+                            <a th:href="@{/paquetes/{id}(id=${paq.id_paquete})}" class="btn btn-light mt-2">Ver
+                                Detalle</a>
                         </div>
-
                     </div>
                 </div>
             </div>
-            <!--
+        </div>
+    </main>
+    <!--
             <div class="container px-4 py-3 rounded-2" id="paquetescards">
                 <h2 class="pb-2 border-bottom">Paquetes</h2>
                 <div class="row row-cols-1 row-cols-lg-3 align-items-stretch
@@ -592,10 +595,6 @@
 
                 </div>
             </div>-->
-
-        </form> <!--cambiar a div sino funciona-->
-
-    </main>
 
     <!--Footer-->
     <footer th:replace="~{fragments/footer :: footerContent}"></footer>

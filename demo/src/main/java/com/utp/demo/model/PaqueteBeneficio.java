@@ -63,6 +63,7 @@ public class PaqueteBeneficio {
 
     // Clave compuesta
     public static class PaqueteBeneficioId implements Serializable {
+
         private String id_beneficio;
         private String id_paquete;
 
@@ -92,13 +93,15 @@ public class PaqueteBeneficio {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o)
+            if (this == o) {
                 return true;
-            if (!(o instanceof PaqueteBeneficioId))
+            }
+            if (!(o instanceof PaqueteBeneficioId)) {
                 return false;
+            }
             PaqueteBeneficioId that = (PaqueteBeneficioId) o;
-            return Objects.equals(id_paquete, that.id_paquete) &&
-                    Objects.equals(id_beneficio, that.id_beneficio);
+            return Objects.equals(id_paquete, that.id_paquete)
+                    && Objects.equals(id_beneficio, that.id_beneficio);
         }
 
         @Override

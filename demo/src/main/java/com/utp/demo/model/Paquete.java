@@ -19,13 +19,13 @@ public class Paquete {
     @Column(name = "Id_paquete")
     private String id_paquete;
 
-    @Column(name = "nom_paquete")
+    @Column(name = "nombre_paq")
     private String nom_paquete;
 
-    @Column(name = "desc_paquete")
+    @Column(name = "descripcion_paq")
     private String desc_paquete;
 
-    @Column(name = "prec_paquete_uni")
+    @Column(name = "precio_paq")
     private double prec_paquete_uni;
 
     @ManyToOne
