@@ -30,7 +30,7 @@ public class BarcoService {
 
     // Buscar por capitán
     public Barcos buscarPorCapitan(String nombre) {
-        return barcoRepository.findByCapitan_barcoIgnoreCase(nombre);
+        return barcoRepository.findByCapitanBarcoIgnoreCase(nombre);
     }
 
     // Buscar por modelo (nombre del modelo)
