@@ -1,9 +1,13 @@
 package com.utp.demo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -30,6 +34,10 @@ public class Barcos {
 
     @Column(name = "imagen_barco")
     private String imagen_barco;
+
+    // --- RELACIÓN M:N INVERSA ---
+    @ManyToMany(mappedBy = "barcos")
+    private Set<Ruta> rutas = new HashSet<>();
 
     public Barcos() {
     }
@@ -99,6 +107,14 @@ public class Barcos {
 
     public int getTotalCabinas() {
         return bar_model != null ? bar_model.getTotalcabinas() : 0;
+    }
+
+    public Set<Ruta> getRutas() {
+        return rutas;
+    }
+
+    public void setRutas(Set<Ruta> rutas) {
+        this.rutas = rutas;
     }
 
 }

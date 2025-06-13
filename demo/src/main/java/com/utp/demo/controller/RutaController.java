@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.utp.demo.model.Barcos;
+import com.utp.demo.model.Barcos_modelo;
 import com.utp.demo.model.Ruta;
 import com.utp.demo.service.RutaService;
 
@@ -33,12 +35,20 @@ public class RutaController {
         // 2. Aplicar filtros
         Stream<Ruta> stream = todas.stream();
 
+        // Filtrar por puerto de salida (igual que antes)
         if (salida != null && !salida.isEmpty()) {
             stream = stream.filter(r -> salida.contains(r.getSalida()));
         }
 
+        // Filtrar por modelo de barco: comprobamos si ALGÚN barco de la ruta
+        // tiene un modelo en la lista de modelos seleccionados
         if (modelo != null && !modelo.isEmpty()) {
-            stream = stream.filter(r -> modelo.contains(r.getModeloBarco().getModelo_barco()));
+            stream = stream.filter(r
+                    -> r.getBarcos().stream()
+                            .map(Barcos::getBar_model) // de Barcos obtenemos Barcos_modelo
+                            .map(Barcos_modelo::getModelo_barco) // y de ahí el código de modelo
+                            .anyMatch(modelo::contains)
+            );
         }
 
         List<Ruta> filtradas = stream.collect(Collectors.toList());

@@ -1,16 +1,20 @@
 package com.utp.demo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Ruta")
 public class Ruta {
+
     @Id
     @Column(name = "id_ruta")
     private String Id_ruta;
@@ -33,10 +37,14 @@ public class Ruta {
     @Column(name = "imagen")
     private String imagen;
 
-    // NUEVO: Relación con Barcos_modelo
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "modelo_barco") // este campo debe estar en tu tabla RUTA como FK
-    private Barcos_modelo modeloBarco;
+    // --- RELACIÓN M:N CON BARCO ---
+    @ManyToMany
+    @JoinTable(
+            name = "RUTA_BARCO",
+            joinColumns = @JoinColumn(name = "id_ruta"),
+            inverseJoinColumns = @JoinColumn(name = "id_barco")
+    )
+    private Set<Barcos> barcos = new HashSet<>();
 
     public Ruta() {
     }
@@ -108,11 +116,12 @@ public class Ruta {
         this.imagen = imagen;
     }
 
-    public Barcos_modelo getModeloBarco() {
-        return modeloBarco;
+    public Set<Barcos> getBarcos() {
+        return barcos;
     }
 
-    public void setModeloBarco(Barcos_modelo modeloBarco) {
-        this.modeloBarco = modeloBarco;
+    public void setBarcos(Set<Barcos> barcos) {
+        this.barcos = barcos;
     }
+
 }
