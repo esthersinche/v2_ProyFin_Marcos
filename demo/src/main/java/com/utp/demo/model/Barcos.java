@@ -29,9 +29,6 @@ public abstract class Barcos {
     @Column(name = "descripcion_barco")
     private String descripcion_barco;
 
-    @Column(name = "recreacion")
-    private String recreacion;
-
     @Column(name = "imagen_barco")
     private String imagen_barco;
 
@@ -39,13 +36,12 @@ public abstract class Barcos {
     }
 
     public Barcos(String id_barco, String nombre_barco, String capitan_barco, Barcos_modelo modelo_barco,
-            String descripcion_barco, String recreacion, String imagen_barco) {
+            String descripcion_barco, String imagen_barco) {
         this.ID_barco = id_barco;
         this.nombre_barco = nombre_barco;
         this.capitan_barco = capitan_barco;
         this.modelo_barco = modelo_barco;
         this.descripcion_barco = descripcion_barco;
-        this.recreacion = recreacion;
         this.imagen_barco = imagen_barco;
     }
 
@@ -89,14 +85,6 @@ public abstract class Barcos {
         this.descripcion_barco = descripcion_barco;
     }
 
-    public String getRecreacion() {
-        return recreacion;
-    }
-
-    public void setRecreacion(String recreacion) {
-        this.recreacion = recreacion;
-    }
-
     public String getImagen_barco() {
         return imagen_barco;
     }
@@ -105,6 +93,7 @@ public abstract class Barcos {
         this.imagen_barco = imagen_barco;
     }
 
+    // auxiliares
     public int getCapacidadTotal() {
         return modelo_barco != null ? modelo_barco.getCapacidad() : 0;
     }

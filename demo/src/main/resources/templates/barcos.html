@@ -11,27 +11,29 @@
 </head>
 
 <body class="bg-white">
-    <!--Header-->
+
+    <!-- Header -->
     <header th:replace="~{fragments/header :: navBar}"></header>
 
-    <!--body-->
+    <!-- Main Body -->
     <main class="py-4 container">
         <h1 class="text-dark text-center">Conoce a nuestra flota</h1>
         <br>
+
         <div th:each="barco, iterStat : ${barcos}">
-            <div class="row featurette">
+            <div class="row featurette align-items-center">
 
                 <!-- Texto -->
                 <div th:class="'col-md-7 ' + (${iterStat.index} % 2 == 1 ? 'order-md-2 text-start' : 'text-end')">
                     <h3 class="featurette-heading">
                         <span th:text="${barco.nombre_barco}">Nombre</span><br>
-                        <small class="text-ocean" th:text="${barco.modelo.modelo_barco}">Modelo</small>
+                        <small class="text-ocean" th:text="${barco.modelo_barco.modelo_barco}">Modelo</small>
                     </h3>
                     <p class="lead">
                         <strong>Capitán:</strong> <span th:text="${barco.capitan_barco}">Capitán</span><br>
-                        <strong>Camarotes y Suites:</strong> <span th:text="${barco.modelo.totalcabinas}">0</span> Cabinas<br>
-                        <strong>Capacidad:</strong> <span th:text="${barco.modelo.capacidad}">0</span> Pasajeros<br>
-                        <strong>Recreación:</strong> <span th:text="${barco.descripcion}">Actividades</span>
+                        <strong>Camarotes y Suites:</strong> <span th:text="${barco.totalCabinas}">0</span> Cabinas<br>
+                        <strong>Capacidad:</strong> <span th:text="${barco.capacidadTotal}">0</span> Pasajeros<br>
+                        <strong>Descripción:</strong> <span th:text="${barco.descripcion_barco}">Descripción</span>
                     </p>
                     <a th:href="@{/paquetes}" class="btn btn-dark btn-lg mt-3">
                         Ver destinos disponibles
@@ -40,7 +42,8 @@
 
                 <!-- Imagen -->
                 <div th:class="'col-md-5 ' + (${iterStat.index} % 2 == 1 ? 'order-md-1' : '')">
-                    <img th:src="@{${barco.imagen_barco}}" th:alt="${barco.nombre_barco}" class="img-fluid mx-auto d-block"
+                    <img th:src="@{${barco.imagen_barco}}" th:alt="${barco.nombre_barco}"
+                         class="img-fluid mx-auto d-block rounded shadow-sm"
                          style="max-height: 350px; object-fit: cover;">
                 </div>
             </div>
