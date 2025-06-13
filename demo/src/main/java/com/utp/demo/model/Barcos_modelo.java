@@ -46,7 +46,7 @@ public class Barcos_modelo {
     // Capacidad total del modelo
     public int getCapacidad() {
         return tiposDeCabina.stream()
-                .mapToInt(bmtc -> bmtc.getCant() * bmtc.getCab_type().getCant_max_per())
+                .mapToInt(bmtc -> bmtc.getCant() * bmtc.getCab_type().getCantMaxPer())
                 .sum();
     }
 

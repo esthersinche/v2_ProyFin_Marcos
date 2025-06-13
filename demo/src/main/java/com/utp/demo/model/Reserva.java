@@ -16,7 +16,7 @@ public class Reserva {
 
     @Id
     @Column(name = "id_reserva")
-    private String id_reserva;
+    private String idReserva;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dni_cliente")
@@ -50,12 +50,12 @@ public class Reserva {
     public Reserva() {
     }
 
-    public String getId_reserva() {
-        return id_reserva;
+    public String getIdReserva() {
+        return idReserva;
     }
 
-    public void setId_reserva(String id_reserva) {
-        this.id_reserva = id_reserva;
+    public void setIdReserva(String id_reserva) {
+        this.idReserva = id_reserva;
     }
 
     public Cliente getCliente() {

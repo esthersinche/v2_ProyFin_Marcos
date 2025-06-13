@@ -48,21 +48,21 @@ public class Cabina_Inst extends Cabina {
 
     @Override
     public String getCab_tipo_id() {
-        return cab_tipo.getCab_tipo_id();
+        return cab_tipo.getCabTipoId();
     }
 
     @Override
     public String getNombre_cab() {
-        return cab_tipo.getNombre_cab();
+        return cab_tipo.getNombreCab();
     }
 
     @Override
     public int getCant_max_per() {
-        return cab_tipo.getCant_max_per();
+        return cab_tipo.getCantMaxPer();
     }
 
     @Override
     public double getPrec_cabina_per() {
-        return cab_tipo.getPrec_cabina_per();
+        return cab_tipo.getPrecCabinaPer();
     }
 }

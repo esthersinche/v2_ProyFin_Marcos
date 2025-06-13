@@ -67,8 +67,8 @@ public class CabinaService {
         }
         // Extraer los IDs de cabina que el modelo soporta
         List<String> tipoIds = barco.getBarmodel().getTiposDeCabina().stream()
-            .map(bmtc -> bmtc.getCab_type().getCab_tipo_id())
-            .toList();
+                .map(bmtc -> bmtc.getCab_type().getCabTipoId())
+                .toList();
 
         return cabrepo.findByCabTipoIdIn(tipoIds);
     }

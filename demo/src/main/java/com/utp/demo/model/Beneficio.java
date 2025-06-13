@@ -15,13 +15,13 @@ public class Beneficio {
 
     @Id
     @Column(name = "id_beneficio")
-    private String id_bene;
+    private String idBene;
 
     @Column(name = "nombre_beneficio")
-    private String nombre_bene;
+    private String nombreBene;
 
     @Column(name = "descripcion_beneficio")
-    private String desc_bene;
+    private String descBene;
 
     @OneToMany(mappedBy = "beneficio")
     private List<PaqueteBeneficio> beneficiosPorPaquete = new ArrayList<>();
@@ -30,33 +30,33 @@ public class Beneficio {
     }
 
     public Beneficio(String id_bene, String nombre_bene, String desc_bene) {
-        this.id_bene = id_bene;
-        this.nombre_bene = nombre_bene;
-        this.desc_bene = desc_bene;
+        this.idBene = id_bene;
+        this.nombreBene = nombre_bene;
+        this.descBene = desc_bene;
     }
 
-    public String getId_bene() {
-        return id_bene;
+    public String getIdBene() {
+        return idBene;
     }
 
-    public void setId_bene(String id_bene) {
-        this.id_bene = id_bene;
+    public void setIdBene(String id_bene) {
+        this.idBene = id_bene;
     }
 
-    public String getNombre_bene() {
-        return nombre_bene;
+    public String getNombreBene() {
+        return nombreBene;
     }
 
-    public void setNombre_bene(String nombre_bene) {
-        this.nombre_bene = nombre_bene;
+    public void setNombreBene(String nombre_bene) {
+        this.nombreBene = nombre_bene;
     }
 
-    public String getDesc_bene() {
-        return desc_bene;
+    public String getDescBene() {
+        return descBene;
     }
 
-    public void setDesc_bene(String desc_bene) {
-        this.desc_bene = desc_bene;
+    public void setDescBene(String desc_bene) {
+        this.descBene = desc_bene;
     }
 
     public List<PaqueteBeneficio> getBeneficiosPorPaquete() {

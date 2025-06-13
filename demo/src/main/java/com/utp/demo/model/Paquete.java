@@ -15,16 +15,16 @@ public class Paquete {
 
     @Id
     @Column(name = "Id_paquete")
-    private String id_paquete;
+    private String idPaquete;
 
     @Column(name = "nombre_paq")
-    private String nom_paquete;
+    private String nomPaquete;
 
     @Column(name = "descripcion_paq")
-    private String desc_paquete;
+    private String descPaquete;
 
     @Column(name = "precio_paq")
-    private double prec_paquete_uni;
+    private double precPaqueteUni;
     /* 
     @ManyToOne
     @JoinColumn(name = "cabinatipo")
@@ -46,42 +46,42 @@ public class Paquete {
     }
 
     public Paquete(String id_paquete, String nom_paquete, String desc_paquete, double prec_paquete_uni) {
-        this.id_paquete = id_paquete;
-        this.nom_paquete = nom_paquete;
-        this.desc_paquete = desc_paquete;
-        this.prec_paquete_uni = prec_paquete_uni;
+        this.idPaquete = id_paquete;
+        this.nomPaquete = nom_paquete;
+        this.descPaquete = desc_paquete;
+        this.precPaqueteUni = prec_paquete_uni;
     }
 
-    public String getId_paquete() {
-        return id_paquete;
+    public String getIdPaquete() {
+        return idPaquete;
     }
 
-    public void setId_paquete(String id_paquete) {
-        this.id_paquete = id_paquete;
+    public void setIdPaquete(String id_paquete) {
+        this.idPaquete = id_paquete;
     }
 
-    public String getNom_paquete() {
-        return nom_paquete;
+    public String getNomPaquete() {
+        return nomPaquete;
     }
 
-    public void setNom_paquete(String nom_paquete) {
-        this.nom_paquete = nom_paquete;
+    public void setNomPaquete(String nom_paquete) {
+        this.nomPaquete = nom_paquete;
     }
 
-    public String getDesc_paquete() {
-        return desc_paquete;
+    public String getDescPaquete() {
+        return descPaquete;
     }
 
-    public void setDesc_paquete(String desc_paquete) {
-        this.desc_paquete = desc_paquete;
+    public void setDescPaquete(String desc_paquete) {
+        this.descPaquete = desc_paquete;
     }
 
-    public double getPrec_paquete_uni() {
-        return prec_paquete_uni;
+    public double getPrecPaqueteUni() {
+        return precPaqueteUni;
     }
 
-    public void setPrec_paquete_uni(double prec_paquete_uni) {
-        this.prec_paquete_uni = prec_paquete_uni;
+    public void setPrecPaqueteUni(double prec_paquete_uni) {
+        this.precPaqueteUni = prec_paquete_uni;
     }
 
     /* 

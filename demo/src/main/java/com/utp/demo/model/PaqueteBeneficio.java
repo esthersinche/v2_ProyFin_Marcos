@@ -34,7 +34,7 @@ public class PaqueteBeneficio {
     public PaqueteBeneficio(Paquete paquete, Beneficio beneficio) {
         this.paquete = paquete;
         this.beneficio = beneficio;
-        this.id = new PaqueteBeneficioId(paquete.getId_paquete(), beneficio.getId_bene());
+        this.id = new PaqueteBeneficioId(paquete.getIdPaquete(), beneficio.getIdBene());
     }
 
     public PaqueteBeneficioId getId() {

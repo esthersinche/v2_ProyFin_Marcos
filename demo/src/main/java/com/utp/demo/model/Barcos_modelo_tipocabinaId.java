@@ -34,13 +34,15 @@ public class Barcos_modelo_tipocabinaId implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof Barcos_modelo_tipocabinaId))
+        }
+        if (!(o instanceof Barcos_modelo_tipocabinaId)) {
             return false;
+        }
         Barcos_modelo_tipocabinaId that = (Barcos_modelo_tipocabinaId) o;
-        return Objects.equals(modelo_barco, that.modelo_barco) &&
-                Objects.equals(cab_tipo_id, that.cab_tipo_id);
+        return Objects.equals(modelo_barco, that.modelo_barco)
+                && Objects.equals(cab_tipo_id, that.cab_tipo_id);
     }
 
     @Override

@@ -33,7 +33,7 @@ public class ReservaService {
     public Reserva iniciarReserva() {
         Reserva r = new Reserva();
         // Generar ID único
-        r.setId_reserva(UUID.randomUUID().toString());
+        r.setIdReserva(UUID.randomUUID().toString());
         return r;
     }
 

@@ -35,7 +35,7 @@ public class Barcos_modelo_tipocabina {
         this.bar_model = bar_model;
         this.cab_type = cab_type;
         this.cant = cant;
-        this.idparaelcoso = new Barcos_modelo_tipocabinaId(bar_model.getModelo_barco(), cab_type.getCab_tipo_id());
+        this.idparaelcoso = new Barcos_modelo_tipocabinaId(bar_model.getModelo_barco(), cab_type.getCabTipoId());
     }
 
     public Barcos_modelo_tipocabinaId getIdparaelcoso() {
