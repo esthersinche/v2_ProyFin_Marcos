@@ -16,7 +16,7 @@ public class Cabina_Inst extends Cabina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cabina")
-    private Long cabinaId;
+    private String cabinaId;
 
     @ManyToOne
     @JoinColumn(name = "cabinatipo")
@@ -30,11 +30,11 @@ public class Cabina_Inst extends Cabina {
         this.cabTipo = cab_tipo;
     }
 
-    public Long getCabinaId() {
+    public String getCabinaId() {
         return cabinaId;
     }
 
-    public void setCabinaId(Long cabina_id) {
+    public void setCabinaId(String cabina_id) {
         this.cabinaId = cabina_id;
     }
 

@@ -1,14 +1,18 @@
 package com.utp.demo.controller;
 
 import java.time.LocalDate;
+import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.utp.demo.model.Barcos;
 import com.utp.demo.model.Cabina_Inst;
@@ -18,9 +22,12 @@ import com.utp.demo.model.Reserva;
 import com.utp.demo.model.Ruta;
 import com.utp.demo.service.BarcoService;
 import com.utp.demo.service.CabinaService;
+import com.utp.demo.service.ClienteService;
 import com.utp.demo.service.PaqueteService;
 import com.utp.demo.service.ReservaService;
 import com.utp.demo.service.RutaService;
+
+import jakarta.validation.Valid;
 
 @Controller
 
@@ -47,11 +54,6 @@ public class ReservaController {
         this.cabinaService = cabinaService;
     }
 
-    @ModelAttribute("reserva")
-    public Reserva reservaSession() {
-        return reservaService.iniciarReserva();
-    }
-
 // Paso 1: Cliente
     @GetMapping("/comprar")
     public String mostrarFormularioCliente(Model model) {
@@ -59,39 +61,64 @@ public class ReservaController {
         return "comprar";
     }
 
+    @Autowired
+    private ClienteService clienteService;
+
     @PostMapping("/guardarCliente")
     public String guardarCliente(
-            @ModelAttribute Cliente cliente,
+            @Valid @ModelAttribute Cliente cliente,
+            BindingResult result,
             @RequestParam int cantidadPasajeros,
-            @ModelAttribute("reserva") Reserva reserva
-    ) {
+            @ModelAttribute("reserva") Reserva reserva,
+            Model model) {
+        if (result.hasErrors()) {
+            return "comprar";
+        }
+        clienteService.guardarCliente(cliente);
 
         reserva.setCliente(cliente);
         reserva.setCantidadPasajeros(cantidadPasajeros);
         reserva.setFechaReserva(LocalDate.now());
         return "redirect:/elegirruta";
+    }
 
+    @ModelAttribute("reserva")
+    public Reserva reservaSession() {
+        return reservaService.iniciarReserva();
     }
 
 // Paso 2: Ruta + barco
     @GetMapping("/elegirruta")
-    public String mostrarRutas(Model model) {
+    public String mostrarRutas(
+            @RequestParam(required = false) String selectedRuta,
+            @ModelAttribute("reserva") Reserva reserva,
+            Model model) {
+
+        // Siempre cargo las rutas
         model.addAttribute("rutas", rutaService.obtenerTodasLasRutas());
-        model.addAttribute("barcos", barcoService.obtenerPorRuta(null));
+
+        if (selectedRuta != null) {
+            // Si viene ?selectedRuta=XYZ, cargo los barcos y marco la ruta seleccionada
+            model.addAttribute("selectedRuta", selectedRuta);
+            model.addAttribute("barcos", barcoService.obtenerPorRuta(selectedRuta));
+        } else {
+            // Primera vez que entras, lista de barcos vacía
+            model.addAttribute("barcos", Collections.<Barcos>emptyList());
+        }
+
         return "elegirruta";
     }
 
     @PostMapping("/guardarRuta")
     public String guardarRuta(
             @RequestParam String idruta,
-            @ModelAttribute("reserva") Reserva reserva,
-            Model model) {
+            @ModelAttribute("reserva") Reserva reserva) {
+
         Ruta ruta = rutaService.buscarPorId(idruta);
         reserva.setRuta(ruta);
-        model.addAttribute("rutas", rutaService.obtenerTodasLasRutas());
-        model.addAttribute("selectedRuta", idruta);
-        model.addAttribute("barcos", barcoService.obtenerPorRuta(idruta));
-        return "elegirruta";
+
+        // redirige enviando el parámetro selectedRuta
+        return "redirect:/elegirruta?selectedRuta=" + idruta;
     }
 
     @PostMapping("/guardarBarco")
@@ -118,7 +145,7 @@ public class ReservaController {
             @ModelAttribute("reserva") Reserva reserva,
             Model model) {
         Paquete pq = paqueteService.buscarPorId(idpaquete);
-        Cabina_Inst cb = cabinaService.buscarPorIdCabina(Long.parseLong(idcabina));
+        Cabina_Inst cb = cabinaService.buscarPorIdCabina(idcabina);
         reserva.setPaquete(pq);
         reserva.setCabina(cb);
         double unitario = pq.getPrecPaqueteUni()
@@ -134,17 +161,23 @@ public class ReservaController {
     @PostMapping("/confirmarReserva")
     public String confirmarReserva(
             @ModelAttribute("reserva") Reserva reserva,
-            @RequestParam double precioUnitario) {
-        int qty = reserva.getCantidadPasajeros();
-        reserva.setTotal(precioUnitario * qty);
-        reservaService.guardar(reserva);
-        return "redirect:/resumen";
+            @RequestParam double precioUnitario,
+            SessionStatus status) {
+        reserva.setTotal(precioUnitario * reserva.getCantidadPasajeros());
+        // Guarda y recupera la entidad con su id generado
+        Reserva reservaGuardada = reservaService.guardar(reserva);
+        status.setComplete();   // elimina "reserva" de la sesión
+        return "redirect:/resumen?id=" + reservaGuardada.getIdReserva();
     }
 
 // Paso 4: Resumen
     @GetMapping("/resumen")
-    public String mostrarResumen(@ModelAttribute("reserva") Reserva reserva, Model model
-    ) {
+    public String mostrarResumen(
+            @RequestParam("id") String idReserva,
+            Model model) {
+
+        // Recupera la reserva completa (con cliente, ruta, paquete, etc.)
+        Reserva reserva = reservaService.buscar(idReserva);
         model.addAttribute("reserva", reserva);
         return "resumen";
     }
