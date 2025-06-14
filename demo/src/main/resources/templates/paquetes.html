@@ -138,19 +138,19 @@
                     <div class="card h-100 text-light bg-ocean rounded-4 shadow-lg">
                         <div class="card-body d-flex flex-column justify-content-between">
                             <div>
-                                <h3 class="display-6 fw-bold fs-3" th:text="${paq.nom_paquete}"></h3>
-                                <p th:text="${paq.desc_paquete}"></p>
+                                <h3 class="display-6 fw-bold fs-3" th:text="${paq.nomPaquete}"></h3>
+                                <p th:text="${paq.descPaquete}"></p>
                             </div>
                             <ul class="list-unstyled d-flex mb-3">
                                 <li>
                                     <i class="bi bi-cash-stack"></i>
-                                    <small th:text="${paq.prec_paquete_uni}"></small>
+                                    <small th:text="${paq.precPaqueteUni}"></small>
                                 </li>
                             </ul>
                             <div>
                                 <strong>Beneficios:</strong>
                                 <ul>
-                                    <li th:each="pb : ${paq.beneficios}" th:text="${pb.beneficio.nombre_bene}"></li>
+                                    <li th:each="pb : ${paq.beneficios}" th:text="${pb.beneficio.nombreBene}"></li>
                                 </ul>
                             </div>
                         </div>

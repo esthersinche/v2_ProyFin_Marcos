@@ -16,53 +16,53 @@ public class Cabina_Inst extends Cabina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cabina")
-    private Long cabina_id;
+    private Long cabinaId;
 
     @ManyToOne
     @JoinColumn(name = "cabinatipo")
-    private Cabina_tipo cab_tipo;
+    private Cabina_tipo cabTipo;
 
     public Cabina_Inst() {
     }
 
     public Cabina_Inst(int numadultos, Cabina_tipo cab_tipo) {
         super(numadultos);
-        this.cab_tipo = cab_tipo;
+        this.cabTipo = cab_tipo;
     }
 
-    public Long getCabina_id() {
-        return cabina_id;
+    public Long getCabinaId() {
+        return cabinaId;
     }
 
-    public void setCabina_id(Long cabina_id) {
-        this.cabina_id = cabina_id;
+    public void setCabinaId(Long cabina_id) {
+        this.cabinaId = cabina_id;
     }
 
-    public Cabina_tipo getCab_tipo() {
-        return cab_tipo;
+    public Cabina_tipo getCabTipo() {
+        return cabTipo;
     }
 
-    public void setCab_tipo(Cabina_tipo cab_tipo) {
-        this.cab_tipo = cab_tipo;
+    public void setCabTipo(Cabina_tipo cab_tipo) {
+        this.cabTipo = cab_tipo;
     }
 
     @Override
     public String getCab_tipo_id() {
-        return cab_tipo.getCabTipoId();
+        return cabTipo.getCabTipoId();
     }
 
     @Override
     public String getNombre_cab() {
-        return cab_tipo.getNombreCab();
+        return cabTipo.getNombreCab();
     }
 
     @Override
     public int getCant_max_per() {
-        return cab_tipo.getCantMaxPer();
+        return cabTipo.getCantMaxPer();
     }
 
     @Override
     public double getPrec_cabina_per() {
-        return cab_tipo.getPrecCabinaPer();
+        return cabTipo.getPrecCabinaPer();
     }
 }

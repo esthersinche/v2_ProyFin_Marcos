@@ -30,15 +30,14 @@ public interface BarcoRepository extends JpaRepository<Barcos, String> {
     @Query("""
       SELECT b 
       FROM Barcos b 
-      WHERE LOWER(b.barmodel.modelo_barco) = LOWER(:modeloNombre)
+      WHERE LOWER(b.barmodel.modeloBarco) = LOWER(:modeloNombre)
     """)
     Barcos findByModeloNombreIgnoreCase(@Param("modeloNombre") String modeloNombre);
-
 
     @Query("""
         SELECT DISTINCT b.barmodel FROM Barcos b
         """)
-        List<Barcos_modelo>findDistinctModelos();
+    List<Barcos_modelo> findDistinctModelos();
 
     @Query("""
       SELECT b
@@ -48,4 +47,3 @@ public interface BarcoRepository extends JpaRepository<Barcos, String> {
     """)
     List<Barcos> findAllByRutaId(@Param("rutaId") String rutaId);
 }
-

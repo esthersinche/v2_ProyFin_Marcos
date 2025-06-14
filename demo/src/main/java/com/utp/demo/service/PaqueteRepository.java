@@ -13,7 +13,7 @@ public interface PaqueteRepository extends JpaRepository<Paquete, String> {
     @Query("""
       SELECT p
       FROM Paquete p
-      WHERE LOWER(p.nom_paquete) IN :nombres
+      WHERE LOWER(p.nomPaquete) IN :nombres
     """)
     List<Paquete> findByNombrePaqInIgnoreCase(@Param("nombres") List<String> nombres);
 

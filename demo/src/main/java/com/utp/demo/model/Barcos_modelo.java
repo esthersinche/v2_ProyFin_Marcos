@@ -15,7 +15,7 @@ public class Barcos_modelo {
 
     @Id
     @Column(name = "modelo")
-    private String modelo_barco; // Ej. SMODEL, MMODEL, LMODEL
+    private String modeloBarco; // Ej. SMODEL, MMODEL, LMODEL
 
     @OneToMany(mappedBy = "bar_model")
     private List<Barcos_modelo_tipocabina> tiposDeCabina = new ArrayList<>();
@@ -24,15 +24,15 @@ public class Barcos_modelo {
     }
 
     public Barcos_modelo(String modelo_barco) {
-        this.modelo_barco = modelo_barco;
+        this.modeloBarco = modelo_barco;
     }
 
-    public String getModelo_barco() {
-        return modelo_barco;
+    public String getModeloBarco() {
+        return modeloBarco;
     }
 
-    public void setModelo_barco(String modelo_barco) {
-        this.modelo_barco = modelo_barco;
+    public void setModeloBarco(String modelo_barco) {
+        this.modeloBarco = modelo_barco;
     }
 
     public List<Barcos_modelo_tipocabina> getTiposDeCabina() {

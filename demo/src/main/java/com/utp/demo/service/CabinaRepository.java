@@ -14,23 +14,23 @@ public interface CabinaRepository extends JpaRepository<Cabina_Inst, Long> {
     @Query("""
       SELECT c
       FROM Cabina_Inst c
-      WHERE c.cab_tipo.cab_tipo_id = :cabTipoId
+      WHERE c.cabTipo.cabTipoId = :cabTipoId
     """)
     List<Cabina_Inst> findByCabTipoId(@Param("cabTipoId") String cabTipoId);
 
     @Query("""
       SELECT c
       FROM Cabina_Inst c
-      WHERE c.cab_tipo = :cabTipo
+      WHERE c.cabTipo = :cabTipo
     """)
     Cabina_Inst findFirstByCabTipo(@Param("cabTipo") Cabina_tipo cabTipo);
 
-     // ya hay findByCabTipoId lol(?)
+    // ya hay findByCabTipoId lol(?)
     @Query("""
       SELECT c
       FROM Cabina_Inst c
-      JOIN c.cab_tipo t
-      WHERE t.cab_tipo_id IN :ids
+      JOIN c.cabTipo t
+      WHERE t.cabTipoId IN :ids
     """)
     List<Cabina_Inst> findByCabTipoIdIn(@Param("ids") List<String> ids);
 

@@ -46,7 +46,7 @@ public class RutaController {
             stream = stream.filter(r
                     -> r.getBarcos().stream()
                             .map(Barcos::getBarmodel) // de Barcos obtenemos Barcos_modelo
-                            .map(Barcos_modelo::getModelo_barco) // y de ahí el código de modelo
+                            .map(Barcos_modelo::getModeloBarco) // y de ahí el código de modelo
                             .anyMatch(modelo::contains)
             );
         }

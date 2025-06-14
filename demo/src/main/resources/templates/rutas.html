@@ -106,7 +106,7 @@
                                 <div th:class="${ stat.index % 2 == 1 
                                   ? 'col-5 order-2' 
                                   : 'col-5 order-1' }">
-                                    <img th:src="@{${ruta.imagen}}" th:alt="${ruta.nombre_ruta}"
+                                    <img th:src="@{${ruta.imagen}}" th:alt="${ruta.nombreruta}"
                                         class="img-fluid rounded-start h-100 w-100 object-fit-cover">
                                 </div>
 
@@ -115,26 +115,26 @@
                                   ? 'col-7 d-flex flex-column order-1 ps-3' 
                                   : 'col-7 d-flex flex-column order-2 pe-3' }">
                                     <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title text-ocean" th:text="${ruta.nombre_ruta}">
+                                        <h5 class="card-title text-ocean" th:text="${ruta.nombreruta}">
                                             Nombre de la ruta
                                         </h5>
-                                        <p class="card-text flex-grow-1" th:text="${ruta.descripcion_ruta}">
+                                        <p class="card-text flex-grow-1" th:text="${ruta.descripcionruta}">
                                             Descripción…
                                         </p>
                                         <ul class="list-group list-group-flush mb-3">
                                             <li class="list-group-item">
-                                                Duración: <span th:text="${ruta.dias_ruta}">0 días</span>
+                                                Duración: <span th:text="${ruta.diasruta}">0 días</span>
                                             </li>
                                             <li class="list-group-item">
                                                 <!-- Mostramos todos los modelos de barco asociados -->
                                                 Modelos de Barco:
-                                                <span th:each="b : ${ruta.barcos}" th:text="${b.bar_model.modelo_barco}"
+                                                <span th:each="b : ${ruta.barcos}" th:text="${b.barmodel.modeloBarco}"
                                                     class="badge bg-secondary me-1">
                                                     Modelo
                                                 </span>
                                             </li>
                                             <li class="list-group-item">
-                                                Precio: $<span th:text="${ruta.precio_ruta}">0.0</span>
+                                                Precio: $<span th:text="${ruta.precioruta}">0.0</span>
                                             </li>
                                             <li class="list-group-item">
                                                 Salida: <span th:text="${ruta.salida}">Puerto</span>

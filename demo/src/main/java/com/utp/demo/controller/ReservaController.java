@@ -123,7 +123,7 @@ public class ReservaController {
         reserva.setCabina(cb);
         double unitario = pq.getPrecPaqueteUni()
                 + reserva.getRuta().getPrecioruta()
-                + cb.getCab_tipo().getPrecCabinaPer();
+                + cb.getCabTipo().getPrecCabinaPer();
         model.addAttribute("precioUnitario", unitario);
         // recargar misma vista con precio disponible y confirmación
         model.addAttribute("paquetes", paqueteService.obtenerTodosLosPaquetes());

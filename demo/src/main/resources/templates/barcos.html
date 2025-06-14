@@ -26,18 +26,18 @@
                 <!-- Texto -->
                 <div th:class="${ 'col-md-7 ' + (iterStat.index % 2 == 1 ? 'order-md-2 text-start' : 'text-end') }">
                     <h3 class="featurette-heading">
-                        <span th:text="${barco.nombre_barco}">Nombre del barco</span><br>
-                        <small class="text-ocean" th:text="${barco.bar_model.modelo_barco}">Modelo</small>
+                        <span th:text="${barco.nombrebarco}">Nombre del barco</span><br>
+                        <small class="text-ocean" th:text="${barco.barmodel.modeloBarco}">Modelo</small>
                     </h3>
                     <p class="lead">
                         <strong>Capitán:</strong>
-                        <span th:text="${barco.capitan_barco}">Capitán</span><br>
+                        <span th:text="${barco.capitanbarco}">Capitán</span><br>
                         <strong>Camarotes y Suites:</strong>
                         <span th:text="${barco.totalCabinas}">0</span> Cabinas<br>
                         <strong>Capacidad:</strong>
                         <span th:text="${barco.capacidadTotal}">0</span> Pasajeros<br>
                         <strong>Descripción:</strong>
-                        <span th:text="${barco.descripcion_barco}">Descripción</span>
+                        <span th:text="${barco.descripcionbarco}">Descripción</span>
                     </p>
                     <a th:href="@{/paquetes}" class="btn btn-dark btn-lg mt-3">
                         Ver destinos disponibles
@@ -46,7 +46,7 @@
 
                 <!-- Imagen -->
                 <div th:class="${ 'col-md-5 ' + (iterStat.index % 2 == 1 ? 'order-md-1' : '') }">
-                    <img th:src="@{${barco.imagen_barco}}" th:alt="${barco.nombre_barco}"
+                    <img th:src="@{${barco.imagenbarco}}" th:alt="${barco.imagenbarco}"
                         class="img-fluid mx-auto d-block rounded shadow-sm"
                         style="max-height: 350px; object-fit: cover;">
                 </div>
