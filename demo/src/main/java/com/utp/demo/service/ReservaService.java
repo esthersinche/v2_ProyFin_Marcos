@@ -1,7 +1,7 @@
 package com.utp.demo.service;
 
+import java.security.SecureRandom;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,12 +29,26 @@ public class ReservaService {
         return reservaRepository.existsById(id);
     }
 
-    //metodo q necesitaba
     public Reserva iniciarReserva() {
         Reserva r = new Reserva();
-        // Generar ID único
-        r.setIdReserva(UUID.randomUUID().toString());
+        String id;
+        // Genera hasta que encuentres un ID que NO exista en BD
+        do {
+            id = generarIdAleatorio(20);
+        } while (reservaRepository.existsById(id));
+        r.setIdReserva(id);
         return r;
+    }
+    private final SecureRandom rnd = new SecureRandom();
+    private static final String ALFABETO = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    //metodo q necesitaba
+    private String generarIdAleatorio(int longitud) {
+        StringBuilder sb = new StringBuilder(longitud);
+        for (int i = 0; i < longitud; i++) {
+            sb.append(ALFABETO.charAt(rnd.nextInt(ALFABETO.length())));
+        }
+        return sb.toString();
     }
 
     // Guardar o actualizar una reserva

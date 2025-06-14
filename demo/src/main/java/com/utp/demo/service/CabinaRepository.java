@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.utp.demo.model.Cabina_Inst;
 import com.utp.demo.model.Cabina_tipo;
 
-public interface CabinaRepository extends JpaRepository<Cabina_Inst, Long> {
+public interface CabinaRepository extends JpaRepository<Cabina_Inst, String> {
 
     @Query("""
       SELECT c
