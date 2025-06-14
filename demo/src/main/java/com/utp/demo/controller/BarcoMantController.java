@@ -36,6 +36,8 @@ public class BarcoMantController {
         model.addAttribute("rutasDisponibles", rutaserv.obtenerTodasLasRutas());
         return "Mantenimiento/barcoMant";
     }
+
+    
     
 
 

@@ -43,4 +43,8 @@ public class RutaService {
         rutaRepository.deleteById(idRuta);
     }
 
+    public List<String> obtenerTodasLasSalidas(){
+        return rutaRepository.Obtenertodaslassalidas();
+    }
+
 }

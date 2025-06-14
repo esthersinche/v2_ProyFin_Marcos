@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -41,21 +40,21 @@
                         </div>
                         <div class="col-md-6">
                             <label for="salida" class="form-label">Puerto de Salida</label>
-                            <select class="form-select" id="salida" th:field="*{salida}" required>
-                                <option th:each="p : ${puertos}" th:value="${p.id}" th:text="${p.nombre}">Puerto
+                            <select class="form-select" id="salida" th:field="*{salidaRuta}" required>
+                                <option th:each="p : ${puertos}" th:value="${p}" th:text="${p}">Puerto
                                 </option>
                             </select>
                         </div>
 
                         <div class="col-12">
                             <label for="descRuta" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="descRuta" th:field="*{descRuta}" rows="3"
+                            <textarea class="form-control" id="descRuta" th:field="*{descripcionRuta}" rows="3"
                                 placeholder="Descripción de la ruta" required></textarea>
                         </div>
 
                         <div class="col-md-12">
                             <label for="imagenRuta" class="form-label">Imagen (URL)</label>
-                            <input type="url" class="form-control" id="imagenRuta" th:field="*{imagenUrl}"
+                            <input type="url" class="form-control" id="imagenRuta" th:field="*{urlRuta}"
                                 placeholder="Enlace de la imagen">
                         </div>
                     </div>

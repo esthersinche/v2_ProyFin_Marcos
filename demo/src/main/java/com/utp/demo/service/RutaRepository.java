@@ -29,4 +29,12 @@ public interface RutaRepository extends JpaRepository<Ruta, String> {
       WHERE LOWER(r.salida) = LOWER(:salida)
     """)
     List<Ruta> findBySalidaIgnoreCase(@Param("salida") String salida);
+
+    @Query("""
+      SELECT DISTINCT r.salida
+      FROM Ruta r
+      WHERE r.salida IS NOT NULL
+        
+        """)
+        List<String> Obtenertodaslassalidas();
 }

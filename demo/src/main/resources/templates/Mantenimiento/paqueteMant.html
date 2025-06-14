@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -37,7 +37,7 @@
                         <div class="col-12">
                             <label for="beneficios" class="form-label">Beneficios Asignados</label>
                             <select class="form-select" id="beneficios" th:field="*{beneficios}" multiple size="5">
-                                <option th:each="b : ${beneficiosDisponibles}" th:value="${b.id}" th:text="${b.nombre}">
+                                <option th:each="b : ${beneficiosDisponibles}" th:value="${b.idBene}" th:text="${b.nombreBene}">
                                     Beneficio</option>
                             </select>
                             <small class="form-text text-muted">Mantén Ctrl (o Cmd) para seleccionar múltiples
