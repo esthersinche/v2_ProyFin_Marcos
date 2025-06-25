@@ -25,42 +25,42 @@ public class Cabina_tipo {
     public Cabina_tipo() {
     }
 
-    public Cabina_tipo(String cab_tipo_id, String nombre_cab, int cant_max_per, double prec_cabina_per) {
-        this.cabTipoId = cab_tipo_id;
-        this.nombreCab = nombre_cab;
-        this.cantMaxPer = cant_max_per;
-        this.precCabinaPer = prec_cabina_per;
+    public Cabina_tipo(String cabTipoId, String nombreCab, int cantMaxPer, double precCabinaPer) {
+        this.cabTipoId = cabTipoId;
+        this.nombreCab = nombreCab;
+        this.cantMaxPer = cantMaxPer;
+        this.precCabinaPer = precCabinaPer;
     }
 
     public String getCabTipoId() {
         return cabTipoId;
     }
 
-    public void setCabTipoId(String cab_tipo_id) {
-        this.cabTipoId = cab_tipo_id;
+    public void setCabTipoId(String cabTipoId) {
+        this.cabTipoId = cabTipoId;
     }
 
     public String getNombreCab() {
         return nombreCab;
     }
 
-    public void setNombreCab(String nombre_cab) {
-        this.nombreCab = nombre_cab;
+    public void setNombreCab(String nombreCab) {
+        this.nombreCab = nombreCab;
     }
 
     public int getCantMaxPer() {
         return cantMaxPer;
     }
 
-    public void setCantMaxPer(int cant_max_per) {
-        this.cantMaxPer = cant_max_per;
+    public void setCantMaxPer(int cantMaxPer) {
+        this.cantMaxPer = cantMaxPer;
     }
 
     public double getPrecCabinaPer() {
         return precCabinaPer;
     }
 
-    public void setPrecCabinaPer(double prec_cabina_per) {
-        this.precCabinaPer = prec_cabina_per;
+    public void setPrecCabinaPer(double precCabinaPer) {
+        this.precCabinaPer = precCabinaPer;
     }
 }

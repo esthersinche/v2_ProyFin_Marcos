@@ -18,12 +18,12 @@ public class Barcos_modelo_tipocabina {
     @ManyToOne
     @MapsId("modelo_barco")
     @JoinColumn(name = "modelo")
-    private Barcos_modelo bar_model;
+    private Barcos_modelo barmodel; //bar_model
 
     @ManyToOne
     @MapsId("cab_tipo_id")
     @JoinColumn(name = "cabinatipo")
-    private Cabina_tipo cab_type;
+    private Cabina_tipo cabtype; //cab_type
 
     @Column(name = "cantidad")
     private int cant;
@@ -31,11 +31,11 @@ public class Barcos_modelo_tipocabina {
     public Barcos_modelo_tipocabina() {
     }
 
-    public Barcos_modelo_tipocabina(Barcos_modelo bar_model, Cabina_tipo cab_type, int cant) {
-        this.bar_model = bar_model;
-        this.cab_type = cab_type;
+    public Barcos_modelo_tipocabina(Barcos_modelo barmodel, Cabina_tipo cabtype, int cant) {
+        this.barmodel = barmodel;
+        this.cabtype = cabtype;
         this.cant = cant;
-        this.idparaelcoso = new Barcos_modelo_tipocabinaId(bar_model.getModeloBarco(), cab_type.getCabTipoId());
+        this.idparaelcoso = new Barcos_modelo_tipocabinaId(barmodel.getModeloBarco(), cabtype.getCabTipoId());
     }
 
     public Barcos_modelo_tipocabinaId getIdparaelcoso() {
@@ -46,20 +46,20 @@ public class Barcos_modelo_tipocabina {
         this.idparaelcoso = idparaelcoso;
     }
 
-    public Barcos_modelo getBar_model() {
-        return bar_model;
+    public Barcos_modelo getBarmodel() {
+        return barmodel;
     }
 
-    public void setBar_model(Barcos_modelo bar_model) {
-        this.bar_model = bar_model;
+    public void setBarmodel(Barcos_modelo barmodel) {
+        this.barmodel = barmodel;
     }
 
-    public Cabina_tipo getCab_type() {
-        return cab_type;
+    public Cabina_tipo getCabtype() {
+        return cabtype;
     }
 
-    public void setCab_type(Cabina_tipo cab_type) {
-        this.cab_type = cab_type;
+    public void setCabtype(Cabina_tipo cabtype) {
+        this.cabtype = cabtype;
     }
 
     public int getCant() {
