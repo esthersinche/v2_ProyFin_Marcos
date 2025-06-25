@@ -5,31 +5,31 @@ import java.util.Objects;
 
 public class Barcos_modelo_tipocabinaId implements Serializable {
 
-    private String modelo_barco;
-    private String cab_tipo_id;
+    private String modelobarco;
+    private String cabtipoid;
 
     public Barcos_modelo_tipocabinaId() {
     }
 
-    public Barcos_modelo_tipocabinaId(String modelo_barco, String cab_tipo_id) {
-        this.modelo_barco = modelo_barco;
-        this.cab_tipo_id = cab_tipo_id;
+    public Barcos_modelo_tipocabinaId(String modelobarco, String cabtipoid) {
+        this.modelobarco = modelobarco;
+        this.cabtipoid = cabtipoid;
     }
 
-    public String getModelo_barco() {
-        return modelo_barco;
+    public String getModelobarco() {
+        return modelobarco;
     }
 
-    public void setModelo_barco(String modelo_barco) {
-        this.modelo_barco = modelo_barco;
+    public void setModelobarco(String modelobarco) {
+        this.modelobarco = modelobarco;
     }
 
-    public String getCab_tipo_id() {
-        return cab_tipo_id;
+    public String getCabtipoid() {
+        return cabtipoid;
     }
 
-    public void setCab_tipo_id(String cab_tipo_id) {
-        this.cab_tipo_id = cab_tipo_id;
+    public void setCabtipoid(String cabtipoid) {
+        this.cabtipoid = cabtipoid;
     }
 
     @Override
@@ -41,12 +41,12 @@ public class Barcos_modelo_tipocabinaId implements Serializable {
             return false;
         }
         Barcos_modelo_tipocabinaId that = (Barcos_modelo_tipocabinaId) o;
-        return Objects.equals(modelo_barco, that.modelo_barco)
-                && Objects.equals(cab_tipo_id, that.cab_tipo_id);
+        return Objects.equals(modelobarco, that.modelobarco)
+                && Objects.equals(cabtipoid, that.cabtipoid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(modelo_barco, cab_tipo_id);
+        return Objects.hash(modelobarco, cabtipoid);
     }
 }

@@ -27,12 +27,12 @@ public class Cliente {
         // Obligatorio para Spring y formularios
     }
 
-    public Cliente(String apellido, int celular, String ciudad, String correo, int dni_cliente, String nombre) {
+    public Cliente(String apellido, int celular, String ciudad, String correo, int dniCliente, String nombre) {
         this.apellido = apellido;
         this.celular = celular;
         this.ciudad = ciudad;
         this.correo = correo;
-        this.dniCliente = dni_cliente;
+        this.dniCliente = dniCliente;
         this.nombre = nombre;
     }
 
@@ -40,8 +40,8 @@ public class Cliente {
         return dniCliente;
     }
 
-    public void setDniCliente(int dni_cliente) {
-        this.dniCliente = dni_cliente;
+    public void setDniCliente(int dniCliente) {
+        this.dniCliente = dniCliente;
     }
 
     public String getNombre() {

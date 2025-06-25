@@ -107,7 +107,7 @@ public class Barcos {
     // auxiliares
     public int getCapacidadTotal() {
         return barmodel != null ? barmodel.getCapacidad() : 0;
-    }
+    }//si no es null da valor, si es null da 0
 
     public int getTotalCabinas() {
         return barmodel != null ? barmodel.getTotalcabinas() : 0;

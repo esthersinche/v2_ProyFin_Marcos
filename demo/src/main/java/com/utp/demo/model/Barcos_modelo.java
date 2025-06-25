@@ -17,22 +17,22 @@ public class Barcos_modelo {
     @Column(name = "modelo")
     private String modeloBarco; // Ej. SMODEL, MMODEL, LMODEL
 
-    @OneToMany(mappedBy = "bar_model")
+    @OneToMany(mappedBy = "barmodel")
     private List<Barcos_modelo_tipocabina> tiposDeCabina = new ArrayList<>();
 
     public Barcos_modelo() {
     }
 
-    public Barcos_modelo(String modelo_barco) {
-        this.modeloBarco = modelo_barco;
+    public Barcos_modelo(String modeloBarco) {
+        this.modeloBarco = modeloBarco;
     }
 
     public String getModeloBarco() {
         return modeloBarco;
     }
 
-    public void setModeloBarco(String modelo_barco) {
-        this.modeloBarco = modelo_barco;
+    public void setModeloBarco(String modeloBarco) {
+        this.modeloBarco = modeloBarco;
     }
 
     public List<Barcos_modelo_tipocabina> getTiposDeCabina() {
@@ -46,7 +46,7 @@ public class Barcos_modelo {
     // Capacidad total del modelo
     public int getCapacidad() {
         return tiposDeCabina.stream()
-                .mapToInt(bmtc -> bmtc.getCant() * bmtc.getCab_type().getCantMaxPer())
+                .mapToInt(bmtc -> bmtc.getCant() * bmtc.getCabtype().getCantMaxPer())
                 .sum();
     }
 

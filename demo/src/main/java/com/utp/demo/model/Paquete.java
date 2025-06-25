@@ -45,43 +45,43 @@ public class Paquete {
     public Paquete() {
     }
 
-    public Paquete(String id_paquete, String nom_paquete, String desc_paquete, double prec_paquete_uni) {
-        this.idPaquete = id_paquete;
-        this.nomPaquete = nom_paquete;
-        this.descPaquete = desc_paquete;
-        this.precPaqueteUni = prec_paquete_uni;
+    public Paquete(String idPaquete, String nomPaquete, String descPaquete, double precPaqueteUni) {
+        this.idPaquete = idPaquete;
+        this.nomPaquete = nomPaquete;
+        this.descPaquete = descPaquete;
+        this.precPaqueteUni = precPaqueteUni;
     }
 
     public String getIdPaquete() {
         return idPaquete;
     }
 
-    public void setIdPaquete(String id_paquete) {
-        this.idPaquete = id_paquete;
+    public void setIdPaquete(String idPaquete) {
+        this.idPaquete = idPaquete;
     }
 
     public String getNomPaquete() {
         return nomPaquete;
     }
 
-    public void setNomPaquete(String nom_paquete) {
-        this.nomPaquete = nom_paquete;
+    public void setNomPaquete(String nomPaquete) {
+        this.nomPaquete = nomPaquete;
     }
 
     public String getDescPaquete() {
         return descPaquete;
     }
 
-    public void setDescPaquete(String desc_paquete) {
-        this.descPaquete = desc_paquete;
+    public void setDescPaquete(String descPaquete) {
+        this.descPaquete = descPaquete;
     }
 
     public double getPrecPaqueteUni() {
         return precPaqueteUni;
     }
 
-    public void setPrecPaqueteUni(double prec_paquete_uni) {
-        this.precPaqueteUni = prec_paquete_uni;
+    public void setPrecPaqueteUni(double precPaqueteUni) {
+        this.precPaqueteUni = precPaqueteUni;
     }
 
     /* 

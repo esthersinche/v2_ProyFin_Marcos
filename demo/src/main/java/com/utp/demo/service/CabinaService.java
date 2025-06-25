@@ -33,7 +33,7 @@ public class CabinaService {
     // Buscar por nombre de cabina
     public Cabina_Inst buscarPorNombreCabina(String nombreCabina) {
         return cabrepo.findAll().stream()
-                .filter(c -> c.getNombre_cab().equalsIgnoreCase(nombreCabina))
+                .filter(c -> c.getNombrecab().equalsIgnoreCase(nombreCabina))
                 .findFirst()
                 .orElse(null);
     }
@@ -41,7 +41,7 @@ public class CabinaService {
     // Buscar por cantidad máxima de personas
     public Cabina_Inst buscarPorCapacidadMaxima(int capacidad) {
         return cabrepo.findAll().stream()
-                .filter(c -> c.getCant_max_per() == capacidad)
+                .filter(c -> c.getCantmaxper() == capacidad)
                 .findFirst()
                 .orElse(null);
     }
@@ -67,7 +67,7 @@ public class CabinaService {
         }
         // Extraer los IDs de cabina que el modelo soporta
         List<String> tipoIds = barco.getBarmodel().getTiposDeCabina().stream()
-                .map(bmtc -> bmtc.getCab_type().getCabTipoId())
+                .map(bmtc -> bmtc.getCabtype().getCabTipoId())
                 .toList();
 
         return cabrepo.findByCabTipoIdIn(tipoIds);

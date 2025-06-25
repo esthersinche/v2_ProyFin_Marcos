@@ -18,6 +18,8 @@ public class Cabina_Inst extends Cabina {
     @Column(name = "id_cabina")
     private Long cabinaId;
 
+    //obtiene numadultos de Cabina
+
     @ManyToOne
     @JoinColumn(name = "cabinatipo")
     private Cabina_tipo cabTipo;
@@ -25,44 +27,44 @@ public class Cabina_Inst extends Cabina {
     public Cabina_Inst() {
     }
 
-    public Cabina_Inst(int numadultos, Cabina_tipo cab_tipo) {
+    public Cabina_Inst(int numadultos, Cabina_tipo cabTipo) {
         super(numadultos);
-        this.cabTipo = cab_tipo;
+        this.cabTipo = cabTipo;
     }
 
     public Long getCabinaId() {
         return cabinaId;
     }
 
-    public void setCabinaId(Long cabina_id) {
-        this.cabinaId = cabina_id;
+    public void setCabinaId(Long cabinaId) {
+        this.cabinaId = cabinaId;
     }
 
     public Cabina_tipo getCabTipo() {
         return cabTipo;
     }
 
-    public void setCabTipo(Cabina_tipo cab_tipo) {
-        this.cabTipo = cab_tipo;
+    public void setCabTipo(Cabina_tipo cabTipo) {
+        this.cabTipo = cabTipo;
     }
 
     @Override
-    public String getCab_tipo_id() {
+    public String getCabtipoid() {
         return cabTipo.getCabTipoId();
     }
 
     @Override
-    public String getNombre_cab() {
+    public String getNombrecab() {
         return cabTipo.getNombreCab();
     }
 
     @Override
-    public int getCant_max_per() {
+    public int getCantmaxper() {
         return cabTipo.getCantMaxPer();
     }
 
     @Override
-    public double getPrec_cabina_per() {
+    public double getPreccabinaper() {
         return cabTipo.getPrecCabinaPer();
     }
 }

@@ -3,6 +3,8 @@ package com.utp.demo.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 
+//mas dirigida a lo q es reserva
+
 @MappedSuperclass
 public abstract class Cabina {
 
@@ -25,13 +27,13 @@ public abstract class Cabina {
     }
 
     // Métodos abstractos
-    public abstract String getCab_tipo_id();
+    public abstract String getCabtipoid();
 
-    public abstract String getNombre_cab();
+    public abstract String getNombrecab();
 
-    public abstract int getCant_max_per();
+    public abstract int getCantmaxper();
 
-    public abstract double getPrec_cabina_per();
+    public abstract double getPreccabinaper();
 
     // Total de personas (por ahora solo adultos, puedes extenderlo si consideras
     // niños después)
@@ -41,6 +43,6 @@ public abstract class Cabina {
 
     // Validación de capacidad de la cabina
     public boolean capacidadvalida() {
-        return getNumtotalper() <= getCant_max_per();
+        return getNumtotalper() <= getCantmaxper();
     }
 }

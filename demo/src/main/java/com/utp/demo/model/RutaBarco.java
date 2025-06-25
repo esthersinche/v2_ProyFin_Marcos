@@ -1,8 +1,10 @@
 package com.utp.demo.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,12 +30,18 @@ public class RutaBarco {
     @JoinColumn(name = "id_barco")
     private Barcos barco;
 
+    @Column(name= "fechasalida")
+    private Date fechasalida;
+
     public RutaBarco() {
     }
 
-    public RutaBarco(Ruta ruta, Barcos barco) {
+    
+
+    public RutaBarco( Ruta ruta, Barcos barco, Date fechasalida) {
         this.ruta = ruta;
         this.barco = barco;
+        this.fechasalida = fechasalida;
         this.id = new RutaBarcoId(ruta.getIdruta(), barco.getIDbarco());
     }
 
@@ -59,6 +67,14 @@ public class RutaBarco {
 
     public void setBarco(Barcos barco) {
         this.barco = barco;
+    }
+
+    public Date getFechasalida() {
+        return fechasalida;
+    }
+
+    public void setFechasalida(Date fechasalida) {
+        this.fechasalida = fechasalida;
     }
 
     // Clase embebida como ID compuesta
@@ -109,4 +125,8 @@ public class RutaBarco {
             return Objects.hash(id_ruta, id_barco);
         }
     }
+
+
+
+    
 }

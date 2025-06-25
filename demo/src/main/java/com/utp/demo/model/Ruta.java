@@ -31,7 +31,7 @@ public class Ruta {
     @Column(name = "precio_ruta")
     private double precioruta;
 
-    @Column(name = "salida")
+    @Column(name = "salida") //puerto
     private String salida;
 
     @Column(name = "imagen")
