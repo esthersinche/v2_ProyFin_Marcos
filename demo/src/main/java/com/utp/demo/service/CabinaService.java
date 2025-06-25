@@ -26,7 +26,7 @@ public class CabinaService {
     }
 
     // Buscar por ID
-    public Cabina_Inst buscarPorIdCabina(Long id) {
+    public Cabina_Inst buscarPorIdCabina(String id) {
         return cabrepo.findById(id).orElse(null);
     }
 

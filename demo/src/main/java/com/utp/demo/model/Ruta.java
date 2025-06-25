@@ -125,6 +125,4 @@ public class Ruta {
         this.barcos = barcos;
     }
 
-
-
 }

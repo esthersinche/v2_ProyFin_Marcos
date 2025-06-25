@@ -16,7 +16,7 @@ public class Cabina_Inst extends Cabina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cabina")
-    private Long cabinaId;
+    private String cabinaId;
 
     //obtiene numadultos de Cabina
 
@@ -32,12 +32,13 @@ public class Cabina_Inst extends Cabina {
         this.cabTipo = cabTipo;
     }
 
-    public Long getCabinaId() {
+    public String getCabinaId() {
         return cabinaId;
     }
 
     public void setCabinaId(Long cabinaId) {
         this.cabinaId = cabinaId;
+
     }
 
     public Cabina_tipo getCabTipo() {

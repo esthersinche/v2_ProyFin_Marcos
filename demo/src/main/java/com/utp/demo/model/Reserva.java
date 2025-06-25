@@ -2,6 +2,7 @@ package com.utp.demo.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,12 +16,8 @@ import jakarta.persistence.Table;
 public class Reserva {
 
     @Id
-    @Column(name = "id_reserva")
+    @Column(name = "id_reserva", length = 20, nullable = false)
     private String idReserva;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dni_cliente")
-    private Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ruta")
@@ -46,6 +43,10 @@ public class Reserva {
 
     @Column(name = "total")
     private double total;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "dni_cliente", referencedColumnName = "dni_cliente")
+    private Cliente cliente;
 
     public Reserva() {
     }
