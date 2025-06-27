@@ -3,12 +3,11 @@ package com.utp.demo.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,19 +15,19 @@ import jakarta.persistence.Table;
 public class Ruta {
 
     @Id
-    @Column(name = "id_ruta")
+    @Column(name = "idruta")
     private String idruta;
 
-    @Column(name = "nombre_ruta", nullable = false)
+    @Column(name = "nombreruta", nullable = false)
     private String nombreruta;
 
-    @Column(name = "descripcion_ruta", length = 800)
+    @Column(name = "descripcionruta", length = 800)
     private String descripcionruta;
 
     @Column(name = "dias")
     private String diasruta;
 
-    @Column(name = "precio_ruta")
+    @Column(name = "precioruta")
     private double precioruta;
 
     @Column(name = "salida") //puerto
@@ -37,20 +36,24 @@ public class Ruta {
     @Column(name = "imagen")
     private String imagen;
 
+    @OneToMany(mappedBy = "ruta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RutaBarco> rutaBarcos = new HashSet<>();
+
     // --- RELACIÓN M:N CON BARCO ---
-    @ManyToMany
+    /* @ManyToMany
     @JoinTable(
             name = "RUTA_BARCO",
-            joinColumns = @JoinColumn(name = "id_ruta"),
-            inverseJoinColumns = @JoinColumn(name = "id_barco")
+            joinColumns = @JoinColumn(name = "idruta"),
+            inverseJoinColumns = @JoinColumn(name = "idbarco")
     )
-    private Set<Barcos> barcos = new HashSet<>();
+    private Set<Barcos> barcos = new HashSet<>();*/
+    
 
     public Ruta() {
     }
 
     public Ruta(String idruta, String nombreruta, String descripcionruta, String diasruta, double precioruta,
-            String salida, String imagen, Set<Barcos> barcos) {
+            String salida, String imagen, Set<RutaBarco> rutaBarcos) {
         this.idruta = idruta;
         this.nombreruta = nombreruta;
         this.descripcionruta = descripcionruta;
@@ -58,7 +61,7 @@ public class Ruta {
         this.precioruta = precioruta;
         this.salida = salida;
         this.imagen = imagen;
-        this.barcos = barcos;
+        this.rutaBarcos = rutaBarcos;
     }
 
     public String getIdruta() {
@@ -117,12 +120,12 @@ public class Ruta {
         this.imagen = imagen;
     }
 
-    public Set<Barcos> getBarcos() {
-        return barcos;
+    public Set<RutaBarco> getRutaBarcos() {
+        return rutaBarcos;
     }
 
-    public void setBarcos(Set<Barcos> barcos) {
-        this.barcos = barcos;
+    public void setRutaBarcos(Set<RutaBarco> rutaBarcos) {
+        this.rutaBarcos = rutaBarcos;
     }
 
 }

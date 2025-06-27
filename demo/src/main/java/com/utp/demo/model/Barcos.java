@@ -3,12 +3,13 @@ package com.utp.demo.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,35 +17,35 @@ import jakarta.persistence.Table;
 public class Barcos {
 
     @Id
-    @Column(name = "id_barco")
+    @Column(name = "idbarco")
     private String IDbarco;
 
-    @Column(name = "nombre_barco")
+    @Column(name = "nombrebarco")
     private String nombrebarco;
 
-    @Column(name = "capitan_barco")
+    @Column(name = "capitanbarco")
     private String capitanbarco;
 
     @ManyToOne
     @JoinColumn(name = "modelo")
     private Barcos_modelo barmodel;
 
-    @Column(name = "descripcion_barco")
+    @Column(name = "descripcionbarco")
     private String descripcionbarco;
 
-    @Column(name = "imagen_barco")
+    @Column(name = "imagenbarco")
     private String imagenbarco;
 
     // --- RELACIÓN M:N INVERSA ---
-    @ManyToMany(mappedBy = "barcos")
-    private Set<Ruta> rutas = new HashSet<>();
+    @OneToMany(mappedBy = "barco", cascade = CascadeType.ALL)
+    private Set<RutaBarco> rutas = new HashSet<>();
 
     public Barcos() {
     }
 
 
     public Barcos(String iDbarco, String nombrebarco, String capitanbarco, Barcos_modelo barmodel,
-            String descripcionbarco, String imagenbarco, Set<Ruta> rutas) {
+            String descripcionbarco, String imagenbarco, Set<RutaBarco> rutas) {
         IDbarco = iDbarco;
         this.nombrebarco = nombrebarco;
         this.capitanbarco = capitanbarco;
@@ -113,11 +114,11 @@ public class Barcos {
         return barmodel != null ? barmodel.getTotalcabinas() : 0;
     }
 
-    public Set<Ruta> getRutas() {
+    public Set<RutaBarco> getRutas() {
         return rutas;
     }
 
-    public void setRutas(Set<Ruta> rutas) {
+    public void setRutas(Set<RutaBarco> rutas) {
         this.rutas = rutas;
     }
 

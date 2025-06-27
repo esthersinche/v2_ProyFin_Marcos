@@ -14,16 +14,16 @@ import jakarta.persistence.Table;
 public class Paquete {
 
     @Id
-    @Column(name = "Id_paquete")
+    @Column(name = "Idpaquete")
     private String idPaquete;
 
-    @Column(name = "nombre_paq")
+    @Column(name = "nombrepaq")
     private String nomPaquete;
 
-    @Column(name = "descripcion_paq")
+    @Column(name = "descripcionpaq")
     private String descPaquete;
 
-    @Column(name = "precio_paq")
+    @Column(name = "preciopaq")
     private double precPaqueteUni;
     /* 
     @ManyToOne

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.utp.demo.model.Barcos;
 import com.utp.demo.model.Barcos_modelo;
 import com.utp.demo.model.Ruta;
+import com.utp.demo.model.RutaBarco;
 import com.utp.demo.service.RutaService;
 
 @Controller
@@ -43,11 +44,16 @@ public class RutaController {
         // Filtrar por modelo de barco: comprobamos si ALGÚN barco de la ruta
         // tiene un modelo en la lista de modelos seleccionados
         if (modelo != null && !modelo.isEmpty()) {
-            stream = stream.filter(r
-                    -> r.getBarcos().stream()
-                            .map(Barcos::getBarmodel) // de Barcos obtenemos Barcos_modelo
-                            .map(Barcos_modelo::getModeloBarco) // y de ahí el código de modelo
-                            .anyMatch(modelo::contains)
+            stream = stream.filter(r -> r.getRutaBarcos().stream().map(RutaBarco::getBarco) // saca el barco
+                    .map(Barcos::getBarmodel) // saca el modelo del barco
+                    .map(Barcos_modelo::getModeloBarco) // agarra el código string
+                    .anyMatch(modelo::contains)
+            /*
+             * .map(Barcos::getBarmodel) // de Barcos obtenemos Barcos_modelo
+             * .map(Barcos_modelo::getModeloBarco) // y de ahí el código de modelo
+             * .anyMatch(modelo::contains)
+             */
+
             );
         }
 

@@ -13,13 +13,13 @@ public class Cabina_tipo {
     @Column(name = "cabinatipo")
     private String cabTipoId;
 
-    @Column(name = "nombre_cabina")
+    @Column(name = "nombrecabina")
     private String nombreCab;
 
-    @Column(name = "cant_max_per")
+    @Column(name = "cantmaxper")
     private int cantMaxPer;
 
-    @Column(name = "prec_cabina_per")
+    @Column(name = "preccabinaper")
     private double precCabinaPer;
 
     public Cabina_tipo() {

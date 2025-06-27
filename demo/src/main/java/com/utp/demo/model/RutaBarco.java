@@ -21,13 +21,13 @@ public class RutaBarco {
     private RutaBarcoId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("id_ruta")
-    @JoinColumn(name = "id_ruta")
+    @MapsId("idruta")
+    @JoinColumn(name = "idruta")
     private Ruta ruta;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("id_barco")
-    @JoinColumn(name = "id_barco")
+    @MapsId("idbarco")
+    @JoinColumn(name = "idbarco")
     private Barcos barco;
 
     @Column(name= "fechasalida")
@@ -80,31 +80,31 @@ public class RutaBarco {
     // Clase embebida como ID compuesta
     public static class RutaBarcoId implements Serializable {
 
-        private String id_ruta;
-        private String id_barco;
+        private String idruta;
+        private String idbarco;
 
         public RutaBarcoId() {
         }
 
-        public RutaBarcoId(String id_ruta, String id_barco) {
-            this.id_ruta = id_ruta;
-            this.id_barco = id_barco;
+        public RutaBarcoId(String idruta, String idbarco) {
+            this.idruta = idruta;
+            this.idbarco = idbarco;
         }
 
-        public String getId_ruta() {
-            return id_ruta;
+        public String getIdruta() {
+            return idruta;
         }
 
-        public void setId_ruta(String id_ruta) {
-            this.id_ruta = id_ruta;
+        public void setIdruta(String idruta) {
+            this.idruta = idruta;
         }
 
-        public String getId_barco() {
-            return id_barco;
+        public String getIdbarco() {
+            return idbarco;
         }
 
-        public void setId_barco(String id_barco) {
-            this.id_barco = id_barco;
+        public void setIdbarco(String idbarco) {
+            this.idbarco = idbarco;
         }
 
         @Override
@@ -116,13 +116,13 @@ public class RutaBarco {
                 return false;
             }
             RutaBarcoId that = (RutaBarcoId) o;
-            return Objects.equals(id_ruta, that.id_ruta)
-                    && Objects.equals(id_barco, that.id_barco);
+            return Objects.equals(idruta, that.idruta)
+                    && Objects.equals(idbarco, that.idbarco);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(id_ruta, id_barco);
+            return Objects.hash(idruta, idbarco);
         }
     }
 

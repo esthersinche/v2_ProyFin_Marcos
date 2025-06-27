@@ -16,12 +16,12 @@ public class Barcos_modelo_tipocabina {
     private Barcos_modelo_tipocabinaId idparaelcoso;
 
     @ManyToOne
-    @MapsId("modelo_barco")
+    @MapsId("modelobarco")
     @JoinColumn(name = "modelo")
     private Barcos_modelo barmodel; //bar_model
 
     @ManyToOne
-    @MapsId("cab_tipo_id")
+    @MapsId("cabtipoid")
     @JoinColumn(name = "cabinatipo")
     private Cabina_tipo cabtype; //cab_type
 
