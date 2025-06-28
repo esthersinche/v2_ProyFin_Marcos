@@ -43,7 +43,7 @@ public interface BarcoRepository extends JpaRepository<Barcos, String> {
       SELECT b
       FROM Barcos b
       JOIN b.rutas r
-      WHERE r.idruta = :rutaId
+      WHERE r.ruta.idruta = :rutaId
     """)
     List<Barcos> findAllByRutaId(@Param("rutaId") String rutaId);
 }

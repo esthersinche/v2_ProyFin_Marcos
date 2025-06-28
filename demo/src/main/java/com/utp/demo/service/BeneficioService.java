@@ -19,6 +19,15 @@ public class BeneficioService {
         return benerepo.findAll();
     }
 
+    public Beneficio BuscarBeneficioxID(String id){
+        return benerepo.findById(id).orElse(null);
+
+    }
+
+    public Beneficio guardarBeneficio(Beneficio bene){
+        return benerepo.save(bene);
+    }
+
      
 
 

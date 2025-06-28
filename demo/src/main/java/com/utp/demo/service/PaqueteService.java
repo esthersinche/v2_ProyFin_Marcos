@@ -1,23 +1,26 @@
 package com.utp.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.utp.demo.model.Barcos;
+import com.utp.demo.model.Beneficio;
 import com.utp.demo.model.Paquete;
+import com.utp.demo.model.PaqueteBeneficio;
+import com.utp.demo.model.DTO.PaqueteDTO;
+import com.utp.demo.model.PaqueteBeneficio.PaqueteBeneficioId;
 
 @Service
 public class PaqueteService {
 
     private final PaqueteRepository paqueteRepository;
-    private BarcoRepository barcoRepository;
+    private BeneficioService beneserv;
 
-    
-
-    public PaqueteService(PaqueteRepository paqueteRepository, BarcoRepository barcoRepository) {
+    public PaqueteService(PaqueteRepository paqueteRepository, BeneficioService beneserv) {
         this.paqueteRepository = paqueteRepository;
-        this.barcoRepository = barcoRepository;
+        this.beneserv = beneserv;
     }
 
     // Obtener todos los paquetes
@@ -28,6 +31,16 @@ public class PaqueteService {
     // <-- Nuevo -->
     public Paquete buscarPorId(String id) {
         return paqueteRepository.findById(id).orElse(null);
+    }
+
+    public Paquete guardarPaquete(Paquete paq){
+        return paqueteRepository.save(paq);
+
+    }
+
+    public void eliminarPaquetexId(String id){
+        paqueteRepository.deleteById(id);
+
     }
 
     /* 
@@ -79,6 +92,53 @@ public class PaqueteService {
     // Buscar paquetes por lista de nombres
     public List<Paquete> buscarPorNombrePaquetes(List<String> nombresPaquetes) {
         return paqueteRepository.findByNombrePaqInIgnoreCase(nombresPaquetes);
+    }
+
+    //convertir de dto a paquete
+
+    public Paquete convertiraPaq(PaqueteDTO paqdto, Paquete paq){
+        paq.setIdPaquete(paqdto.getIdPaquete());
+        paq.setNomPaquete(paqdto.getNomPaquete());
+        paq.setDescPaquete(paqdto.getDescPaquete());
+        paq.setPrecPaqueteUni(paqdto.getPrecPaqueteUni());
+
+        List<PaqueteBeneficio> idspaqbene= new ArrayList<>();//lista
+        for (String idspqbn : paqdto.getIdsbeneficios()) {//each para buscar el id
+            Beneficio bene= beneserv.BuscarBeneficioxID(idspqbn);//se guarda en obj beneficio
+            if (bene != null) {
+                PaqueteBeneficio omfg= new PaqueteBeneficio();//nuevo paqbene
+
+                //id compuesto pa q funcione
+                PaqueteBeneficioId idhelp= new PaqueteBeneficioId(paq.getIdPaquete(), bene.getIdBene());
+                //setear id a paqbene creado
+                omfg.setId(idhelp);
+
+                //enlazar
+                omfg.setPaquete(paq);
+                omfg.setBeneficio(bene);
+
+                //añadir a lista
+                idspaqbene.add(omfg);
+                
+            }            
+        }
+        paq.setBeneficios(idspaqbene);
+
+        return paq;
+    }
+
+    //convertir de paquete a dto
+    public PaqueteDTO convertiraDTO(Paquete paqs, PaqueteDTO paqdtoo){
+        paqdtoo.setIdPaquete(paqs.getIdPaquete());
+        paqdtoo.setNomPaquete(paqs.getNomPaquete());
+        paqdtoo.setDescPaquete(paqs.getDescPaquete());
+        paqdtoo.setPrecPaqueteUni(paqs.getPrecPaqueteUni());
+
+        List<String> idsbenes= paqs.getBeneficios().stream().map(pb -> pb.getBeneficio().getIdBene()).collect(Collectors.toList());
+        paqdtoo.setIdsbeneficios(idsbenes);
+
+        return paqdtoo;
+
     }
 
 

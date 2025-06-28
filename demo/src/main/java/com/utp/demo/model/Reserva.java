@@ -16,29 +16,29 @@ import jakarta.persistence.Table;
 public class Reserva {
 
     @Id
-    @Column(name = "id_reserva", length = 20, nullable = false)
+    @Column(name = "idreserva", length = 20, nullable = false)
     private String idReserva;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_ruta")
+    @JoinColumn(name = "idruta")
     private Ruta ruta;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_paquete")
+    @JoinColumn(name = "idpaquete")
     private Paquete paquete;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_cabina")
+    @JoinColumn(name = "id_abina")
     private Cabina_Inst cabina;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_barco")
+    @JoinColumn(name = "idbarco")
     private Barcos barco;
 
-    @Column(name = "cantidad_pasajeros")
+    @Column(name = "cantidadpasajeros")
     private int cantidadPasajeros;
 
-    @Column(name = "fecha_reserva")
+    @Column(name = "fechareserva")
     private LocalDate fechaReserva;
 
     @Column(name = "total")

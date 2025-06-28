@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.utp.demo.model.Ruta;
+import com.utp.demo.model.DTO.RutaDTO;
 
 @Service
 public class RutaService {
@@ -45,6 +46,33 @@ public class RutaService {
 
     public List<String> obtenerTodasLasSalidas(){
         return rutaRepository.Obtenertodaslassalidas();
+    }
+
+    //convertir a ruta
+    public Ruta convertiraRuta(RutaDTO rutadto, Ruta rutaa){
+        rutaa.setIdruta(rutadto.getIdRuta());
+        rutaa.setNombreruta(rutadto.getNombreRuta());
+        rutaa.setDiasruta(rutadto.getDiasRuta());
+        rutaa.setPrecioruta(rutadto.getPrecioRuta());
+        rutaa.setSalida(rutadto.getSalidaRuta());
+        rutaa.setDescripcionruta(rutadto.getDescripcionRuta());
+        rutaa.setImagen(rutadto.getUrlRuta());
+
+        return rutaa;
+
+    }
+    //convertir a dto
+
+    public RutaDTO convertiraDTO(Ruta rutaaa, RutaDTO rutadtoo){
+        rutadtoo.setIdRuta(rutaaa.getIdruta());
+        rutadtoo.setNombreRuta(rutaaa.getNombreruta());
+        rutadtoo.setDiasRuta(rutaaa.getDiasruta());
+        rutadtoo.setPrecioRuta(rutaaa.getPrecioruta());
+        rutadtoo.setSalidaRuta(rutaaa.getSalida());
+        rutadtoo.setDescripcionRuta(rutaaa.getDescripcionruta());
+        rutadtoo.setUrlRuta(rutaaa.getImagen());
+
+        return rutadtoo;
     }
 
 }

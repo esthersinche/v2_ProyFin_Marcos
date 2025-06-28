@@ -7,8 +7,9 @@ public class BarcoDTO {
     private String nombreBarco;
     private String capitanBarco;
     private String modeloBarco;
-    //private String imgURLbarco; 
-    private List<String> idsrutasbarco;
+    private String imgURLbarco; 
+    private String descripcionBarco;
+    public List<String> idsrutasbarco;
     
     public BarcoDTO() {
     }
@@ -52,6 +53,24 @@ public class BarcoDTO {
     public void setIdsrutasbarco(List<String> idsrutasbarco) {
         this.idsrutasbarco = idsrutasbarco;
     }
+
+    public String getImgURLbarco() {
+        return imgURLbarco;
+    }
+
+    public void setImgURLbarco(String imgURLbarco) {
+        this.imgURLbarco = imgURLbarco;
+    }
+
+    public String getDescripcionBarco() {
+        return descripcionBarco;
+    }
+
+    public void setDescripcionBarco(String descripcionBarco) {
+        this.descripcionBarco = descripcionBarco;
+    }
+
+    
 
     
 

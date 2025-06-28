@@ -15,7 +15,7 @@ public class Cabina_Inst extends Cabina {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cabina")
+    @Column(name = "idcabina")
     private String cabinaId;
 
     //obtiene numadultos de Cabina

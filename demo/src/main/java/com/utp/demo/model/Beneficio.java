@@ -14,13 +14,13 @@ import jakarta.persistence.Table;
 public class Beneficio {
 
     @Id
-    @Column(name = "id_beneficio")
+    @Column(name = "idbeneficio")
     private String idBene;
 
-    @Column(name = "nombre_beneficio")
+    @Column(name = "nombrebeneficio")
     private String nombreBene;
 
-    @Column(name = "descripcion_beneficio")
+    @Column(name = "descripcionbeneficio")
     private String descBene;
 
     @OneToMany(mappedBy = "beneficio")

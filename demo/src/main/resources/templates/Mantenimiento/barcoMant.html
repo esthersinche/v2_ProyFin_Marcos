@@ -14,31 +14,51 @@
     <header th:replace="~{fragments/headerAdmin :: wiwi}"></header>
     <div class="container py-5">
         <h2 class="mb-4">Mantenimiento de Barcos</h2>
+        <div th:if="${errorMsg}" class="alert alert-danger">
+            <p th:text="${errorMsg}"></p>
+        </div>
         <div class="card shadow">
             <div class="card-body">
-                <form th:action="@{/barcos}" th:object="${barco}" method="post" enctype="multipart/form-data">
+                <form th:object="${barco}" enctype="multipart/form-data">
                     <div class="row g-3">
                         <div class="col-md-3">
                             <label for="idBarco" class="form-label">ID Barco</label>
+
                             <input type="text" class="form-control" id="idBarco" th:field="*{idBarco}"
                                 placeholder="Código" required>
+
+                            <button type="submit" class="btn btn-ocean me-auto mt-2" 
+                            th:formaction="@{/Mantenimiento/barcoMant/buscarbarco}" th:formmethod="get">Buscar</button>
                         </div>
                         <div class="col-md-5">
                             <label for="nombreBarco" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombreBarco" th:field="*{nombreBarco}"
-                                placeholder="Nombre del barco" required>
+                                placeholder="Nombre del barco" >
                         </div>
                         <div class="col-md-4">
                             <label for="capitanBarco" class="form-label">Capitán</label>
                             <input type="text" class="form-control" id="capitanBarco" th:field="*{capitanBarco}"
-                                placeholder="Nombre del capitán" required>
+                                placeholder="Nombre del capitán" >
                         </div>
 
                         <div class="col-md-6">
                             <label for="modeloBarco" class="form-label">Modelo</label>
                             <select class="form-select" id="modeloBarco" th:field="*{modeloBarco}" required>
-                                <option th:each="m : ${modelos}" th:value="${m}" th:text="${m}">Modelo</option>
+                                <option th:each="m : ${modelos}" th:value="${m.modeloBarco}" th:text="${m.modeloBarco}">Modelo</option>
                             </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="imgURLbarco" class="form-label">Imagen URL</label>
+                            <input type="text" class="form-control" id="imgURLbarco" th:field="*{imgURLbarco}"
+                                placeholder="Imagen URL del barco" >
+                        </div>
+
+                        <div class="col-md-9">
+                            <label for="descripcionBarco" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="descripcionBarco" th:field="*{descripcionBarco}"
+                                placeholder="Descripción pequeña del Barco.">
+
                         </div>
 
                         <div class="col-12">
@@ -54,11 +74,17 @@
 
                     <div class="mt-4 d-flex justify-content-between">
                         <div>
-                            <button type="button" class="btn btn-ocean me-2">Buscar</button>
-                            <button type="button" class="btn btn-warning me-2">Editar</button>
-                            <button type="button" class="btn btn-danger">Eliminar</button>
+                            
+                            <button type="submit" class="btn btn-warning me-2" 
+                                th:formaction="@{/Mantenimiento/barcoMant/editarbarco}"
+                                th:formmethod="post">Editar</button>
+                            <button type="submit" class="btn btn-danger"
+                                th:formaction="@{/Mantenimiento/barcoMant/eliminarbarco}"
+                                th:formmethod="post">Eliminar</button>
                         </div>
-                        <button type="submit" class="btn btn-apple">Guardar</button>
+                        <button type="submit" class="btn btn-apple"
+                                th:formaction="@{/Mantenimiento/barcoMant/crearbarco}"
+                                th:formmethod="post">Guardar</button>
                     </div>
                 </form>
             </div>
