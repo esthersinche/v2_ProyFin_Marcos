@@ -3,6 +3,7 @@ package com.utp.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -39,7 +40,7 @@ public class Paquete {
     private Barcos_modelo modelobarcoPaq;
      */
 
-    @OneToMany(mappedBy = "paquete")
+    @OneToMany(mappedBy = "paquete", cascade = CascadeType.ALL)
     private List<PaqueteBeneficio> beneficios = new ArrayList<>();
 
     public Paquete() {

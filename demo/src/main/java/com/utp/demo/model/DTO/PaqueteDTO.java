@@ -8,7 +8,8 @@ public class PaqueteDTO {
     private String idPaquete;
     private String nomPaquete;
     private String descPaquete;
-    private List<Beneficio> beneficios;
+    private Double precPaqueteUni;
+    private List<String> idsbeneficios;
 
     public PaqueteDTO() {
     }
@@ -39,13 +40,26 @@ public void setDescPaquete(String descPaquete) {
     this.descPaquete = descPaquete;
 }
 
-public List<Beneficio> getBeneficios() {
-    return beneficios;
+
+public List<String> getIdsbeneficios() {
+    return idsbeneficios;
 }
 
-public void setBeneficios(List<Beneficio> beneficios) {
-    this.beneficios = beneficios;
-}    
+
+
+public void setIdsbeneficios(List<String> idsbeneficios) {
+    this.idsbeneficios = idsbeneficios;
+}
+
+public Double getPrecPaqueteUni() {
+    return precPaqueteUni;
+}
+
+public void setPrecPaqueteUni(Double precPaqueteUni) {
+    this.precPaqueteUni = precPaqueteUni;
+}   
+
+
 
     
 

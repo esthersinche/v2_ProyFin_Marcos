@@ -3,6 +3,7 @@ package com.utp.demo.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,13 +20,13 @@ public class PaqueteBeneficio {
     private PaqueteBeneficioId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("id_paquete")
-    @JoinColumn(name = "id_paquete")
+    @MapsId("idpaquete")
+    @JoinColumn(name = "idpaquete")
     private Paquete paquete;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("id_beneficio")
-    @JoinColumn(name = "id_beneficio")
+    @MapsId("idbeneficio")
+    @JoinColumn(name = "idbeneficio")
     private Beneficio beneficio;
 
     public PaqueteBeneficio() {
@@ -62,33 +63,34 @@ public class PaqueteBeneficio {
     }
 
     // Clave compuesta
+    @Embeddable
     public static class PaqueteBeneficioId implements Serializable {
 
-        private String id_beneficio;
-        private String id_paquete;
+        private String idbeneficio;
+        private String idpaquete;
 
         public PaqueteBeneficioId() {
         }
 
-        public PaqueteBeneficioId(String id_paquete, String id_beneficio) {
-            this.id_paquete = id_paquete;
-            this.id_beneficio = id_beneficio;
+        public PaqueteBeneficioId(String idpaquete, String idbeneficio) {
+            this.idpaquete = idpaquete;
+            this.idbeneficio = idbeneficio;
         }
 
         public String getId_beneficio() {
-            return id_beneficio;
+            return idbeneficio;
         }
 
-        public void setId_beneficio(String id_beneficio) {
-            this.id_beneficio = id_beneficio;
+        public void setIdbeneficio(String idbeneficio) {
+            this.idbeneficio = idbeneficio;
         }
 
-        public String getId_paquete() {
-            return id_paquete;
+        public String getIdpaquete() {
+            return idpaquete;
         }
 
-        public void setId_paquete(String id_paquete) {
-            this.id_paquete = id_paquete;
+        public void setIdpaquete(String idpaquete) {
+            this.idpaquete = idpaquete;
         }
 
         @Override
@@ -100,13 +102,13 @@ public class PaqueteBeneficio {
                 return false;
             }
             PaqueteBeneficioId that = (PaqueteBeneficioId) o;
-            return Objects.equals(id_paquete, that.id_paquete)
-                    && Objects.equals(id_beneficio, that.id_beneficio);
+            return Objects.equals(idpaquete, that.idpaquete)
+                    && Objects.equals(idbeneficio, that.idbeneficio);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(id_paquete, id_beneficio);
+            return Objects.hash(idpaquete, idbeneficio);
         }
     }
 }

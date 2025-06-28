@@ -103,7 +103,7 @@ public class BarcoService {
         barquito.setDescripcionbarco(barcodto.getDescripcionBarco());
 
         Set<RutaBarco> idsrutasbarco= new HashSet<>();
-        for (String idruta : barcodto.getIdsrutasbarco()) {
+        for (String idruta : barcodto.getIdsrutasbarco()) {//falta desc
             Ruta pls= rutaserv.buscarPorId(idruta);
             if (pls != null) {
                 RutaBarco ayuda= new RutaBarco();
