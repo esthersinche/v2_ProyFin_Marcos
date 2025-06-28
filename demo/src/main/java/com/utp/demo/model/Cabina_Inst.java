@@ -19,7 +19,6 @@ public class Cabina_Inst extends Cabina {
     private String cabinaId;
 
     //obtiene numadultos de Cabina
-
     @ManyToOne
     @JoinColumn(name = "cabinatipo")
     private Cabina_tipo cabTipo;
@@ -36,7 +35,7 @@ public class Cabina_Inst extends Cabina {
         return cabinaId;
     }
 
-    public void setCabinaId(Long cabinaId) {
+    public void setCabinaId(String cabinaId) {
         this.cabinaId = cabinaId;
 
     }
