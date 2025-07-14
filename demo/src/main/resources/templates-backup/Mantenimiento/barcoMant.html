@@ -28,7 +28,8 @@
                                 placeholder="Código" required>
 
                             <button type="submit" class="btn btn-ocean me-auto mt-2" 
-                            th:formaction="@{/Mantenimiento/barcoMant/buscarbarco}" th:formmethod="get">Buscar</button>
+                            th:formaction="@{/Mantenimiento/barcoMant/buscar/{id}(id=${barco.idBarco})}" 
+                            th:formmethod="get">Buscar</button>
                         </div>
                         <div class="col-md-5">
                             <label for="nombreBarco" class="form-label">Nombre</label>
@@ -76,14 +77,14 @@
                         <div>
                             
                             <button type="submit" class="btn btn-warning me-2" 
-                                th:formaction="@{/Mantenimiento/barcoMant/editarbarco}"
+                                th:formaction="@{/Mantenimiento/barcoMant/save}"
                                 th:formmethod="post">Editar</button>
                             <button type="submit" class="btn btn-danger"
-                                th:formaction="@{/Mantenimiento/barcoMant/eliminarbarco}"
+                                th:formaction="@{/Mantenimiento/barcoMant/delete/{id}(id=${barco.idBarco})}"
                                 th:formmethod="post">Eliminar</button>
                         </div>
                         <button type="submit" class="btn btn-apple"
-                                th:formaction="@{/Mantenimiento/barcoMant/crearbarco}"
+                                th:formaction="@{/Mantenimiento/barcoMant/save}"
                                 th:formmethod="post">Guardar</button>
                     </div>
                 </form>
