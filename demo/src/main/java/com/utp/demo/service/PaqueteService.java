@@ -1,16 +1,8 @@
 package com.utp.demo.service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
 
-import com.utp.demo.model.Beneficio;
 import com.utp.demo.model.Paquete;
-import com.utp.demo.model.PaqueteBeneficio;
-import com.utp.demo.model.DTO.PaqueteDTO;
-import com.utp.demo.model.PaqueteBeneficio.PaqueteBeneficioId;
 
 @Service
 public class PaqueteService {
@@ -95,8 +87,8 @@ public class PaqueteService {
     }
 
     //convertir de dto a paquete
-
-    public Paquete convertiraPaq(PaqueteDTO paqdto, Paquete paq){
+    /* 
+     * public Paquete convertiraPaq(PaqueteDTO paqdto, Paquete paq){
         paq.setIdPaquete(paqdto.getIdPaquete());
         paq.setNomPaquete(paqdto.getNomPaquete());
         paq.setDescPaquete(paqdto.getDescPaquete());
@@ -140,6 +132,9 @@ public class PaqueteService {
         return paqdtoo;
 
     }
+    */
+
+    
 
 
 }

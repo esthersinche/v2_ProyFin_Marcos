@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.utp.demo.model.Ruta;
-import com.utp.demo.model.DTO.RutaDTO;
 
 @Service
 public class RutaService {
@@ -48,7 +47,8 @@ public class RutaService {
         return rutaRepository.Obtenertodaslassalidas();
     }
 
-    //convertir a ruta
+    /*
+     * //convertir a ruta
     public Ruta convertiraRuta(RutaDTO rutadto, Ruta rutaa){
         rutaa.setIdruta(rutadto.getIdRuta());
         rutaa.setNombreruta(rutadto.getNombreRuta());
@@ -74,5 +74,7 @@ public class RutaService {
 
         return rutadtoo;
     }
+     */
+    
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.utp.demo.DTO.ReservaResumenDTO;
 import com.utp.demo.model.Reserva;
 
 @Service
@@ -59,6 +60,15 @@ public class ReservaService {
     // Buscar reserva por ID
     public Reserva buscar(String id) {
         return reservaRepository.findById(id).orElse(null);
+    }
+
+    //de coso a dto
+
+    //de dto a coso
+    public Reserva convertiraReserva(ReservaResumenDTO resresdto, Reserva reser){
+        reser.setFechaReserva(resresdto.getFechaReserva());
+        reser.set
+
     }
 
 }

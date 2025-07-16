@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.utp.demo.model.Ruta;
-import com.utp.demo.model.DTO.RutaDTO;
 import com.utp.demo.service.RutaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,7 +25,7 @@ public class RutaMantController {
 
     @GetMapping
     public String mostrarlasrutas(Model model) {
-        model.addAttribute("ruta", new RutaDTO());
+        model.addAttribute("ruta", new Ruta());
         model.addAttribute("puertos", rutaserv.obtenerTodasLasSalidas());
         return "Mantenimiento/rutaMant";
     }
@@ -35,30 +34,30 @@ public class RutaMantController {
     @GetMapping("/buscarruta")
     public String BuscarRutaxId(@RequestParam String idRuta, Model model) {
 
-        RutaDTO rutadto;
+        Ruta rutita= new Ruta();
 
         if (idRuta == null || idRuta.isBlank()) {// si no hay nada en field o apunta a nulo como inicio
             model.addAttribute("errorMsg", "Ingrese un ID válido");
-            rutadto = new RutaDTO();// aaa
+           // rutadto = new RutaDTO();// aaa
 
         } else {
             // se usa el dto mas q nada para futuras actus, posible agregar otros atributos
-            rutadto= new RutaDTO();//me salia error ;; x no inicializar
-            Ruta rutita= rutaserv.buscarPorId(idRuta);
+            Ruta foundruta= rutaserv.buscarPorId(idRuta);
 
-            if (rutita != null) {
-                rutaserv.convertiraDTO(rutita, rutadto);
+            if (foundruta != null) {
+                rutita= foundruta;
+                model.addAttribute("ruta", rutita);
+                
 
             } else {
                 model.addAttribute("errorMsg", "No se encontro una Ruta con ID " + idRuta);
-                rutadto = new RutaDTO();
-                rutadto.setIdRuta(idRuta);
+                rutita.setIdruta(idRuta);
 
             }
 
         }
 
-        model.addAttribute("ruta", rutadto);
+        model.addAttribute("ruta", rutita);
         model.addAttribute("puertos", rutaserv.obtenerTodasLasSalidas());
 
         return "Mantenimiento/rutaMant";
@@ -66,23 +65,22 @@ public class RutaMantController {
     
     //editar
     @PostMapping("/editarruta")
-    public String EditarRutaxId(@ModelAttribute("ruta") RutaDTO rutita, Model model) {
+    public String EditarRutaxId(@ModelAttribute("ruta") Ruta rutita1, Model model) {
 
-        if (rutita.getIdRuta().isBlank() || rutita.getNombreRuta().isBlank()
-                || rutita.getDescripcionRuta().isBlank()) {//los 3 primeros
+        if (rutita1.getIdruta().isBlank() || rutita1.getNombreruta().isBlank()
+                || rutita1.getDescripcionruta().isBlank()) {//los 3 primeros
             model.addAttribute("errorMsg", "No hay nada para editar");
             return "Mantenimiento/rutaMant";
 
         } // por si puso buscar y no le salio nada y usa el boton de editar
      
-        Ruta ruta= rutaserv.buscarPorId(rutita.getIdRuta());// se fija si el id esta en labase de datos
+        Ruta ruta= rutaserv.buscarPorId(rutita1.getIdruta());// se fija si el id esta en labase de datos
 
         if (ruta == null) {// si se le ocurrio llenar todo y puso editar pero la id no esta en la bd
             model.addAttribute("puertos", rutaserv.obtenerTodasLasSalidas());
             model.addAttribute("errorMsg", "ID no existe, no hay nada para editar.");
             return "Mantenimiento/rutaMant";
         } else {
-            rutaserv.convertiraRuta(rutita, ruta);
             rutaserv.guardarRuta(ruta);
         }
 
@@ -91,15 +89,15 @@ public class RutaMantController {
     
     //eliminar
     @PostMapping("/eliminarruta")
-    public String EliminarRutaxId(@ModelAttribute("ruta") RutaDTO rutita2, Model model) {
+    public String EliminarRutaxId(@ModelAttribute("ruta") Ruta rutita3, Model model) {
 
-        if (rutita2.getIdRuta().isBlank() ) {
+        if (rutita3.getIdruta().isBlank() ) {
             model.addAttribute("errorMsg", "No hay nada para eliminar.");
             model.addAttribute("puertos", rutaserv.obtenerTodasLasSalidas());
             return "Mantenimiento/rutaMant";
         }
 
-        Ruta ruta2= rutaserv.buscarPorId(rutita2.getIdRuta());
+        Ruta ruta2= rutaserv.buscarPorId(rutita3.getIdruta());
 
         if (ruta2 == null) {
             model.addAttribute("errorMsg", "ID no existe, no hay nada para eliminar.");
@@ -108,7 +106,7 @@ public class RutaMantController {
 
         } else {
 
-            rutaserv.eliminarRuta(rutita2.getIdRuta());
+            rutaserv.eliminarRuta(rutita3.getIdruta());
         }
           
         return "redirect:/Mantenimiento/rutaMant";
@@ -116,22 +114,20 @@ public class RutaMantController {
     
     //guardar
     @PostMapping("/guardarruta")
-    public String GuardarRuta(@ModelAttribute("ruta") RutaDTO rutita3, Model model) {
+    public String GuardarRuta(@ModelAttribute("ruta") Ruta rutita4, Model model) {
 
          Ruta rutacreada= new Ruta();
 
-        if (rutita3.getIdRuta().isBlank() || rutita3.getNombreRuta().isBlank() || rutita3.getDiasRuta().isBlank() || 
-        rutita3.getPrecioRuta() == null || rutita3.getSalidaRuta().isBlank() || rutita3.getDescripcionRuta().isBlank()
-        || rutita3.getUrlRuta().isBlank()) {
+        if (rutita4.getIdruta().isBlank() || rutita4.getNombreruta().isBlank() || rutita4.getDiasruta().isBlank() || 
+        rutita4.getPrecioruta() == 0 || rutita4.getSalida().isBlank() || rutita4.getDescripcionruta().isBlank()
+        || rutita4.getImagen().isBlank()) {
 
             model.addAttribute("errorMsg", "Faltan datos para creación de Ruta");
             model.addAttribute("puertos", rutaserv.obtenerTodasLasSalidas());
             return "Mantenimiento/rutaMant";
         }
 
-        rutaserv.convertiraRuta(rutita3, rutacreada);
-        rutaserv.guardarRuta(rutacreada);
-      
+        rutaserv.guardarRuta(rutacreada);    
         return "redirect:/Mantenimiento/rutaMant";
     }
     

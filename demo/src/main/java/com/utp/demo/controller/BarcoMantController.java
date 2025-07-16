@@ -72,35 +72,36 @@ public class BarcoMantController {
     public String BuscarbarcoxId(@RequestParam String idBarco, Model model) {
 
         //BarcoDTO barcodto;
-        Barcos barquito;
+        Barcos barquito= new Barcos();
 
         if (idBarco == null || idBarco.isBlank()) {// si no hya nada o esta vacio
             model.addAttribute("errorMsg", "Ingrese un ID");
             //barcodto = new BarcoDTO();// aaa
-            barquito= new Barcos();
+            //barquito= new Barcos();
 
 
         } else {
             // se usa el dto mas q nada para futuras actus, posible agregar otros atributos
             //Barcos barquito = barcoserv.buscarPorId(idBarco);
-            barquito= barcoserv.buscarPorId(idBarco);
+            Barcos foundboat= barcoserv.buscarPorId(idBarco);
+            //barquito= barcoserv.buscarPorId(idBarco);
 
-            if (barquito != null) {
+            if (foundboat != null) {
                 //barcodto = barcoserv.convertiraDTO(barquito);
+                barquito= foundboat;
                 model.addAttribute("barco", barquito);
 
             } else {
                 model.addAttribute("errorMsg", "No se encontro un barco con ID " + idBarco);
                 //barcodto = new BarcoDTO();
                 //barcodto.setIdBarco(idBarco);
-                barquito= new Barcos();
                 barquito.setIDbarco(idBarco);
 
             }
 
         }
 
-        
+        model.addAttribute("barco", barquito);
         model.addAttribute("modelos", barcorepo.findDistinctModelos());
         model.addAttribute("rutasDisponibles", rutaserv.obtenerTodasLasRutas());
 
