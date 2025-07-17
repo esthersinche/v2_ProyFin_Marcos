@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.utp.demo.model.Barcos;
+import com.utp.demo.DTO.BarcoDTO;
 import com.utp.demo.service.BarcoService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -24,8 +24,8 @@ public class BarcoController {
     }
 
     @GetMapping
-    public List<Barcos> findAll() {
-        return barcoService.obtenerBarcos();
+    public List<BarcoDTO> findAll() {
+        return barcoService.obtenerBarcosDTO();
     }
     /* ESO ES DEL THYMELEAF, LO DEJO COMENTADO POR SI ACASO
     @GetMapping("/barcos")

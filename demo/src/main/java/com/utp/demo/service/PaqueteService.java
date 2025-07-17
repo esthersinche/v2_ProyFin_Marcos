@@ -1,8 +1,13 @@
 package com.utp.demo.service;
+
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
+import com.utp.demo.DTO.PaqueteDTO;
 import com.utp.demo.model.Paquete;
+import com.utp.demo.model.PaqueteBeneficio;
 
 @Service
 public class PaqueteService {
@@ -15,6 +20,34 @@ public class PaqueteService {
         this.beneserv = beneserv;
     }
 
+// Convertir entidad ↔ DTO
+    private PaqueteDTO toDTO(Paquete paquete) {
+        PaqueteDTO dto = new PaqueteDTO();
+        dto.setIdPaquete(paquete.getIdPaquete());
+        dto.setNomPaquete(paquete.getNomPaquete());
+        dto.setDescPaquete(paquete.getDescPaquete());
+        dto.setPrecPaqueteUni(paquete.getPrecPaqueteUni());
+        // Extraer IDs de beneficios
+        List<String> idsBene = paquete.getBeneficios()
+                .stream()
+                .map(PaqueteBeneficio::getBeneficio)
+                .map(b -> b.getIdBene())
+                .collect(Collectors.toList());
+        dto.setIdsbeneficios(idsBene);
+
+        return dto;
+    }
+
+    /**
+     * Devuelve lista de paquetes como DTOs
+     */
+    public List<PaqueteDTO> obtenerPaquetesDTO() {
+        return paqueteRepository.findAll()
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
     // Obtener todos los paquetes
     public List<Paquete> obtenerTodosLosPaquetes() {
         return paqueteRepository.findAll();
@@ -25,12 +58,12 @@ public class PaqueteService {
         return paqueteRepository.findById(id).orElse(null);
     }
 
-    public Paquete guardarPaquete(Paquete paq){
+    public Paquete guardarPaquete(Paquete paq) {
         return paqueteRepository.save(paq);
 
     }
 
-    public void eliminarPaquetexId(String id){
+    public void eliminarPaquetexId(String id) {
         paqueteRepository.deleteById(id);
 
     }
@@ -132,9 +165,5 @@ public class PaqueteService {
         return paqdtoo;
 
     }
-    */
-
-    
-
-
+     */
 }

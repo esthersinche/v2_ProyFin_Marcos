@@ -62,6 +62,10 @@ public class ReservaService {
         return reservaRepository.findById(id).orElse(null);
     }
 
+
+    //de coso a dto
+    public ReservaResumenDTO convertiraDTO(Reserva reservita, ReservaResumenDTO resdto) {
+
     /* 
      * //de coso a dto
     public ReservaResumenDTO convertiraDTO(Reserva reservita){
@@ -88,7 +92,7 @@ public class ReservaService {
         //cabina
         resdto.setCabinaTipo(reservita.getCabina().getCabTipo().getNombreCab());
         resdto.setCabinaPrecioPorPersona(reservita.getCabina().getCabTipo().getPrecCabinaPer());
-        
+
         //total
         resdto.setTotal(reservita.getTotal());
 
@@ -97,8 +101,11 @@ public class ReservaService {
     }
     */
     
+    //de dto a coso
+    /*  public Reserva convertiraReserva(Reserva reservita1, ReservaResumenDTO resresdto){
 
-    
-    
+        
+    }
+     */
 
 }
