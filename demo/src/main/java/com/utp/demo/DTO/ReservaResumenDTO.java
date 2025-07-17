@@ -18,6 +18,7 @@ public class ReservaResumenDTO {
 
     // Detalles de Ruta
     @JsonFormat(pattern = "dd/MM/yyyy")
+    private String nombreRuta; //reserva.ruta.nombreruta
     private String puertoSalida; // reserva.ruta.salida (si es String)
     private String puertoDestino; // reserva.ruta.nombreruta o destino según tu modelo
     private String rutaDuracion; // reserva.ruta.diasruta
@@ -39,7 +40,7 @@ public class ReservaResumenDTO {
     public ReservaResumenDTO() {
     }
 
-    public static ReservaResumenDTO fromEntity(Reserva r) {
+    public static ReservaResumenDTO convertiraDTO(Reserva r) {
         ReservaResumenDTO dto = new ReservaResumenDTO();
 
         dto.fechaReserva = r.getFechaReserva();
@@ -48,6 +49,7 @@ public class ReservaResumenDTO {
         dto.clienteDni = r.getCliente().getDniCliente();
         dto.clienteCorreo = r.getCliente().getCorreo();
         dto.cantidadPasajeros = r.getCantidadPasajeros();
+
 
         dto.puertoSalida = r.getRuta().getSalida();
         dto.puertoDestino = r.getRuta().getNombreruta();

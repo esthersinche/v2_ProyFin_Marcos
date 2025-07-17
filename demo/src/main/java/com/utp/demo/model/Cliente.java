@@ -27,14 +27,15 @@ public class Cliente {
         // Obligatorio para Spring y formularios
     }
 
-    public Cliente(String apellido, int celular, String ciudad, String correo, int dniCliente, String nombre) {
-        this.apellido = apellido;
-        this.celular = celular;
-        this.ciudad = ciudad;
-        this.correo = correo;
+    public Cliente(int dniCliente, String nombre, String apellido, String correo, int celular, String ciudad) {
         this.dniCliente = dniCliente;
         this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.celular = celular;
+        this.ciudad = ciudad;
     }
+
 
     public int getDniCliente() {
         return dniCliente;

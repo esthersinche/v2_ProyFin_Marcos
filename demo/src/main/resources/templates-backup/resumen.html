@@ -28,7 +28,7 @@
   <main class="container my-5">
     <div class="alert alert-success text-center">
       <h2>¡Gracias por tu reserva!</h2>
-      <p>Se ha enviado un correo de confirmación a <strong th:text="${reserva.cliente.correo}"></strong>.</p>
+      <p>Se ha enviado un correo de confirmación a <strong th:text="${reserva.clienteCorreo}"></strong>.</p>
       <p>Espera instrucciones con el método de pago y próximos pasos.</p>
     </div>
 
@@ -37,10 +37,9 @@
       <h5 class="mt-4">Datos del Cliente</h5>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Nombre: <span
-            th:text="${reserva.cliente.nombre} + ' ' + ${reserva.cliente.apellido}"></span></li>
-        <li class="list-group-item">Correo: <span th:text="${reserva.cliente.correo}"></span></li>
-        <li class="list-group-item">Celular: <span th:text="${reserva.cliente.celular}"></span></li>
-        <li class="list-group-item">Ciudad: <span th:text="${reserva.cliente.ciudad}"></span></li>
+            th:text="${reserva.clienteNombre}"></span></li>
+        <li class="list-group-item">Correo: <span th:text="${reserva.clienteCorreo}"></span></li>
+        <li class="list-group-item">DNI: <span th:text="${reserva.clienteDni}"></span></li>
         <li class="list-group-item">Pasajeros: <span th:text="${reserva.cantidadPasajeros}"></span></li>
         <li class="list-group-item">Fecha de reserva: <span
             th:text="${#temporals.format(reserva.fechaReserva, 'dd/MM/yyyy')}"></span></li>
@@ -48,25 +47,24 @@
 
       <h5 class="mt-4">Ruta Elegida</h5>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Nombre: <span th:text="${reserva.ruta.nombreruta}"></span></li>
-        <li class="list-group-item">Descripción: <span th:text="${reserva.ruta.descripcionruta}"></span></li>
-        <li class="list-group-item">Duración: <span th:text="${reserva.ruta.diasruta}"></span></li>
-        <li class="list-group-item">Puerto de Salida: <span th:text="${reserva.ruta.salida}"></span></li>
-        <li class="list-group-item">Precio Ruta: S/. <span th:text="${reserva.ruta.precioruta}"></span></li>
+        <li class="list-group-item">Nombre: <span th:text="${reserva.puertoDestino}"></span></li>
+        <li class="list-group-item">Duración: <span th:text="${reserva.rutaDuracion}"></span></li>
+        <li class="list-group-item">Puerto de Salida: <span th:text="${reserva.puertoSalida}"></span></li>
+        <li class="list-group-item">Precio Ruta: S/. <span th:text="${reserva.subtotalRuta}"></span></li>
       </ul>
 
       <h5 class="mt-4">Paquete</h5>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Nombre: <span th:text="${reserva.paquete.nomPaquete}"></span></li>
-        <li class="list-group-item">Descripción: <span th:text="${reserva.paquete.descPaquete}"></span></li>
-        <li class="list-group-item">Precio Paquete: S/. <span th:text="${reserva.paquete.precPaqueteUni}"></span></li>
+        <li class="list-group-item">Nombre: <span th:text="${reserva.paqueteNombre}"></span></li>
+        <li class="list-group-item">Descripción: <span th:text="${reserva.paqueteDescripcion}"></span></li>
+        <li class="list-group-item">Precio Paquete: S/. <span th:text="${reserva.subtotalPaquete}"></span></li>
       </ul>
 
       <h5 class="mt-4">Cabina</h5>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Tipo: <span th:text="${reserva.cabina.cabTipo.nombreCab}"></span></li>
+        <li class="list-group-item">Tipo: <span th:text="${reserva.cabinaTipo}"></span></li>
         <li class="list-group-item">Precio Cabina por persona: S/. <span
-            th:text="${reserva.cabina.cabTipo.precCabinaPer}"></span></li>
+            th:text="${reserva.cabinaPrecioPorPersona}"></span></li>
       </ul>
 
       <h4 class="mt-4 text-end">Total a pagar: <strong>S/. <span th:text="${reserva.total}"></span></strong></h4>
