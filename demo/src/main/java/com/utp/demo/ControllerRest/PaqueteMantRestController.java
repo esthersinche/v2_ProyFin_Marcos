@@ -8,15 +8,18 @@ import com.utp.demo.service.PaqueteService;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
+@RequestMapping("/api/paqueteMant")
 public class PaqueteMantRestController {
 
     private PaqueteService paqserv;
@@ -35,26 +38,38 @@ public class PaqueteMantRestController {
 
     //buscar
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<Paquete> BuscarxId(@PathVariable String id, Model model) {
+    public ResponseEntity<Paquete> BuscarxId(@PathVariable String id) {
         Paquete paquetito1= paqserv.buscarPorId(id);
         if (paquetito1 != null) {
-            model.addAttribute("paquete", paquetito1);// añade datos a inputs(?)
             return ResponseEntity.ok(paquetito1);// ok= codigo 200(tudo bem + cuerpo)
 
         } else {
-            model.addAttribute("errorMsg", "Ingrese un ID válido");
             return ResponseEntity.notFound().build();// notfound= 404(not tudo bem, sin cuerpo)
         }
 
     }
     // Reponse entity es una rpta http q tiene todo, cabecera, estado y cuerpo
 
-    //crear o editar
+    //crear 
     @PostMapping("/save")
-    public ResponseEntity<Paquete> guardar(@RequestBody Paquete paq) {
-        Paquete paquetito2= paqserv.guardarPaquete(paq);
+    public ResponseEntity<Paquete> guardar(@RequestBody Paquete paq1) {
+        Paquete createdpaq= paqserv.guardarPaquete(paq1);
 
-        return ResponseEntity.ok(paquetito2);
+        return ResponseEntity.ok(createdpaq);
+    }
+
+    //actualizar 
+    @PutMapping("editar/{id}")
+    public ResponseEntity<Paquete> actualizar(@PathVariable String paqid, @RequestBody Paquete paq2) {
+        Paquete editedpaq= paqserv.buscarPorId(paqid);
+
+        if (editedpaq != null) {
+            paqserv.guardarPaquete(editedpaq);
+            return ResponseEntity.ok(editedpaq);         
+        } else{
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     //eliminar

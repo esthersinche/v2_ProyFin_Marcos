@@ -18,7 +18,6 @@ public class ReservaResumenDTO {
 
     // Detalles de Ruta
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate rutaFechaSalida; // reserva.ruta.salida (si es LocalDate)
     private String puertoSalida; // reserva.ruta.salida (si es String)
     private String puertoDestino; // reserva.ruta.nombreruta o destino según tu modelo
     private String rutaDuracion; // reserva.ruta.diasruta
@@ -33,6 +32,7 @@ public class ReservaResumenDTO {
     private String cabinaTipo; // reserva.cabina.cabTipo.nombreCab
     private double cabinaPrecioPorPersona; // reserva.cabina.cabTipo.precCabinaPer
 
+    
     // Total a pagar
     private double total; // reserva.total
 
@@ -105,14 +105,6 @@ public class ReservaResumenDTO {
 
     public void setCantidadPasajeros(int c) {
         this.cantidadPasajeros = c;
-    }
-
-    public LocalDate getRutaFechaSalida() {
-        return rutaFechaSalida;
-    }
-
-    public void setRutaFechaSalida(LocalDate d) {
-        this.rutaFechaSalida = d;
     }
 
     public String getPuertoSalida() {

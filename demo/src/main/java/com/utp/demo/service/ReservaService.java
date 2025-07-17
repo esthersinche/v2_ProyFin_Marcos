@@ -63,12 +63,41 @@ public class ReservaService {
     }
 
     //de coso a dto
+    public ReservaResumenDTO convertiraDTO(Reserva reservita, ReservaResumenDTO resdto){
+        resdto.setFechaReserva(reservita.getFechaReserva());
+        //cliente
+        resdto.setClienteNombre(reservita.getCliente().getNombre());
+        resdto.setClienteDni(reservita.getCliente().getDniCliente());
+        resdto.setClienteCorreo(reservita.getCliente().getCorreo());
+        resdto.setCantidadPasajeros(reservita.getCantidadPasajeros());
 
-    //de dto a coso
-    public Reserva convertiraReserva(ReservaResumenDTO resresdto, Reserva reser){
-        reser.setFechaReserva(resresdto.getFechaReserva());
-        reser.set
+        //detalles ruta
+        resdto.setPuertoSalida(reservita.getRuta().getSalida());
+        resdto.setPuertoDestino(reservita.getRuta().getNombreruta());
+        resdto.setRutaDuracion(reservita.getRuta().getDiasruta());
+        resdto.setSubtotalRuta(reservita.getRuta().getPrecioruta());
+
+        //paquete
+        resdto.setPaqueteNombre(reservita.getPaquete().getNomPaquete());
+        resdto.setPaqueteDescripcion(reservita.getPaquete().getDescPaquete());
+        resdto.setSubtotalPaquete(reservita.getPaquete().getPrecPaqueteUni());
+
+        //cabina
+        resdto.setCabinaTipo(reservita.getCabina().getCabTipo().getNombreCab());
+        resdto.setCabinaPrecioPorPersona(reservita.getCabina().getCabTipo().getPrecCabinaPer());
+        
+        //total
+        resdto.setTotal(reservita.getTotal());
+
+        return resdto;
 
     }
+
+    //de dto a coso
+    public Reserva convertiraReserva(Reserva reservita1, ReservaResumenDTO resresdto){
+
+        
+    }
+    
 
 }
