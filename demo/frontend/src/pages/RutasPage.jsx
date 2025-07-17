@@ -5,30 +5,30 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function RutasPage() {
-  const [rutas, setRutas] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [filters, setFilters] = useState({ salida: [], modelo: [] });
+  const [rutas, setRutas] = useState([]); //lista de rutas
+  const [loading, setLoading] = useState(true); // ve si esta cargando
+  const [error, setError] = useState(null); //guarda errores
+  const [filters, setFilters] = useState({ salida: [], modelo: [] }); //guarda filtros
 
   const fetchRutas = () => {
-    setLoading(true);
-    const params = new URLSearchParams();
+    setLoading(true);//activa cargando
+    const params = new URLSearchParams();//URLSearchParams construye la url con filtros de abajo
     filters.salida.forEach(s => params.append('salida', s));
     filters.modelo.forEach(m => params.append('modelo', m));
 
-    fetch(`/api/rutas?${params.toString()}`)
+    fetch(`/api/rutas?${params.toString()}`)//params se convierte a string y se hace fetch a esa url 
       .then(res => {
         if (!res.ok) throw new Error('Error al cargar rutas');
         return res.json();
       })
-      .then(data => setRutas(data))
-      .catch(err => setError(err.message))
-      .finally(() => setLoading(false));
+      .then(data => setRutas(data))//sino se guarda en rutas
+      .catch(err => setError(err.message))//si hay errores se guarda en error
+      .finally(() => setLoading(false));//desactiva cargando
   };
 
   useEffect(() => {
     fetchRutas();
-  }, [filters]);
+  }, [filters]); //cuando se cambian filtros se vuelve a ejecutar fetchrutas, actualizandose automaticamente
 
   return (
     <>
@@ -44,8 +44,8 @@ export default function RutasPage() {
           </Col>
           <Col md={9}>
             <h1 className="text-center mb-4">Destinos disponibles</h1>
-
-            {loading && <div className="text-center"><Spinner /></div>}
+            
+            {loading && <div className="text-center"><Spinner /></div>} 
             {error && <Alert variant="danger">{error}</Alert>}
 
             <Row xs={1} md={2} className="g-4">
