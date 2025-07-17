@@ -28,7 +28,7 @@ public class Reserva {
     private Paquete paquete;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_abina")
+    @JoinColumn(name = "idcabina")
     private Cabina_Inst cabina;
 
     @ManyToOne(fetch = FetchType.LAZY)

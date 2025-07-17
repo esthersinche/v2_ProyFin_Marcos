@@ -1,11 +1,14 @@
 package com.utp.demo.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.utp.demo.DTO.RutaDTO;
 import com.utp.demo.model.Ruta;
+import com.utp.demo.model.RutaBarco;
 
 @Service
 public class RutaService {
@@ -16,6 +19,46 @@ public class RutaService {
     // Obtener todas las rutas
     public List<Ruta> obtenerTodasLasRutas() {
         return rutaRepository.findAll();
+    }
+
+    /**
+     * Devuelve todas las rutas filtradas y convertidas en DTOs
+     */
+    public List<RutaDTO> listarRutasDTO(List<String> salida, List<String> modelo) {
+        return rutaRepository.findAll().stream()
+                // Filtrado por salida
+                .filter(r -> salida == null || salida.isEmpty() || salida.contains(r.getSalida()))
+                // Filtrado por modelo
+                .filter(r -> modelo == null || modelo.isEmpty()
+                || r.getRutaBarcos().stream()
+                        .map(RutaBarco::getBarco)
+                        .map(b -> b.getBarmodel().getModeloBarco())
+                        .anyMatch(modelo::contains)
+                )
+                // Conversión a DTO
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Convierte una entidad Ruta en RutaDTO
+     */
+    private RutaDTO toDTO(Ruta r) {
+        RutaDTO dto = new RutaDTO();
+        dto.setIdruta(r.getIdruta());
+        dto.setNombreruta(r.getNombreruta());
+        dto.setDescripcionruta(r.getDescripcionruta());
+        dto.setDiasruta(r.getDiasruta());
+        dto.setPrecioruta(r.getPrecioruta());
+        dto.setSalida(r.getSalida());
+        dto.setImagen(r.getImagen());
+        List<String> modelos = r.getRutaBarcos().stream()
+                .map(RutaBarco::getBarco)
+                .map(b -> b.getBarmodel().getModeloBarco())
+                .distinct()
+                .collect(Collectors.toList());
+        dto.setModelos(modelos);
+        return dto;
     }
 
     // Buscar por ID
@@ -43,7 +86,7 @@ public class RutaService {
         rutaRepository.deleteById(idRuta);
     }
 
-    public List<String> obtenerTodasLasSalidas(){
+    public List<String> obtenerTodasLasSalidas() {
         return rutaRepository.Obtenertodaslassalidas();
     }
 
@@ -75,6 +118,4 @@ public class RutaService {
         return rutadtoo;
     }
      */
-    
-
 }
