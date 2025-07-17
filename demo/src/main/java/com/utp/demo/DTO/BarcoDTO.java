@@ -1,6 +1,5 @@
 package com.utp.demo.DTO;
 
-import java.util.List;
 
 public class BarcoDTO {
 

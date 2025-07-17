@@ -64,9 +64,10 @@ public class ReservaService {
 
 
     //de coso a dto
+    /* 
     public ReservaResumenDTO convertiraDTO(Reserva reservita, ReservaResumenDTO resdto) {
 
-    /* 
+    
      * //de coso a dto
     public ReservaResumenDTO convertiraDTO(Reserva reservita){
         ReservaResumenDTO resdto= new ReservaResumenDTO();
@@ -107,5 +108,5 @@ public class ReservaService {
         
     }
      */
-
+    
 }
