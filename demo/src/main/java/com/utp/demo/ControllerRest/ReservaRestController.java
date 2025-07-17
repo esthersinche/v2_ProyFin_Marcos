@@ -29,6 +29,7 @@ import com.utp.demo.service.ClienteService;
 import com.utp.demo.service.PaqueteService;
 import com.utp.demo.service.ReservaService;
 import com.utp.demo.service.RutaService;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/reservacontrol")
@@ -112,61 +113,115 @@ public class ReservaRestController {
         }
     }
 
-    //actualizando parte de reserva con barcos
+    // actualizando parte de reserva con barcos
     @PatchMapping("/{id}/barcos")
     public ResponseEntity<ReservaResumenDTO> guardarparcialbarcos(@PathVariable String id,
-        @RequestBody BarcoReservaDTO boatdto){
+            @RequestBody BarcoReservaDTO boatdto) {
 
-            //buscar reserva primero
-            Reserva continuereserva2= reservaserv.buscar(id);
+        // buscar reserva primero
+        Reserva continuereserva2 = reservaserv.buscar(id);
 
-            //ahora si id de barco
-            Barcos idboatfound= barcoserv.buscarPorId(boatdto.getIdBarco());
+        // ahora si id de barco
+        Barcos idboatfound = barcoserv.buscarPorId(boatdto.getIdBarco());
 
-            //guardar todo manito todo
-            if (idboatfound != null) {
-                continuereserva2.setBarco(idboatfound);
-                continuereserva2= reservaserv.guardar(continuereserva2);
-                ReservaResumenDTO resres3= ReservaResumenDTO.convertiraDTO(continuereserva2);
-                
-                return ResponseEntity.ok(resres3);
-            } else{
-                return ResponseEntity.notFound().build();
-            }
-            
+        // guardar todo manito todo
+        if (idboatfound != null) {
+            continuereserva2.setBarco(idboatfound);
+            continuereserva2 = reservaserv.guardar(continuereserva2);
+            ReservaResumenDTO resres3 = ReservaResumenDTO.convertiraDTO(continuereserva2);
+
+            return ResponseEntity.ok(resres3);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
 
     }
 
-    //3: paquete
+    // 3: paquete
     @PatchMapping("/{id}/paqueteycabina")
     public ResponseEntity<ReservaResumenDTO> guardarparcialpaqsycabin(@PathVariable String id,
-        @RequestBody PaqueteyCabinaReservaDTO packdto){
+            @RequestBody PaqueteyCabinaReservaDTO packdto) {
 
-            //buscarreserva the usual
-            Reserva continuereserva3= reservaserv.buscar(id);
+        // buscarreserva the usual
+        Reserva continuereserva3 = reservaserv.buscar(id);
 
-            //id de paquete y de cabina
-            Paquete idpaqfound= paqserv.buscarPorId(packdto.getIdPaquete());
-            Cabina_Inst idcabinfound= cabinaserv.buscarPorIdCabina(packdto.getIdCabina());
+        // id de paquete y de cabina
+        Paquete idpaqfound = paqserv.buscarPorId(packdto.getIdPaquete());
+        Cabina_Inst idcabinfound = cabinaserv.buscarPorIdCabina(packdto.getIdCabina());
 
-            //guardartodo sisisisisisisisisisisisisisisisisi
-            //heavy is the crown goddddddd
-            if (idpaqfound != null && idcabinfound != null) {
-                //THIS IS WHAT U ASKED FOR HEAVY IS THE CROWN
-                continuereserva3.setPaquete(idpaqfound);
-                continuereserva3.setCabina(idcabinfound);
+        // guardartodo sisisisisisisisisisisisisisisisisi
+        // heavy is the crown goddddddd
+        if (idpaqfound != null && idcabinfound != null) {
+            // THIS IS WHAT U ASKED FOR HEAVY IS THE CROWN
+            continuereserva3.setPaquete(idpaqfound);
+            continuereserva3.setCabina(idcabinfound);
 
-                continuereserva3= reservaserv.guardar(continuereserva3);
+            continuereserva3 = reservaserv.guardar(continuereserva3);
 
-                ReservaResumenDTO resres4= ReservaResumenDTO.convertiraDTO(continuereserva3);
+            ReservaResumenDTO resres4 = ReservaResumenDTO.convertiraDTO(continuereserva3);
 
-                return ResponseEntity.ok(resres4);
-            } else{
-                return ResponseEntity.notFound().build();
-            }
+            return ResponseEntity.ok(resres4);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
 
     }
 
-    //4: finalizado
+    // 4: finalizado
+    @PatchMapping("/{id}/pago")
+    public ResponseEntity<ReservaResumenDTO> confirmarypagofinal(@PathVariable String id) {
+
+        // tut ututu ututu tutututu utututut utututu utututu utututu ututututtututuut
+        // last one omfg free at last
+        Reserva continuefinalreserva = reservaserv.buscar(id);
+
+        // porsia
+        if (continuefinalreserva.getRuta() == null || continuefinalreserva.getBarco() == null
+                || continuefinalreserva.getPaquete() == null || continuefinalreserva.getCabina() == null) {
+            return ResponseEntity.notFound().build();
+
+        }
+
+        // pagospagospagospagos
+        double pagofinomguni = continuefinalreserva.getPaquete().getPrecPaqueteUni()
+                + continuefinalreserva.getCabina().getCabTipo().getPrecCabinaPer() +
+                continuefinalreserva.getRuta().getPrecioruta();
+
+        // set total y guardor todo, mi precioso nono el señor frodo no te alejara demi
+        continuefinalreserva.setTotal(pagofinomguni * continuefinalreserva.getCantidadPasajeros());
+        continuefinalreserva = reservaserv.guardar(continuefinalreserva);
+
+        // convertir y mandar como json p
+        ReservaResumenDTO resres5 = ReservaResumenDTO.convertiraDTO(continuefinalreserva);
+
+        return ResponseEntity.ok(resres5);
+    }
+
+    // final omfg 5: resumen completo
+    @GetMapping("/{id}")
+    public ResponseEntity<ReservaResumenDTO> resumenyipee(@PathVariable String id) {
+
+        // buscar id por ultima vez esta vez fr
+        Reserva finalfinalreservafr = reservaserv.buscar(id);
+
+        // osea existe
+        if (finalfinalreservafr != null) {
+            // si esta incompleto
+            if (finalfinalreservafr.getCliente() == null || finalfinalreservafr.getRuta() == null
+                    || finalfinalreservafr.getBarco() == null
+                    || finalfinalreservafr.getPaquete() == null || finalfinalreservafr.getCabina() == null) {
+                return ResponseEntity.badRequest().build();
+                // 400= bad request
+            } else {
+                // siexiste / y no esta incompleto
+                ReservaResumenDTO finalresresalfin = ReservaResumenDTO.convertiraDTO(finalfinalreservafr);
+                return ResponseEntity.ok(finalresresalfin);// 200
+            }
+        } else{
+            //nada ps
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 
 }
