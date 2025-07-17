@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.utp.demo.DTO.ReservaResumenDTO;
 import com.utp.demo.model.Barcos;
 import com.utp.demo.model.Cabina_Inst;
 import com.utp.demo.model.Cliente;
@@ -178,7 +179,10 @@ public class ReservaController {
 
         // Recupera la reserva completa (con cliente, ruta, paquete, etc.)
         Reserva reserva = reservaService.buscar(idReserva);
-        model.addAttribute("reserva", reserva);
+        ReservaResumenDTO resres= ReservaResumenDTO.convertiraDTO(reserva);
+        
+
+        model.addAttribute("resumen", resres);
         return "resumen";
     }
 
