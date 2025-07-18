@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class Cliente {
 
     @Id
-    @Column(name = "dni_cliente")
+    @Column(name = "dnicliente")
     private int dniCliente;
     @Column(name = "nombre")
     private String nombre;
@@ -35,7 +35,6 @@ public class Cliente {
         this.celular = celular;
         this.ciudad = ciudad;
     }
-
 
     public int getDniCliente() {
         return dniCliente;

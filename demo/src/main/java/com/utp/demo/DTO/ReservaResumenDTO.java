@@ -33,9 +33,9 @@ public class ReservaResumenDTO {
     private String cabinaTipo; // reserva.cabina.cabTipo.nombreCab
     private double cabinaPrecioPorPersona; // reserva.cabina.cabTipo.precCabinaPer
 
-    
     // Total a pagar
     private double total; // reserva.total
+    private double precioUnitario;
 
     public ReservaResumenDTO() {
     }
@@ -44,28 +44,37 @@ public class ReservaResumenDTO {
         ReservaResumenDTO dto = new ReservaResumenDTO();
 
         dto.fechaReserva = r.getFechaReserva();
-        dto.clienteNombre = r.getCliente().getNombre()
-                + " " + r.getCliente().getApellido();
+        dto.clienteNombre = r.getCliente().getNombre() + " " + r.getCliente().getApellido();
         dto.clienteDni = r.getCliente().getDniCliente();
         dto.clienteCorreo = r.getCliente().getCorreo();
         dto.cantidadPasajeros = r.getCantidadPasajeros();
 
-
-        dto.puertoSalida = r.getRuta().getSalida();
-        dto.puertoDestino = r.getRuta().getNombreruta();
-        dto.rutaDuracion = r.getRuta().getDiasruta();
-        dto.subtotalRuta = r.getRuta().getPrecioruta();
-
-        dto.paqueteNombre = r.getPaquete().getNomPaquete();
-        dto.paqueteDescripcion = r.getPaquete().getDescPaquete();
-        dto.subtotalPaquete = r.getPaquete().getPrecPaqueteUni();
-
-        dto.cabinaTipo = r.getCabina().getCabTipo().getNombreCab();
-        dto.cabinaPrecioPorPersona = r.getCabina().getCabTipo().getPrecCabinaPer();
+        if (r.getRuta() != null) {
+            dto.nombreRuta = r.getRuta().getNombreruta();
+            dto.puertoSalida = r.getRuta().getSalida();
+            dto.puertoDestino = r.getRuta().getNombreruta();
+            dto.rutaDuracion = r.getRuta().getDiasruta();
+            dto.subtotalRuta = r.getRuta().getPrecioruta();
+        }
+        if (r.getPaquete() != null) {
+            dto.paqueteNombre = r.getPaquete().getNomPaquete();
+            dto.paqueteDescripcion = r.getPaquete().getDescPaquete();
+            dto.subtotalPaquete = r.getPaquete().getPrecPaqueteUni();
+        }
+        if (r.getCabina() != null && r.getCabina().getCabTipo() != null) {
+            dto.cabinaTipo = r.getCabina().getCabTipo().getNombreCab();
+            dto.cabinaPrecioPorPersona = r.getCabina().getCabTipo().getPrecCabinaPer();
+        }
+        if (r.getCabina() != null && r.getPaquete() != null && r.getRuta() != null) {
+            double precioUnit = r.getCabina().getCabTipo().getPrecCabinaPer()
+                    + r.getPaquete().getPrecPaqueteUni()
+                    + r.getRuta().getPrecioruta();
+            dto.setPrecioUnitario(precioUnit);
+        }
 
         dto.total = r.getTotal();
-
         return dto;
+
     }
 
     // ——— Getters y setters ———
@@ -187,6 +196,14 @@ public class ReservaResumenDTO {
 
     public void setTotal(double t) {
         this.total = t;
+    }
+
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
 }

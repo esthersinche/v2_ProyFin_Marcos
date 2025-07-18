@@ -45,7 +45,7 @@ public class Reserva {
     private double total;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "dni_cliente", referencedColumnName = "dni_cliente")
+    @JoinColumn(name = "dnicliente", referencedColumnName = "dnicliente")
     private Cliente cliente;
 
     public Reserva() {
