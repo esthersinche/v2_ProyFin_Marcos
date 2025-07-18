@@ -5,6 +5,7 @@ import BarcosPage from './pages/BarcosPage';
 import PaquetesPage from './pages/PaquetesPage';
 import RutasPage from './pages/RutasPage';
 import LoginPage from './pages/LoginPage';
+import BarcosMantPage from './pages/BarcosMantPage';
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem('user'); // o el nombre que uses para guardar tus credenciales/jwt
@@ -21,6 +22,7 @@ function App() {
         <Route path="/paquetes" element={<PaquetesPage />} />
         <Route path="/rutas" element={<RutasPage />} />
         <Route path="*" element={<Navigate to="/main" replace />} />
+        <Route path="/barcoMant" element={<BarcosMantPage />} />
         {/* <Route path="/paquetes" element={<PaqueteList />} /> */}
       </Routes>
     </BrowserRouter>

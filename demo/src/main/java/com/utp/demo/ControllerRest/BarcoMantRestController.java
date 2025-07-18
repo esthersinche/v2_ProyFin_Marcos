@@ -12,8 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.utp.demo.model.Barcos;
+import com.utp.demo.model.Barcos_modelo;
+import com.utp.demo.model.Ruta;
+import com.utp.demo.service.BarcoRepository;
 import com.utp.demo.service.BarcoService;
+import com.utp.demo.service.RutaService;
+
 import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -21,17 +27,35 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class BarcoMantRestController {
 
     private BarcoService barcoserv;
+    private BarcoRepository barcorepo;
+    private RutaService rutaserv;
 
-    public BarcoMantRestController(BarcoService barcoserv) {
+    public BarcoMantRestController(BarcoService barcoserv, BarcoRepository barcorepo, RutaService rutaserv) {
         this.barcoserv = barcoserv;
+        this.barcorepo = barcorepo;
+        this.rutaserv = rutaserv;
     }
 
     // cambios para api
-    // listar
-    @GetMapping("/listar")
+    // listar para barcos y para q react los cargue
+    @GetMapping("/listarbarcos")
     public List<Barcos> listar() {
         return barcoserv.obtenerBarcos();
     }
+
+    //listar para modelos
+    @GetMapping("/listarmodelos")
+    public List<Barcos_modelo> listarmodelos() {
+        return barcorepo.findDistinctModelos();
+    }
+
+    //listar para rutas
+    @GetMapping("/listarrutas")
+    public List<Ruta> listarrutas() {
+        return rutaserv.obtenerTodasLasRutas();
+    }
+    
+    
 
     // obtener x id
     @GetMapping("/buscar/{id}")
@@ -56,9 +80,9 @@ public class BarcoMantRestController {
     }
 
     //actualizar barcos
-    @PutMapping("editar/{id}")
-    public ResponseEntity<Barcos> actualizarxId(@PathVariable String barcoid, @RequestBody Barcos barquito2) {
-        Barcos editedbarquito= barcoserv.buscarPorId(barcoid);
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<Barcos> actualizarxId(@PathVariable String id, @RequestBody Barcos barquito2) {
+        Barcos editedbarquito= barcoserv.buscarPorId(id);
 
         if (editedbarquito != null) {
             barcoserv.guardarBarco(editedbarquito);
