@@ -1,4 +1,3 @@
-// src/main/java/com/utp/demo/controller/AuthController.java
 package com.utp.demo.controller;
 
 import java.util.Map;

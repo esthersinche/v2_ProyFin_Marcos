@@ -43,6 +43,8 @@ public class SeguridadConfig {
                 )
                 // 3. Reglas de autorización
                 .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/auth/**").permitAll()
+                // después tu regla de Thymeleaf
                 .requestMatchers("/Mantenimiento/barcoMant").hasRole("USER")
                 .anyRequest().permitAll()
                 )
