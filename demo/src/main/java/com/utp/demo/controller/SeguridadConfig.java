@@ -2,6 +2,7 @@ package com.utp.demo.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.utp.demo.service.UsuarioDetailsService;
 
@@ -34,7 +36,8 @@ public class SeguridadConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        
+          http
                 // 1. Activa CORS usando tu CorsConfig
                 .cors().and()
                 // 2. Desactiva CSRF para las rutas /api/**
@@ -61,6 +64,9 @@ public class SeguridadConfig {
                 .permitAll()
                 );
         return http.build();
+         
+        
+        
     }
 
     @Bean

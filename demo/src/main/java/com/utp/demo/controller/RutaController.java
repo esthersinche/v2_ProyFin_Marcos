@@ -1,12 +1,9 @@
 package com.utp.demo.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.*;
 import com.utp.demo.DTO.RutaDTO;
-import com.utp.demo.model.Ruta;
-import com.utp.demo.model.RutaBarco;
 import com.utp.demo.service.RutaService;
 
 @RestController

@@ -26,7 +26,7 @@ export default function LoginPage() {
       .then((data) => {
         // Aquí podrías guardar un token o la info del usuario en localStorage
         // localStorage.setItem('user', JSON.stringify(data));
-        navigate("/dashboard"); // o la ruta que desees
+        navigate("/barcoMant"); // o la ruta que desees
       })
       .catch((err) => setError(err.message));
   };

@@ -1,7 +1,11 @@
 // src/main/java/com/utp/demo/DTO/RutaDTO.java
 package com.utp.demo.DTO;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.utp.demo.model.Ruta;
 
 public class RutaDTO {
 
@@ -17,6 +21,28 @@ public class RutaDTO {
     // Constructors, getters y setters
     public RutaDTO() {
     }
+
+    public static RutaDTO fromEntity(Ruta ruta) {
+        System.out.println("ruta omfg: "+ ruta.getIdruta());
+    RutaDTO dto = new RutaDTO();
+    dto.setIdruta(ruta.getIdruta());
+    dto.setNombreruta(ruta.getNombreruta());
+    dto.setDescripcionruta(ruta.getDescripcionruta());
+    dto.setDiasruta(ruta.getDiasruta());
+    dto.setPrecioruta(ruta.getPrecioruta());
+    dto.setSalida(ruta.getSalida());
+    dto.setImagen(ruta.getImagen());
+
+    // Opcional: si quieres obtener solo los modelos (nombres, no objetos completos)
+    List<String> modelos = ruta.getRutaBarcos().stream()
+        .map(rutaBarco -> rutaBarco.getBarco().getBarmodel().getModeloBarco())
+        .distinct()
+        .collect(Collectors.toList());
+
+    dto.setModelos(modelos);
+
+    return dto;
+}
 
     public String getIdruta() {
         return idruta;

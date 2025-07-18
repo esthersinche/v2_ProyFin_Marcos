@@ -25,9 +25,46 @@ export default function BarcosMantPage() {
   const [errorMsg, setErrorMsg] = useState(null); //guarda errores
 
   //cargar los datos
+  /*
   useEffect(() => {
     fetchModelos().then(setModelos);
     fetchRutas().then(setRutas);
+  }, []);*/
+  useEffect(() => {
+    /*
+    fetchModelos()
+      .then((data) => {
+        console.log("Modelos recibidos:", data); // 🔍 revisa en consola
+        setModelos(data);
+      })
+      .catch((err) => {
+        console.error("Error al obtener modelos", err);
+        setModelos([]); // por si acaso
+      });*/
+    fetchModelos()
+      .then((data) => {
+        // 1. Extrae sólo los strings de modelo
+        const nombres = data.map((m) => m.modeloBarco);
+        // 2. Crea un Set para eliminar duplicados
+        const únicos = Array.from(new Set(nombres));
+        // 3. Reconstruye un array de objetos (si sólo necesitas el string, puedes quedarte con 'únicos')
+        const modelosFiltrados = únicos.map((nom) => ({ modeloBarco: nom }));
+        setModelos(modelosFiltrados);
+      })
+      .catch((err) => {
+        console.error(err);
+        setModelos([]);
+      });
+
+    fetchRutas()
+      .then((data) => {
+        console.log("Rutas recibidas:", data, typeof data);
+        setRutas(Array.isArray(data) ? data : []);
+      })
+      .catch((err) => {
+        console.error("Error al obtener rutas", err);
+        setRutas([]);
+      });
   }, []);
 
   //inputsfjnuwqefnqlkfnaef
@@ -52,7 +89,8 @@ export default function BarcosMantPage() {
   };
 
   //
-  const handlebuscar = (e) => {
+  const handlebuscar = async (e) => {
+    /*
     e.preventDefault();
     if (!barco.idBarco) {
       return;
@@ -61,7 +99,27 @@ export default function BarcosMantPage() {
       .then(setBarco)
       .catch(() =>
         setErrorMsg("No se encontro un barco con ID " + barco.idBarco)
-      );
+      );*/
+    e.preventDefault();
+    if (!barco.idBarco) return;
+
+    try {
+      const data = await fetchBarcoxId(barco.idBarco);
+      setBarco({
+        idBarco: data.idBarco ?? "",
+        nombreBarco: data.nombreBarco ?? "",
+        capitanBarco: data.capitanBarco ?? "",
+        modeloBarco: data.modeloBarco ?? "",
+        imgURLbarco: data.imgURLbarco ?? "",
+        descripcionBarco: data.descripcionBarco ?? "",
+        idsrutasbarco: Array.isArray(data.idsrutasbarco)
+          ? data.idsrutasbarco
+          : [],
+      });
+      setErrorMsg(null);
+    } catch {
+      setErrorMsg("No se encontró un barco con ID " + barco.idBarco);
+    }
   };
 
   //
@@ -201,11 +259,12 @@ export default function BarcosMantPage() {
                     multiple
                     size="5"
                   >
-                    {rutas.map((r) => (
-                      <option key={r.idRuta} value={r.idRuta}>
-                        {r.nombreruta}
-                      </option>
-                    ))}
+                    {Array.isArray(rutas) &&
+                      rutas.map((r) => (
+                        <option key={r.idruta} value={r.idruta}>
+                          {r.nombreruta}
+                        </option>
+                      ))}
                   </select>
                   <small className="form-text text-muted">
                     Mantén Ctrl (o Cmd) para seleccionar múltiples rutas.
@@ -216,16 +275,25 @@ export default function BarcosMantPage() {
               <div className="mt-4 d-flex justify-content-between">
                 <div>
                   <button
+                    type="button"
                     className="btn btn-warning me-2"
                     onClick={handleeditarboat}
                   >
                     Editar
                   </button>
-                  <button className="btn btn-danger" onClick={handlekillboat}>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={handlekillboat}
+                  >
                     Eliminar
                   </button>
                 </div>
-                <button className="btn btn-apple" onClick={handlesaveboat}>
+                <button
+                  type="button"
+                  className="btn btn-apple"
+                  onClick={handlesaveboat}
+                >
                   Guardar
                 </button>
               </div>

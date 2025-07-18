@@ -9,9 +9,9 @@ export default function AdminHeader() {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto">
-            <Nav.Link href="/Mantenimiento/barcoMant" className="text-white">Barcos</Nav.Link>
-            <Nav.Link href="/Mantenimiento/rutaMant" className="text-white">Rutas</Nav.Link>
-            <Nav.Link href="/Mantenimiento/paqueteMant" className="text-white">Paquetes</Nav.Link>
+            <Nav.Link href="/barcoMant" className="text-white">Barcos</Nav.Link>
+            <Nav.Link href="/rutaMant" className="text-white">Rutas</Nav.Link>
+            <Nav.Link href="/paqueteMant" className="text-white">Paquetes</Nav.Link>
             <Nav.Link href="/Mantenimiento/reportes" className="text-white">Reportes</Nav.Link>
           </Nav>
           <Nav className="ms-auto">

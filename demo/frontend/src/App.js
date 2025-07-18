@@ -1,19 +1,20 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import MainPage from './pages/MainPage';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import BarcosPage from './pages/BarcosPage';
+import LoginPage from './pages/LoginPage';
+import MainPage from './pages/MainPage';
 import PaquetesPage from './pages/PaquetesPage';
 import RutasPage from './pages/RutasPage';
-import LoginPage from './pages/LoginPage';
 
 import ComprarPage from './pages/ComprarPage';
-import ElegirRutaPage from './pages/ElegirRutaPage';
 import ElegirBarcoPage from './pages/ElegirBarcoPage';
 import ElegirPaquetePage from './pages/ElegirPaquetePage';
-import ResumenPage from './pages/ResumenPage';
+import ElegirRutaPage from './pages/ElegirRutaPage';
 import MetodosPagoPage from './pages/MetodosPagoPage';
+import ResumenPage from './pages/ResumenPage';
 
 import BarcosMantPage from './pages/BarcosMantPage';
+import PaqueteMantPage from './pages/PaqueteMantPage';
+import RutaMantPage from './pages/RutaMantPage';
 
 
 function PrivateRoute({ children }) {
@@ -45,6 +46,8 @@ function App() {
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/main" replace />} />
         <Route path="/barcoMant" element={<BarcosMantPage />} />
+        <Route path="/paqueteMant" element={<PaqueteMantPage />} />
+        <Route path="/rutaMant" element={<RutaMantPage />} />
         {/* <Route path="/paquetes" element={<PaqueteList />} /> */}
       </Routes>
     </BrowserRouter>
