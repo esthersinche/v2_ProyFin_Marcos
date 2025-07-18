@@ -2,8 +2,10 @@ package com.utp.demo.ControllerRest;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.utp.demo.DTO.ReservaResumenDTO;
 import com.utp.demo.DTO.Fragmentos.BarcoReservaDTO;
 import com.utp.demo.DTO.Fragmentos.ClienteReservaDTO;
 import com.utp.demo.DTO.Fragmentos.PaqueteyCabinaReservaDTO;
 import com.utp.demo.DTO.Fragmentos.RutaReservaDTO;
+import com.utp.demo.DTO.ReservaResumenDTO;
 import com.utp.demo.model.Barcos;
 import com.utp.demo.model.Cabina_Inst;
 import com.utp.demo.model.Cliente;
@@ -29,7 +31,6 @@ import com.utp.demo.service.ClienteService;
 import com.utp.demo.service.PaqueteService;
 import com.utp.demo.service.ReservaService;
 import com.utp.demo.service.RutaService;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/reservacontrol")
@@ -53,10 +54,8 @@ public class ReservaRestController {
     }
 
     // api
-
     // 1: Cliente
     // guardar cliente empezando a crear la reserva
-
     @PostMapping
     public ResponseEntity<ReservaResumenDTO> guardarclientevar(@RequestBody ClienteReservaDTO clidto) {
 
@@ -67,7 +66,7 @@ public class ReservaRestController {
         cliserv.guardarCliente(cli);
 
         // se envia a reserva todo lo q se de en el hmtl
-        Reserva reservita = new Reserva();
+        Reserva reservita = reservaserv.iniciarReserva();
         reservita.setCliente(cli);
         reservita.setCantidadPasajeros(clidto.getCantidadpasajeros());
         reservita.setFechaReserva(LocalDate.now());
@@ -75,7 +74,7 @@ public class ReservaRestController {
         Reserva resbeacon = reservaserv.guardar(reservita);
 
         // convertir
-        ReservaResumenDTO resres = ReservaResumenDTO.convertiraDTO(reservita);
+        ReservaResumenDTO resres = ReservaResumenDTO.convertiraDTO(resbeacon);
 
         // para que el patch tenga el id reserva con q seguir
         URI location = ServletUriComponentsBuilder
@@ -97,20 +96,20 @@ public class ReservaRestController {
 
         // buscar id reserva}
         Reserva continuereserva = reservaserv.buscar(id);
-
-        // luego buscar la id de ruta
-        Ruta idroutefound = rutaserv.buscarPorId(routedto.getIdRuta());
-
-        // guardar las weas
-        if (idroutefound != null) {
-            continuereserva.setRuta(idroutefound);
-            continuereserva = reservaserv.guardar(continuereserva);
-            ReservaResumenDTO resres2 = ReservaResumenDTO.convertiraDTO(continuereserva);
-
-            return ResponseEntity.ok(resres2);
-        } else {
+        if (continuereserva == null) {
             return ResponseEntity.notFound().build();
         }
+        // luego buscar la id de ruta
+        Ruta idroutefound = rutaserv.buscarPorId(routedto.getIdRuta());
+        if (idroutefound == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // guardar las weas
+        continuereserva.setRuta(idroutefound);
+        continuereserva = reservaserv.guardar(continuereserva);
+        ReservaResumenDTO resres2 = ReservaResumenDTO.convertiraDTO(continuereserva);
+        return ResponseEntity.ok(resres2);
     }
 
     // actualizando parte de reserva con barcos
@@ -120,21 +119,20 @@ public class ReservaRestController {
 
         // buscar reserva primero
         Reserva continuereserva2 = reservaserv.buscar(id);
-
+        if (continuereserva2 == null) {
+            return ResponseEntity.notFound().build();
+        }
         // ahora si id de barco
         Barcos idboatfound = barcoserv.buscarPorId(boatdto.getIdBarco());
-
-        // guardar todo manito todo
-        if (idboatfound != null) {
-            continuereserva2.setBarco(idboatfound);
-            continuereserva2 = reservaserv.guardar(continuereserva2);
-            ReservaResumenDTO resres3 = ReservaResumenDTO.convertiraDTO(continuereserva2);
-
-            return ResponseEntity.ok(resres3);
-        } else {
+        if (idboatfound == null) {
             return ResponseEntity.notFound().build();
         }
 
+        // guardar todo manito todo
+        continuereserva2.setBarco(idboatfound);
+        continuereserva2 = reservaserv.guardar(continuereserva2);
+        ReservaResumenDTO resres3 = ReservaResumenDTO.convertiraDTO(continuereserva2);
+        return ResponseEntity.ok(resres3);
     }
 
     // 3: paquete
@@ -144,26 +142,25 @@ public class ReservaRestController {
 
         // buscarreserva the usual
         Reserva continuereserva3 = reservaserv.buscar(id);
+        if (continuereserva3 == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         // id de paquete y de cabina
         Paquete idpaqfound = paqserv.buscarPorId(packdto.getIdPaquete());
         Cabina_Inst idcabinfound = cabinaserv.buscarPorIdCabina(packdto.getIdCabina());
+        if (idpaqfound == null || idcabinfound == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         // guardartodo sisisisisisisisisisisisisisisisisi
         // heavy is the crown goddddddd
-        if (idpaqfound != null && idcabinfound != null) {
-            // THIS IS WHAT U ASKED FOR HEAVY IS THE CROWN
-            continuereserva3.setPaquete(idpaqfound);
-            continuereserva3.setCabina(idcabinfound);
-
-            continuereserva3 = reservaserv.guardar(continuereserva3);
-
-            ReservaResumenDTO resres4 = ReservaResumenDTO.convertiraDTO(continuereserva3);
-
-            return ResponseEntity.ok(resres4);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        // THIS IS WHAT U ASKED FOR HEAVY IS THE CROWN
+        continuereserva3.setPaquete(idpaqfound);
+        continuereserva3.setCabina(idcabinfound);
+        continuereserva3 = reservaserv.guardar(continuereserva3);
+        ReservaResumenDTO resres4 = ReservaResumenDTO.convertiraDTO(continuereserva3);
+        return ResponseEntity.ok(resres4);
 
     }
 
@@ -174,6 +171,9 @@ public class ReservaRestController {
         // tut ututu ututu tutututu utututut utututu utututu utututu ututututtututuut
         // last one omfg free at last
         Reserva continuefinalreserva = reservaserv.buscar(id);
+        if (continuefinalreserva == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         // porsia
         if (continuefinalreserva.getRuta() == null || continuefinalreserva.getBarco() == null
@@ -184,8 +184,8 @@ public class ReservaRestController {
 
         // pagospagospagospagos
         double pagofinomguni = continuefinalreserva.getPaquete().getPrecPaqueteUni()
-                + continuefinalreserva.getCabina().getCabTipo().getPrecCabinaPer() +
-                continuefinalreserva.getRuta().getPrecioruta();
+                + continuefinalreserva.getCabina().getCabTipo().getPrecCabinaPer()
+                + continuefinalreserva.getRuta().getPrecioruta();
 
         // set total y guardor todo, mi precioso nono el señor frodo no te alejara demi
         continuefinalreserva.setTotal(pagofinomguni * continuefinalreserva.getCantidadPasajeros());
@@ -203,25 +203,43 @@ public class ReservaRestController {
 
         // buscar id por ultima vez esta vez fr
         Reserva finalfinalreservafr = reservaserv.buscar(id);
-
-        // osea existe
-        if (finalfinalreservafr != null) {
-            // si esta incompleto
-            if (finalfinalreservafr.getCliente() == null || finalfinalreservafr.getRuta() == null
-                    || finalfinalreservafr.getBarco() == null
-                    || finalfinalreservafr.getPaquete() == null || finalfinalreservafr.getCabina() == null) {
-                return ResponseEntity.badRequest().build();
-                // 400= bad request
-            } else {
-                // siexiste / y no esta incompleto
-                ReservaResumenDTO finalresresalfin = ReservaResumenDTO.convertiraDTO(finalfinalreservafr);
-                return ResponseEntity.ok(finalresresalfin);// 200
-            }
-        } else{
-            //nada ps
+        if (finalfinalreservafr == null) {
             return ResponseEntity.notFound().build();
         }
-
+        // osea existe
+        // si esta incompleto
+        if (finalfinalreservafr.getCliente() == null || finalfinalreservafr.getRuta() == null
+                || finalfinalreservafr.getBarco() == null
+                || finalfinalreservafr.getPaquete() == null || finalfinalreservafr.getCabina() == null) {
+            return ResponseEntity.badRequest().build();
+            // 400= bad request
+        } else {
+            // siexiste / y no esta incompleto
+            ReservaResumenDTO finalresresalfin = ReservaResumenDTO.convertiraDTO(finalfinalreservafr);
+            return ResponseEntity.ok(finalresresalfin);// 200
+        }
     }
 
+    //simulacion de pago causas 
+    @PostMapping("/pagos/simulacion")
+    public ResponseEntity<String> simularPago(@RequestBody Map<String, Object> payload) {
+        String metodo = (String) payload.get("metodo");
+        String reservaId = (String) payload.get("reservaId");
+
+        if (metodo == null || reservaId == null) {
+            return ResponseEntity.badRequest().body("Faltan datos");
+        }
+
+        // Simulación de lógica según método
+        if (metodo.equals("tarjeta")) {
+            // Lógica ficticia: validación de tarjeta (si se desea)
+            System.out.println("Simulando pago con tarjeta para reserva " + reservaId);
+        } else if (metodo.equals("yape")) {
+            System.out.println("Simulando pago con Yape para reserva " + reservaId);
+        } else {
+            return ResponseEntity.badRequest().body("Método no válido");
+        }
+
+        return ResponseEntity.ok("Pago simulado exitoso");
+    }
 }

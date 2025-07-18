@@ -35,10 +35,18 @@ public class SeguridadConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                // 1. Activa CORS usando tu CorsConfig
+                .cors().and()
+                // 2. Desactiva CSRF para las rutas /api/**
+                .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/api/**")
+                )
+                // 3. Reglas de autorización
                 .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/Mantenimiento/barcoMant").hasRole("USER")
                 .anyRequest().permitAll()
                 )
+                // 4. Form login / logout
                 .formLogin(form -> form
                 .loginPage("/Mantenimiento/login")
                 .loginProcessingUrl("/Mantenimiento/login")
