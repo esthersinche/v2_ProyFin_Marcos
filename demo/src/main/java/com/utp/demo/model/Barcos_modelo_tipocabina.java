@@ -1,5 +1,7 @@
 package com.utp.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -18,6 +20,7 @@ public class Barcos_modelo_tipocabina {
     @ManyToOne
     @MapsId("modelobarco")
     @JoinColumn(name = "modelo")
+    @JsonBackReference
     private Barcos_modelo barmodel; //bar_model
 
     @ManyToOne

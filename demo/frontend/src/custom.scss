@@ -1,0 +1,53 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+$main: #DDD8C4;
+$header: #69A297;
+$ocean: #50808E;
+$sh-ocean: #466872;
+$apple: #A3C9A8;
+$aquamarine: #84B59F;
+
+$custom-colors: (
+  "main": $main,
+  "header": $header,
+  "ocean": $ocean,
+  "apple": $apple,
+  "aquamarine": $aquamarine
+);
+
+.btn-apple {
+  color: white;
+  background-color: $apple;
+}
+.btn-ocean {
+  color: white;
+  background-color: $ocean;
+}
+.btn-ocean :hover {
+  background-color: $sh-ocean;
+}
+.btn-aquamarine {
+  color: white;
+  background-color: $aquamarine;
+}
+.text-apple { color: $apple; }
+.text-ocean { color: $ocean; }
+.text-aquamarine { color: $aquamarine; }
+.text-header { color: $header; }
+.text-main { color: $main; }
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "../node_modules/bootstrap/scss/variables-dark";
+@import "../node_modules/bootstrap/scss/maps";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/helpers";
+@import "../node_modules/bootstrap/scss/utilities";
+@import "../node_modules/bootstrap/scss/utilities/api";

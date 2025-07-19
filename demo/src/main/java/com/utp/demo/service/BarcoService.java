@@ -1,19 +1,13 @@
 package com.utp.demo.service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.utp.demo.DTO.BarcoDTO;
 import com.utp.demo.model.Barcos;
-import com.utp.demo.model.Barcos_modelo;
-import com.utp.demo.model.Ruta;
-import com.utp.demo.model.RutaBarco;
-import com.utp.demo.model.DTO.BarcoDTO;
-import com.utp.demo.model.RutaBarco.RutaBarcoId;
 
 @Service
 public class BarcoService {
@@ -21,15 +15,40 @@ public class BarcoService {
     @Autowired
     private BarcoRepository barcoRepository;
 
-    @Autowired
+    /* 
+     * @Autowired
     private BarcosmodeloService barcmodeserv;
 
     @Autowired
     private RutaService rutaserv;
-
+     */
     // Listado completo
     public List<Barcos> obtenerBarcos() {
         return barcoRepository.findAll();
+    }
+
+    // Método público que devuelve DTOs
+    public List<BarcoDTO> obtenerBarcosDTO() {
+        return barcoRepository.findAll()
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    // Conversor privado Barcos → BarcoDTO
+    private BarcoDTO toDTO(Barcos barco) {
+        BarcoDTO dto = new BarcoDTO();
+        dto.setIdBarco(barco.getIDbarco());
+        dto.setNombreBarco(barco.getNombrebarco());
+        dto.setCapitanBarco(barco.getCapitanbarco());
+        dto.setModeloBarco(barco.getBarmodel() != null
+                ? barco.getBarmodel().getModeloBarco()
+                : null);
+        dto.setTotalCabinas(barco.getTotalCabinas());
+        dto.setCapacidadTotal(barco.getCapacidadTotal());
+        dto.setDescripcionBarco(barco.getDescripcionbarco());
+        dto.setImgURLbarco(barco.getImagenbarco());
+        return dto;
     }
 
     // Buscar por ID de barco
@@ -75,6 +94,7 @@ public class BarcoService {
     public Barcos buscarPorId(String id) {
         return barcoRepository.findById(id).orElse(null);
     }
+    /* 
 
     public BarcoDTO convertiraDTO (Barcos barco){
         BarcoDTO barcodtoo= new BarcoDTO();
@@ -124,4 +144,5 @@ public class BarcoService {
 
         return barquito;
     }
+     */
 }

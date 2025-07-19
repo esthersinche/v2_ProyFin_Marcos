@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.utp.demo.DTO.CabinaDTO;
 import com.utp.demo.model.Barcos;
 import com.utp.demo.model.Cabina_Inst;
 import com.utp.demo.model.Cabina_tipo;
@@ -23,6 +24,12 @@ public class CabinaService {
     // Obtener todas las cabinas
     public List<Cabina_Inst> obtenerTodasLasCabinas() {
         return cabrepo.findAll();
+    }
+
+    public List<CabinaDTO> obtenerCabinasComoDTO() {
+        return obtenerTodasLasCabinas().stream()
+                .map(CabinaDTO::fromEntity)
+                .toList();
     }
 
     // Buscar por ID

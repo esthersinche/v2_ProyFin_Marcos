@@ -2,24 +2,31 @@ package com.utp.demo.controller;
 
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.utp.demo.model.Paquete;
+import com.utp.demo.DTO.PaqueteDTO;
 import com.utp.demo.service.PaqueteService;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/api/paquetes")
 public class PaqueteController {
 
-    // no es necesario el autowired debido a una versión del SpringBoot que lo
-    // detecta automáticamente
     private final PaqueteService paqserv;
 
     public PaqueteController(PaqueteService paqserv) {
         this.paqserv = paqserv;
     }
 
+    @GetMapping
+    public List<PaqueteDTO> findAll() {
+        return paqserv.obtenerPaquetesDTO();
+    }
+
+    /* 
     @GetMapping("/paquetes")
     public String listarpaquetes(
             //@RequestParam(name = "ruta", required = false) List<String> rutas,
@@ -106,7 +113,9 @@ public class PaqueteController {
          * // recién puede sacar los nombres
          * List<String> nom_rutas = rutas_cbox_paq.stream().map(Ruta::getNombre_ruta)
          * .distinct().collect(Collectors.toList());
-         */
+     *//* 
         return "paquetes";
     }
+     */
+
 }

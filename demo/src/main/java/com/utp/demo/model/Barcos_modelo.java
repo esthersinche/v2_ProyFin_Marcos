@@ -3,6 +3,8 @@ package com.utp.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -18,6 +20,7 @@ public class Barcos_modelo {
     private String modeloBarco; // Ej. SMODEL, MMODEL, LMODEL
 
     @OneToMany(mappedBy = "barmodel")
+    @JsonManagedReference
     private List<Barcos_modelo_tipocabina> tiposDeCabina = new ArrayList<>();
 
     public Barcos_modelo() {

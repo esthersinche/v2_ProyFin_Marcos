@@ -18,7 +18,7 @@ public interface BarcoRepository extends JpaRepository<Barcos, String> {
       FROM Barcos b
       WHERE LOWER(b.nombrebarco) = LOWER(:nombre)
     """)
-    Barcos findByNombreBarcoIgnoreCase(@Param("nombre") String nombre);
+    Barcos findByNombreBarcoIgnoreCase(String nombre);
 
     @Query("""
       SELECT b 

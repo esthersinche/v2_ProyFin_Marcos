@@ -3,6 +3,8 @@ package com.utp.demo.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,6 +39,7 @@ public class Ruta {
     private String imagen;
 
     @OneToMany(mappedBy = "ruta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<RutaBarco> rutaBarcos = new HashSet<>();
 
     // --- RELACIÓN M:N CON BARCO ---

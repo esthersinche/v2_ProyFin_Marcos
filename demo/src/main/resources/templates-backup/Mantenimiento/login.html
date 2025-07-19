@@ -1,0 +1,60 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TuCrucerito</title>
+    <link th:href="@{/node_modules/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/scss/custom.css}" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <!-- Header -->
+    <header th:replace="~{fragments/header :: navBar}"></header>
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Iniciar Sesión</h3>
+
+                        <!-- Mensaje de error de Spring Security -->
+                        <div th:if="${param.error}" class="alert alert-danger text-center">
+                            Usuario o contraseña inválidos
+                        </div>
+                        <!-- Mensaje de logout exitoso -->
+                        <div th:if="${param.logout}" class="alert alert-success text-center">
+                            Has cerrado sesión correctamente
+                        </div>
+
+                        <form th:action="@{/Mantenimiento/login}" method="post">
+                            <!-- Token CSRF requerido por Spring Security -->
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="username" name="username"
+                                    placeholder="Usuario" required autofocus />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Contraseña" required />
+                            </div>
+
+                            <button type="submit" class="btn btn-ocean w-100">Entrar</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{fragments/footer :: footerContent}"></footer>
+    <script th:src="@{/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -23,6 +25,7 @@ public class RutaBarco {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idruta")
     @JoinColumn(name = "idruta")
+    @JsonBackReference
     private Ruta ruta;
 
     @ManyToOne(fetch = FetchType.LAZY)

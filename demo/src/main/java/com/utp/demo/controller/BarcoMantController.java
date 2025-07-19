@@ -1,6 +1,7 @@
 package com.utp.demo.controller;
 
 
+
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,28 +11,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.utp.demo.model.Barcos;
-import com.utp.demo.model.DTO.BarcoDTO;
 import com.utp.demo.service.BarcoRepository;
 import com.utp.demo.service.BarcoService;
 import com.utp.demo.service.RutaService;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
+
 @Controller
 @RequestMapping("/Mantenimiento/barcoMant")
 public class BarcoMantController {
+
+    private final BarcoController barcoController;
     private BarcoService barcoserv;
     private BarcoRepository barcorepo;
     private RutaService rutaserv;
 
-    public BarcoMantController(BarcoService barcoserv, BarcoRepository barcorepo, RutaService rutaserv) {
+    public BarcoMantController(BarcoService barcoserv, BarcoRepository barcorepo, RutaService rutaserv, BarcoController barcoController) {
         this.barcoserv = barcoserv;
         this.barcorepo = barcorepo;
         this.rutaserv = rutaserv;
+        this.barcoController = barcoController;
     }
+
+    
+
 
     @GetMapping
     public String mostrarlosbarcos(Model model) {
-        model.addAttribute("barco", new BarcoDTO());
+        model.addAttribute("barco", new Barcos());
         model.addAttribute("modelos", barcorepo.findDistinctModelos());
         model.addAttribute("rutasDisponibles", rutaserv.obtenerTodasLasRutas());
         return "Mantenimiento/barcoMant";
@@ -48,69 +56,78 @@ public class BarcoMantController {
      * if (idBarco != null) {
      * 
      * barcoserv.buscarPorId(idBarco);
-     * 
-     * 
-     * 
-     * }else{
-     * 
-     * }
-     * 
-     * 
-     * return "entity";
-     * }
-     */
+     
+      
+      
+      }else{
+      
+     }
+      
+      
+      return "entity";
+     }*/
+     
 
     @GetMapping("/buscarbarco")
     public String BuscarbarcoxId(@RequestParam String idBarco, Model model) {
 
-        BarcoDTO barcodto;
+        //BarcoDTO barcodto;
+        Barcos barquito= new Barcos();
 
         if (idBarco == null || idBarco.isBlank()) {// si no hya nada o esta vacio
             model.addAttribute("errorMsg", "Ingrese un ID");
-            barcodto = new BarcoDTO();// aaa
+            //barcodto = new BarcoDTO();// aaa
+            //barquito= new Barcos();
+
 
         } else {
             // se usa el dto mas q nada para futuras actus, posible agregar otros atributos
-            Barcos barquito = barcoserv.buscarPorId(idBarco);
+            //Barcos barquito = barcoserv.buscarPorId(idBarco);
+            Barcos foundboat= barcoserv.buscarPorId(idBarco);
+            //barquito= barcoserv.buscarPorId(idBarco);
 
-            if (barquito != null) {
-                barcodto = barcoserv.convertiraDTO(barquito);
+            if (foundboat != null) {
+                //barcodto = barcoserv.convertiraDTO(barquito);
+                barquito= foundboat;
+                model.addAttribute("barco", barquito);
 
             } else {
                 model.addAttribute("errorMsg", "No se encontro un barco con ID " + idBarco);
-                barcodto = new BarcoDTO();
-                barcodto.setIdBarco(idBarco);
+                //barcodto = new BarcoDTO();
+                //barcodto.setIdBarco(idBarco);
+                barquito.setIDbarco(idBarco);
 
             }
 
         }
 
-        model.addAttribute("barco", barcodto);
+        model.addAttribute("barco", barquito);
         model.addAttribute("modelos", barcorepo.findDistinctModelos());
         model.addAttribute("rutasDisponibles", rutaserv.obtenerTodasLasRutas());
 
         return "Mantenimiento/barcoMant";
-    }
+    }//ya
 
     // editar
     @PostMapping("/editarbarco")
-    public String EditarBarcoxId(@ModelAttribute("barco") BarcoDTO barquito, Model model) {
+    public String EditarBarcoxId(@ModelAttribute("barco") Barcos barquito2, Model model) {
 
-        if (barquito.getIdBarco().isBlank() && barquito.getNombreBarco().isBlank()
-                && barquito.getCapitanBarco().isBlank()) {
+        if (barquito2.getIDbarco().isBlank() && barquito2.getNombrebarco().isBlank()
+                && barquito2.getCapitanbarco().isBlank()) {
             model.addAttribute("errorMsg", "No hay nada para editar");
             return "Mantenimiento/barcoMant";
 
         } // por si puso buscar y no le salio nada y usa el boton de editar
 
-        Barcos barco = barcoserv.buscarPorId(barquito.getIdBarco());// se fija si el id esta en labase de datos
+        Barcos barco = barcoserv.buscarPorId(barquito2.getIDbarco());
+        // se fija si el id esta en labase de datos y lo guarda en un obj
 
         if (barco == null) {// si se le ocurrio llenar todo y puso editar pero la id no esta en la bd
             model.addAttribute("errorMsg", "ID no existe, no hay nada para editar.");
             return "Mantenimiento/barcoMant";
         } else {
-            barcoserv.convertiraBarcos(barquito, barco);
-            barcoserv.guardarBarco(barco);
+            //barcoserv.convertiraBarcos(barquito, barco);
+            barcoserv.guardarBarco(barquito2);
         }
 
         return "redirect:/Mantenimiento/barcoMant";
@@ -118,15 +135,15 @@ public class BarcoMantController {
 
     // Eliminar
     @PostMapping("/eliminarbarco")
-    public String EliminarBarcoxId(@ModelAttribute("barco") BarcoDTO barquito2, Model model) {
+    public String EliminarBarcoxId(@ModelAttribute("barco") Barcos barquito3, Model model) {
 
-        if (barquito2.getIdBarco().isBlank() && barquito2.getNombreBarco().isBlank()
-                && barquito2.getCapitanBarco().isBlank()) {
+        if (barquito3.getIDbarco().isBlank() && barquito3.getNombrebarco().isBlank()
+                && barquito3.getCapitanbarco().isBlank()) {
             model.addAttribute("errorMsg", "No hay nada para eliminar.");
             return "Mantenimiento/barcoMant";
         }
 
-        Barcos barco2 = barcoserv.buscarPorId(barquito2.getIdBarco());
+        Barcos barco2 = barcoserv.buscarPorId(barquito3.getIDbarco());
 
         if (barco2 == null) {
             model.addAttribute("errorMsg", "ID no existe, no hay nada para eliminar.");
@@ -142,25 +159,26 @@ public class BarcoMantController {
 
     // crear
     @PostMapping("/crearbarco")
-    public String CrearBarco(@ModelAttribute("barco") BarcoDTO barquito3, Model model) {
+    public String CrearBarco(@ModelAttribute("barco") Barcos barquito4, Model model) {
 
-        Barcos barcocrear= new Barcos();
+        //Barcos barcocrear= new Barcos();
 
-        if (barquito3.getIdBarco().isBlank() || barquito3.getNombreBarco().isBlank()
-                || barquito3.getCapitanBarco().isBlank()
-                || barquito3.getModeloBarco().isBlank() || barquito3.getImgURLbarco().isBlank()
-                || barquito3.getDescripcionBarco().isBlank()
-                || barquito3.getIdsrutasbarco().isEmpty()) {
+        if (barquito4.getIDbarco().isBlank() || barquito4.getNombrebarco().isBlank()
+                || barquito4.getCapitanbarco().isBlank()
+                || barquito4.getBarmodel().getModeloBarco().isEmpty() || barquito4.getImagenbarco().isBlank()
+                || barquito4.getDescripcionbarco().isBlank()
+                || barquito4.getRutas().isEmpty()) {
 
                     model.addAttribute("errorMsg", "Faltan datos para creación de Barco.");
                     return "Mantenimiento/barcoMant";
 
         }
 
-            barcoserv.convertiraBarcos(barquito3, barcocrear);
-            barcoserv.guardarBarco(barcocrear);
+            //barcoserv.convertiraBarcos(barquito3, barcocrear);
+            barcoserv.guardarBarco(barquito4);
         
         return "redirect:/Mantenimiento/barcoMant";
     }
+    
 
 }
